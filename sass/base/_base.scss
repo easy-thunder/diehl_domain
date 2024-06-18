@@ -5,7 +5,7 @@
 }
 
 html{
-    font-size: 50%;
+    font-size: 62.5%!important;
 }
 body{
     font-family: "Lato", sans-serif;
@@ -23,7 +23,7 @@ body{
 /* Styles for screen widths between 400px and 1220px */
 @media (min-width: 601px) and (max-width: 1500px) {
     html {
-        font-size: 50%;
+        font-size: 50%!important;
     }
 }
 
@@ -31,6 +31,6 @@ body{
 
 @media (max-width: 600px) {
     html {
-        font-size: 20%;
+        font-size: 20%!important;
     }
 }
