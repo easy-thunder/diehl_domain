@@ -12,7 +12,7 @@ export default function Results(){
                 <div className="featureBox">
                     <i className="featureBox__icon icon-basic-smartphone "></i>
                     <h3 className="heading-tertiary">Dynamic Design</h3>
-                    <p className="featureBox__text">Crafted for ultimate customization, our styling includes predefined variables for spacing and color, ensuring seamless resizing from desktop to mobile and effortless comparison of color choices.</p>
+                    <p className="featureBox__text">Crafted for ultimate customization, my styling includes predefined variables for spacing and color, ensuring seamless resizing from desktop to mobile and effortless comparison of color choices.</p>
                 </div>
             </div>
             <div className="col-1-of-4">
