@@ -14,7 +14,11 @@ body {
   color: #777; }
 
 /* Styles for screen widths between 400px and 1220px */
-@media (min-width: 801px) and (max-width: 1500px) {
+@media (min-width: 1501px) and (max-width: 2000px) {
+  html {
+    font-size: 70% !important; } }
+
+@media (min-width: 800px) and (max-width: 1500px) {
   html {
     font-size: 50% !important; } }
 
