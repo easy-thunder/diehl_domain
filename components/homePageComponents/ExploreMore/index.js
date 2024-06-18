@@ -95,13 +95,13 @@ export default function ExploreMore(){
         <div className="exploreMoreCard">
             <div className="exploreMoreCardSide exploreMoreCardSide--front">
             <div className="exploreMoreCardSide__inner">
-                <h3 className="subHeader">DREAM PROJECT</h3>
-                <img src="/democracy.png" className="exploreMoreCardSide__inner__photo" alt="chess game" />
+                <h3 className="subHeader">SKILLS TIMELINE</h3>
+                <img src="/calendar.jpg" className="exploreMoreCardSide__inner__photo" alt="chess game" />
             </div>
             </div>
             <div className="exploreMoreCardSide exploreMoreCardSide--back">
             <div className="exploreMoreCardSide__inner">
-                <h3 className="subHeader">DREAM PROJECT</h3>
+                <h3 className="subHeader">SKILLS TIMELINE</h3>
                 <p>I've seen a lot of problems in my country. I'm tired of lobbyism. I'm tired of the few making the decisions for the many. I'm tired of vested interests. We can LobbyLess with a direct democracy and technology.</p>
                 <Link href="/static/my-dream-project">
                 <p className="exploreMoreLink">Discover More</p>
