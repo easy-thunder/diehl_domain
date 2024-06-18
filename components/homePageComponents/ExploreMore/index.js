@@ -103,14 +103,14 @@ export default function ExploreMore(){
             <div className="exploreMoreCardSide__inner">
                 <h3 className="subHeader">DREAM PROJECT</h3>
                 <p>I've seen a lot of problems in my country. I'm tired of lobbyism. I'm tired of the few making the decisions for the many. I'm tired of vested interests. We can LobbyLess with a direct democracy and technology.</p>
-                <Link href="/more-games">
+                <Link href="/static/my-dream-project">
                 <p className="exploreMoreLink">Discover More</p>
                 </Link>
             </div>
             </div>
         </div>
 
-        <div className="exploreMoreCard">
+        {/* <div className="exploreMoreCard">
             <div className="exploreMoreCardSide exploreMoreCardSide--front">
             <div className="exploreMoreCardSide__inner">
                 <h3 className="subHeader">COLLABORATE</h3>
@@ -124,11 +124,11 @@ export default function ExploreMore(){
                 <Link href="/more-games">
                 <p className="exploreMoreLink">Discover More</p>
                 </Link>
+            </div>//todo maybe
             </div>
-            </div>
-        </div>
+        </div> */}
 
-        <div className="exploreMoreCard">
+        <div style={{"grid-column":"span 2"}} className="exploreMoreCard">
             <div className="exploreMoreCardSide exploreMoreCardSide--front">
             <div className="exploreMoreCardSide__inner">
                 <h3 className="subHeader">CONTACT</h3>
@@ -138,10 +138,9 @@ export default function ExploreMore(){
             <div className="exploreMoreCardSide exploreMoreCardSide--back">
             <div className="exploreMoreCardSide__inner">
                 <h3 className="subHeader">CONTACT</h3>
-                <p>Please feel free to contact me at i</p>
-                <Link href="/more-games">
-                <p className="exploreMoreLink">Discover More</p>
-                </Link>
+                <p>Please feel free to contact me at my google voice number: 720-773-1934</p>
+                <p>or via email at jakediehl17@gmail.com</p>
+
             </div>
             </div>
         </div>
