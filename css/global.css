@@ -3,17 +3,18 @@
   padding: 0;
   box-sizing: inherit; }
 
+html {
+  font-size: 62.5% !important; }
+
 body {
   font-family: "Lato", sans-serif;
   box-sizing: border-box;
   padding: 3.2rem;
-  font-family: "Lato", sans-serif;
   font-weight: 400;
   line-height: 1.7;
-  margin-top: extra-large-gap;
+  margin-top: 6.4rem;
   height: 100svh;
-  color: #777;
-  font-size: 62.5%; }
+  color: #777; }
 
 /* Styles for screen widths between 400px and 1220px */
 @media (min-width: 601px) and (max-width: 1500px) {
