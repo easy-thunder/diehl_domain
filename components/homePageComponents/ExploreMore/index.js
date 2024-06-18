@@ -67,7 +67,7 @@ export default function ExploreMore(){
             <div className="exploreMoreCardSide__inner">
                 <h3 className="subHeader">MY STORY</h3>
                 <p> I love solving the puzzles of programming. I have dedicated myself to my craft. I am obsessed with growing in this field and often will be found watching Udemy courses to further hone my skills. </p>
-                <Link href="/more-games">
+                <Link href="/static/about-me">
                 <p className="exploreMoreLink">Discover More</p>
                 </Link>
             </div>
