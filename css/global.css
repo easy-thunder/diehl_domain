@@ -3,27 +3,24 @@
   padding: 0;
   box-sizing: inherit; }
 
-html {
-  font-size: 62.5% !important; }
-
 body {
   font-family: "Lato", sans-serif;
   box-sizing: border-box;
-  padding: 3.2rem;
+  padding: 2rem;
   font-weight: 400;
   line-height: 1.7;
-  margin-top: 6.4rem;
+  margin-top: 4rem;
   height: 100svh;
   color: #777; }
 
 /* Styles for screen widths between 400px and 1220px */
-@media (min-width: 601px) and (max-width: 1500px) {
+@media (min-width: 801px) and (max-width: 1500px) {
   html {
     font-size: 50% !important; } }
 
-@media (max-width: 600px) {
+@media (max-width: 800px) {
   html {
-    font-size: 20% !important; } }
+    font-size: 40% !important; } }
 
 @keyframes expand {
   from {
@@ -74,7 +71,7 @@ body {
   top: 0;
   display: flex;
   align-items: center;
-  padding: 0 1.6rem;
+  padding: 0 1rem;
   z-index: 1000;
   transition: top 0.5s ease; }
   .header.collapsed {
@@ -113,7 +110,7 @@ body {
   position: fixed;
   top: 60px;
   left: 0;
-  padding: 1.6rem;
+  padding: 1rem;
   z-index: 999;
   transition: height 0.5s ease, width 0.5s ease;
   display: flex;
@@ -139,7 +136,7 @@ body {
     border-radius: 50%;
     width: 10px;
     height: 10px;
-    margin: 0.8rem 0; }
+    margin: 0.5rem 0; }
     .sidebar .dot.expanded {
       position: relative;
       left: 15rem; }
@@ -164,20 +161,20 @@ body {
     width: 50%;
     background-color: transparent;
     color: #e0d8d1;
-    margin-left: 6.4rem;
+    margin-left: 4rem;
     position: relative;
     display: inline-block; }
     .backgroundImageContainer__titlesBox__title {
-      font-size: 13rem;
+      font-size: 8.125rem;
       animation-name: moveInLeft;
       animation-duration: 1s;
       animation-timing-function: ease-out; }
     .backgroundImageContainer__titlesBox__subTitle {
-      font-size: 6rem;
+      font-size: 3.75rem;
       opacity: 0;
       animation: fadeIn 1.4s ease-in 1s 1 forwards; }
     .backgroundImageContainer__titlesBox__buttonBox {
-      margin-top: 6rem; }
+      margin-top: 3.75rem; }
 
 .btn {
   text-transform: uppercase;
@@ -191,7 +188,7 @@ body {
   position: relative;
   font-size: 6rem;
   text-align: center;
-  margin-top: 3.2rem;
+  margin-top: 2rem;
   cursor: pointer; }
 
 .btn-white {
@@ -245,9 +242,9 @@ body {
   text-align: center;
   margin-top: 5svh; }
   .story__text__title {
-    font-size: 6rem; }
+    font-size: 3.75rem; }
   .story__text__paragraph {
-    font-size: 4rem; }
+    font-size: 2.5rem; }
 
 .photoContainer {
   width: 50%;
@@ -259,7 +256,7 @@ body {
     outline-offset: 2rem;
     border-radius: 2px;
     box-shadow: 0 1.5rem 4rem rgba(38, 42, 56, 0.4);
-    width: 80rem;
+    width: 50rem;
     aspect-ratio: 3/2;
     position: absolute; }
     .photoContainer__photo:hover {
@@ -330,21 +327,22 @@ body {
   background-size: cover;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  gap: 3.2rem;
-  padding: 3.2rem; }
+  gap: 2rem;
+  padding: 2rem; }
 
 .featureBox {
   background-color: white;
-  font-size: 1.5rem;
-  padding: 2.5rem;
+  font-size: 1rem;
+  padding: 1.6rem;
   text-align: center;
   border-radius: .3rem;
   box-shadow: 0 1.5rem 4rem black;
   margin-top: 20svh;
   position: relative;
   transition: transform .3s;
-  font-size: 3rem;
-  height: 60%; }
+  font-size: 2.5rem;
+  min-height: fit-content;
+  height: 64%; }
   .featureBox__icon {
     font-size: 6rem;
     margin-bottom: .5rem;
@@ -358,8 +356,8 @@ body {
 
 .exploreMore {
   display: grid;
-  gap: 3.2rem;
-  margin-top: 3.2rem;
+  gap: 2rem;
+  margin-top: 2rem;
   height: 150svh;
   width: 100%;
   grid-template-columns: 1fr 1fr;
@@ -399,7 +397,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 3.2rem; }
+  font-size: 2rem; }
   .exploreMoreCardSide--front {
     background-image: linear-gradient(to right, rgba(126, 213, 111, 0.8), rgba(40, 180, 131, 0.8));
     box-shadow: 0 1rem 2rem black; }
@@ -408,7 +406,7 @@ body {
     transform: rotateY(180deg);
     color: black; }
   .exploreMoreCardSide__inner {
-    padding: 3.2rem;
+    padding: 2rem;
     background-color: white;
     height: 80%;
     width: 80%;
@@ -421,14 +419,14 @@ body {
     .exploreMoreCardSide__inner__photo {
       max-width: 80%;
       max-height: 80%;
-      margin-top: 3.2rem; }
+      margin-top: 2rem; }
 
 .subHeader {
-  margin-bottom: 3.2rem;
+  margin-bottom: 2rem;
   color: black; }
 
 .exploreMoreLink {
-  margin-top: 3.2rem;
+  margin-top: 2rem;
   padding: 0.5rem 1rem;
   background-color: rgba(40, 180, 131, 0.8);
   color: white;
@@ -452,7 +450,7 @@ body {
   height: 50svh;
   width: 100%;
   background-image: linear-gradient(to right, rgba(202, 139, 22, 0.8), rgba(255, 223, 0, 0.8));
-  margin-top: 3.2rem;
+  margin-top: 2rem;
   border-radius: 2rem;
   display: flex;
   justify-content: center;
@@ -469,15 +467,15 @@ body {
     flex-direction: column;
     justify-content: space-between; }
   .fullStretchContainer .fullStretchTitle {
-    font-size: 6rem;
+    font-size: 3.75rem;
     text-align: center;
     margin-bottom: 1rem; }
   .fullStretchContainer .fullStretchBlurb {
-    font-size: 4rem;
+    font-size: 2.5rem;
     text-align: left;
     margin-bottom: 1rem; }
   .fullStretchContainer .fullStretchTags {
-    font-size: 3.2rem;
+    font-size: 2rem;
     text-align: left;
     margin-bottom: 1rem; }
   .fullStretchContainer .fullStretchButton {
@@ -514,11 +512,11 @@ body {
 
 .individualSkillTitle {
   text-align: center;
-  font-size: 6rem;
+  font-size: 3.75rem;
   margin-bottom: 1.5rem; }
 
 .individualSkillParagraph {
-  font-size: 4rem;
+  font-size: 2.5rem;
   text-align: left;
   margin-bottom: 1rem; }
   .individualSkillParagraph pre {
@@ -526,11 +524,11 @@ body {
     padding: 1rem;
     border-radius: 0.5rem;
     overflow-x: auto;
-    font-size: 4rem; }
+    font-size: 2.5rem; }
   .individualSkillParagraph code {
     font-family: monospace;
     font-size: 1rem;
-    font-size: 4rem; }
+    font-size: 2.5rem; }
 
 .individualSkillTags {
   font-size: 1rem;
@@ -549,7 +547,7 @@ body {
   display: block;
   margin: 2rem auto 0 auto;
   padding: 1rem 2rem;
-  font-size: 4rem;
+  font-size: 2.5rem;
   background-color: rgba(202, 139, 22, 0.8);
   color: white;
   border: none;

@@ -1,4 +1,3 @@
-import Image from "next/image"
 
 export default function Story(){
     return(
@@ -7,7 +6,7 @@ export default function Story(){
             <div className="photoContainer">
 
                 <img src="/instructing.jpg"
-                    alt="Picture of something nice"
+                    alt="Instructing"
                     className="photoContainer__photo photoContainer__photo--p1"
 
 
@@ -22,7 +21,7 @@ export default function Story(){
 
                 />
                 <img src="/raftingDownSanJuan.jpg"
-                        alt="Picture of the author"
+                        alt="Rafting down Sanjuan"
                         className="photoContainer__photo photoContainer__photo--p3"
 
 

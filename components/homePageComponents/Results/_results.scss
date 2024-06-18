@@ -19,16 +19,17 @@
 
 .featureBox{
     background-color: white;
-    font-size: 1.5rem;
-    padding:2.5rem;
+    font-size: 1rem;
+    padding:1.6rem;
     text-align: center;
     border-radius: .3rem;
     box-shadow: 0 1.5rem 4rem black;
     margin-top: 20svh;
     position: relative;
     transition: transform .3s;
-    font-size: 3rem;
-    height: 60%;
+    font-size: 2.5rem;
+    min-height: fit-content;
+    height: 64%;
 
     
     &__icon{
