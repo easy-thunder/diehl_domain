@@ -5,77 +5,79 @@
     background-image: linear-gradient(to right, rgba(202, 139, 22, 0.8), rgba(255, 223, 0, 0.8));
     border-radius: 2rem;
     box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.1);
-  }
   
-  .individualSkillInner {
-    padding: 2rem;
-    background-color: white;
-    border-radius: 2rem;
-    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.1);
-  }
-
-  .individualSkillImage {
-    display: block;
-    margin: 0 auto 1.5rem auto;
-    max-width: 100%;
-    border-radius: 2rem;
-  }
+    .individualSkillInner {
+      padding: 2rem;
+      background-color: white;
+      border-radius: 2rem;
+      box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.1);
   
-  .individualSkillTitle {
-    text-align: center;
-    font-size: $title-font;
-    margin-bottom: 1.5rem;
-  }
+      .timeline {
+        position: relative;
+        padding: 1rem 0;
   
-  .individualSkillParagraph {
-    font-size: $paragraph-font;
-    text-align: left;
-    margin-bottom: 1rem;
-
-    pre {
-        background-color: #f4f4f4;
-        padding: 1rem;
-        border-radius: 0.5rem;
-        overflow-x: auto;
-        font-size: $paragraph-font;
+        .timeline-item {
+          display: flex;
+          width: 100%;
+          margin-bottom: 2rem;
+  
+          &:nth-child(even) {
+            .timeline-item-content {
+              flex-direction: row-reverse;
+            }
+          }
+  
+          .timeline-item-content {
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+            width: calc(50% - 2rem); /* Adjust as needed */
+            margin-left: 1rem;
+            position: relative;
+  
+            .timeline-item-date {
+              font-weight: bold;
+              color: #333;
+              margin-bottom: 0.5rem;
+            }
+  
+            .timeline-item-title {
+              font-size: 1.5rem;
+              margin-bottom: 1rem;
+            }
+  
+            .timeline-item-description {
+              margin-bottom: 1rem;
+            }
+  
+            .timeline-item-skills {
+              list-style-type: none;
+              padding: 0;
+  
+              li {
+                margin-bottom: 0.5rem;
+                font-size: 1rem;
+              }
+            }
+          }
+        }
       }
-    
-      code {
-        font-family: monospace;
-        font-size: 1rem;
-        font-size: $paragraph-font;
-
+    }
+  
+    .backButton {
+      display: block;
+      margin: 2rem auto 0 auto;
+      padding: 1rem 2rem;
+      font-size: 1rem;
+      background-color: rgba(202, 139, 22, 0.8);
+      color: white;
+      border: none;
+      border-radius: 2rem;
+      cursor: pointer;
+      transition: background-color 0.3s;
+  
+      &:hover {
+        background-color: rgba(202, 139, 22, 1);
       }
-  }
-  
-  .individualSkillTags {
-    font-size: 1rem;
-    text-align: left;
-    margin-bottom: 1rem;
-  }
-  
-  .individualSkillTag {
-    background-color: #0070f3;
-    color: #fff;
-    padding: 0.5rem;
-    border-radius: 4px;
-    margin-right: 0.5rem;
-    display: inline-block;
-  }
-  
-  .backButton {
-    display: block;
-    margin: 2rem auto 0 auto;
-    padding: 1rem 2rem;
-    font-size: $paragraph-font;
-    background-color: rgba(202, 139, 22, 0.8);
-    color: white;
-    border: none;
-    border-radius: 2rem;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  
-    &:hover {
-      background-color: rgba(202, 139, 22, 1);
     }
   }

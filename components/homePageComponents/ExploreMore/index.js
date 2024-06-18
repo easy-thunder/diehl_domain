@@ -110,24 +110,6 @@ export default function ExploreMore(){
             </div>
         </div>
 
-        {/* <div className="exploreMoreCard">
-            <div className="exploreMoreCardSide exploreMoreCardSide--front">
-            <div className="exploreMoreCardSide__inner">
-                <h3 className="subHeader">COLLABORATE</h3>
-                <img src="/collaborate.png" className="exploreMoreCardSide__inner__photo" alt="chess game" />
-            </div>
-            </div>
-            <div className="exploreMoreCardSide exploreMoreCardSide--back">
-            <div className="exploreMoreCardSide__inner">
-                <h3 className="subHeader">COLLABORATE</h3>
-                <p>While I am able to accomplish anything I set my mind to, I am not able to do everything. These are tough times for programmers and I'm interested in forming partnerships with people that have skills outside of my knowledge base.</p>
-                <Link href="/more-games">
-                <p className="exploreMoreLink">Discover More</p>
-                </Link>
-            </div>//todo maybe
-            </div>
-        </div> */}
-
         <div style={{"grid-column":"span 2"}} className="exploreMoreCard">
             <div className="exploreMoreCardSide exploreMoreCardSide--front">
             <div className="exploreMoreCardSide__inner">

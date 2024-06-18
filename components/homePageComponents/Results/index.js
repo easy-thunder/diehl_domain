@@ -5,28 +5,28 @@ export default function Results(){
                 <div className="featureBox">
                     <i className="featureBox__icon icon-basic-rss "></i>
                     <h3 className="heading-tertiary">Connection</h3>
-                    <p className="featureBox__text">Need an email list? I can use nodemailer for automated emails. Want instant messaging on your application? I can build with socket.io, SWR, or PeerJS with webRDS for video communication.</p>
+                    <p className="featureBox__text">Require an email list? I utilize Nodemailer for automated emails. Need real-time messaging in your application? I can integrate Socket.io, SWR, or PeerJS for video communication using WebRTC</p>
                 </div>
             </div>
             <div className="col-1-of-4">
                 <div className="featureBox">
                     <i className="featureBox__icon icon-basic-smartphone "></i>
                     <h3 className="heading-tertiary">Dynamic Design</h3>
-                    <p className="featureBox__text">Build with the ultimate customization. In styling have declared variables for spacing and color to easily resize from computer screen to phone or to easily compare color choices.</p>
+                    <p className="featureBox__text">Crafted for ultimate customization, our styling includes predefined variables for spacing and color, ensuring seamless resizing from desktop to mobile and effortless comparison of color choices.</p>
                 </div>
             </div>
             <div className="col-1-of-4">
                 <div className="featureBox">
                     <i className="featureBox__icon icon-basic-cloud "></i>
                     <h3 className="heading-tertiary">Infinite scaling for your Business</h3>
-                    <p className="featureBox__text">Build with multiple scalable technologies including AWS Lambda, SQL Aurora, and API gateway. NoSQL no problem as I'm also familiar with MongoDB.</p>
+                    <p className="featureBox__text">Capable of building with versatile and scalable technologies such as AWS Lambda, SQL Aurora, and API Gateway. Familiar with MongoDB for NoSQL solutions.</p>
                 </div>
             </div>
             <div className="col-1-of-4">
                 <div className="featureBox">
                     <i className="featureBox__icon icon-basic-lock "></i>
                     <h3 className="heading-tertiary">Security</h3>
-                    <p className="featureBox__text">Ensure that your users passwords are encrypted using Bcrypt. Ensure that your API keys are safely locked away in environment variables.</p>
+                    <p className="featureBox__text">Secure your users' passwords with robust encryption using Bcrypt. Safeguard your API keys in secure environment variables for utmost protection.</p>
                 </div>
             </div>
         </div>
