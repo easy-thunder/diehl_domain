@@ -522,6 +522,16 @@ body {
   font-size: 4rem;
   text-align: left;
   margin-bottom: 1rem; }
+  .individualSkillParagraph pre {
+    background-color: #f4f4f4;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    overflow-x: auto;
+    font-size: 4rem; }
+  .individualSkillParagraph code {
+    font-family: monospace;
+    font-size: 1rem;
+    font-size: 4rem; }
 
 .individualSkillTags {
   font-size: 1rem;

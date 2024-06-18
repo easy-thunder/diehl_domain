@@ -31,6 +31,21 @@
     font-size: $paragraph-font;
     text-align: left;
     margin-bottom: 1rem;
+
+    pre {
+        background-color: #f4f4f4;
+        padding: 1rem;
+        border-radius: 0.5rem;
+        overflow-x: auto;
+        font-size: $paragraph-font;
+      }
+    
+      code {
+        font-family: monospace;
+        font-size: 1rem;
+        font-size: $paragraph-font;
+
+      }
   }
   
   .individualSkillTags {
