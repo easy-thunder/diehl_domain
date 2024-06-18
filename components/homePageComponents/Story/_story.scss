@@ -1,0 +1,133 @@
+
+.story{
+    height: 80svh;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    justify-content: center;
+    text-align: center;
+    margin-top: 5svh;
+    
+    &__text{
+
+        &__title{
+            font-size: $title-font;
+            
+        }
+        &__paragraph{
+            font-size: $paragraph-font;
+        }
+    }
+    
+}
+
+.photoContainer {
+    width: 50%;
+    position: relative;
+    top: 20%;
+    justify-content: center;
+    margin-left: 1rem;
+    &__photo {
+        outline-offset:2rem;
+        border-radius: 2px;
+        box-shadow: 0 1.5rem 4rem rgba($color-dark, .4);
+        // aspect-ratio: 3/2;
+        width: 80rem;
+        aspect-ratio: 3/2;
+        position: absolute;
+
+       &:hover  {
+            // background-color: rgba(40, 180, 131, 0.8);
+            outline: 1.5rem solid $gradient-right;
+            transform: scale(1.05) translate(-.5rem);
+            box-shadow: 0 2.5rem rgba(0, 0, 0, 0.503);
+            z-index: 5;
+
+        }
+    
+    }
+    &__photo--p1 {
+        left: -2rem;
+        top: -2rem;
+    }
+    &__photo--p2 {
+        left: 30rem;
+        top: 4rem;
+    }
+    &__photo--p3 {
+        left: 12rem;
+        top: 30rem;
+    }
+
+    @media (min-width: 1201px) and (max-width: 2200px) {
+        &__photo {
+            scale: 70%;
+        }
+        &__photo--p1 {
+            left: -2rem;
+            top: -2rem;
+        }
+        &__photo--p2 {
+            left: 15rem;
+            top: 2rem;
+        }
+        &__photo--p3 {
+            left: 2rem;
+            top: 10rem;
+        }
+    }
+    @media (min-width: 1px) and (max-width: 1790px) {
+        &__photo {
+            scale: 60%;
+            margin-top: -50%;
+        }
+        &__photo--p1 {
+            left: auto;
+            top: 0rem;
+            position: relative;
+        }
+        &__photo--p2 {
+            left: auto;
+            top: 0rem;
+            position: relative;
+        }
+        &__photo--p3 {
+            left: auto;
+            top: 0rem;
+            position: relative;
+        }
+    }
+    
+    @media (max-width: 600px) {
+        &__photo {
+            width: 60rem;
+        }
+        &__photo--p1 {
+            left: auto;
+            top: 0rem;
+            position: relative;
+        }
+        &__photo--p2 {
+            left: auto;
+            top: 0rem;
+            position: relative;
+        }
+        &__photo--p3 {
+            left: auto;
+            top: 0rem;
+            position: relative;
+        }
+    }
+    &:hover &__photo:not(:hover){
+        transform: scale(.95);
+    }
+}
+
+
+
+
+
+
+
+

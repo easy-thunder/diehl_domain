@@ -1,0 +1,10 @@
+.footer {
+    background-color: $color-dark; // Ensure $color-dark is defined in your SCSS
+    width: 100vw; // Use vw instead of svw for broader browser support
+    height: 10rem;
+    position:static;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin-top: 10rem;
+  }

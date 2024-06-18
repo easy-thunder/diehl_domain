@@ -1,0 +1,36 @@
+*,*::after,*::before{
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+}
+
+html{
+    font-size: 62.5%;
+}
+body{
+    font-family: "Lato", sans-serif;
+    box-sizing: border-box;
+    padding: $gap-web-border;
+    font-family: "Lato", sans-serif;
+    font-weight: 400;
+    line-height: 1.7;
+    margin-top: extra-large-gap;
+    height: 100svh;
+    color: #777
+}
+
+
+/* Styles for screen widths between 400px and 1220px */
+@media (min-width: 601px) and (max-width: 1500px) {
+    html {
+        font-size: 50%;
+    }
+}
+
+
+
+@media (max-width: 600px) {
+    html {
+        font-size: 20%;
+    }
+}

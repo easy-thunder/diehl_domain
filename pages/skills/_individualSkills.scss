@@ -1,0 +1,62 @@
+.individualSkillContainer {
+    width: 100%;
+    background-image: linear-gradient(to right, rgba(202, 139, 22, 0.8), rgba(255, 223, 0, 0.8));
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 2rem;
+    box-sizing: border-box;
+  }
+  
+  .individualSkillInner {
+    background-color: #fff;
+    width: 80%;
+    border-radius: 2rem;
+    padding: 2rem;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    // height: fit-content;
+  }
+  
+  .individualSkillTitle {
+    font-size: $title-font;
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+  
+  .individualSkillParagraph {
+    font-size: $paragraph-font;
+    text-align: left;
+    margin-bottom: 1rem;
+  }
+  
+  .individualSkillTags {
+    font-size: 1rem;
+    text-align: left;
+    margin-bottom: 1rem;
+  }
+  
+  .individualSkillTag {
+    background-color: #0070f3;
+    color: #fff;
+    padding: 0.5rem;
+    border-radius: 4px;
+    margin-right: 0.5rem;
+    display: inline-block;
+  }
+  
+  .backButton {
+    align-self: flex-end;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    background-color: #0070f3;
+    color: #fff;
+    cursor: pointer;
+  
+    &:hover {
+      background-color: #005bb5;
+    }
+  }

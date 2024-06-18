@@ -1,0 +1,59 @@
+.fullStretchContainer {
+    height: 50svh;
+    width: 100%;
+    background-image: linear-gradient(to right, rgba(202, 139, 22, 0.8), rgba(255, 223, 0, 0.8));
+    margin-top: $gap-web-border;
+    border-radius: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    padding: 1rem;
+  
+    .fullStretchInner {
+
+      background-color: #fff;
+      height: 80%;
+      width: 100%;
+      border-radius: 2rem;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+  
+    .fullStretchTitle {
+
+
+      font-size: $title-font ;
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+  
+    .fullStretchBlurb {
+      font-size: $paragraph-font;
+      text-align: left;
+      margin-bottom: 1rem;
+    }
+  
+    .fullStretchTags {
+      font-size: $gap-web-border;
+      text-align: left;
+      margin-bottom: 1rem;
+    }
+  
+    .fullStretchButton {
+      align-self: flex-end;
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 4px;
+      background-color: #0070f3;
+      color: #fff;
+      cursor: pointer;
+      float: right;
+  
+      &:hover {
+        background-color: #005bb5;
+      }
+    }
+  }

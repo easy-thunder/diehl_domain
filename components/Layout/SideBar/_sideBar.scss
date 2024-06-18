@@ -1,0 +1,72 @@
+
+
+.sidebar {
+  background-color: $color-dark;
+  width: .5rem;
+  position:fixed;
+  top: 60px; 
+  left: 0;
+  padding: $gap-medium;
+  z-index: 999;
+  transition: height 0.5s ease, width 0.5s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-top-right-radius: 15px;
+  border-bottom-right-radius: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  &.expanded {
+    height: 100svh;
+    width: 20svh;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  .toggle-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    margin: auto 0;
+  }
+
+  .dot {
+    background-color: $color-tertiary;
+    border-radius: 50%;
+    width: 10px;
+    height: 10px;
+    margin: $gap-web-border-quarter 0;
+    &.expanded{
+      position: relative;
+      left: 15rem;
+    }
+    
+  }
+}
+
+// Add curl effect to the sides of the tab
+.sidebar:not(.expanded) {
+  &::before, &::after {
+    // content: '';
+    // position: absolute;
+    // background-color: $color-tertiary;
+    // width: 20px;
+    // height: 20px;
+    // border-radius: 50%;
+    // top: 50%;
+    // transform: translateY(-50%);
+  }
+
+  &::before {
+    // left: -10px;
+    // border-top-left-radius: 0;
+    // border-bottom-left-radius: 0;
+  }
+
+  &::after {
+    // right: -10px;
+    // border-top-right-radius: 0;
+    // border-bottom-right-radius: 0;
+  }
+}

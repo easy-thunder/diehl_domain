@@ -1,0 +1,57 @@
+.backgroundImageContainer {
+    background-image: linear-gradient(to left, $gradient-left, $gradient-right), url(../public/jake_and_john.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 95svh;
+    background-position: top;
+    position: relative;
+    clip-path: polygon(0 0, 100% 0, 100% 75%, 0 100%);
+    background-size: 120% auto; /* Zoom effect by increasing the size */
+    background-position:  left 35%; /* Move the background image to the right */
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap:1rem;
+    
+
+    
+    
+    
+
+
+    &__titlesBox {
+        top: 5%;
+        width: 50%;
+        background-color: transparent;
+        color: $off-white; 
+        margin-left: $extra-large-gap;
+        position:relative;
+
+        display: inline-block;
+        
+
+
+        &__title {
+            font-size: $main-title-font; // Default font size
+            animation-name: moveInLeft;
+            animation-duration: 1s;
+            animation-timing-function: ease-out;
+        }
+        &__subTitle{
+            font-size: $title-font;
+            opacity: 0;
+            animation: fadeIn 1.4s ease-in 1s 1 forwards;
+            
+        }
+        &__buttonBox{
+            margin-top: $title-font
+        }
+    }
+
+
+
+
+
+}
+                                        
+                                        
+

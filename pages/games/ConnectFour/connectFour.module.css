@@ -1,0 +1,53 @@
+/* pages/games/ConnectFour/connectFour.module.css */
+.container {
+    text-align: center;
+  }
+  
+  .board {
+    display: inline-grid; /* Change this line */
+    grid-template-rows: repeat(6, 50px);
+    grid-template-columns: repeat(7, 50px);
+    gap: 5px;
+    background-color: #ffff00; /* Yellow background */
+  }
+  .row {
+    display: contents;
+  }
+  
+  .cell {
+    width: 50px;
+    height: 50px;
+    background-color: #87ceeb;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .piece {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    animation: drop 0.5s; /* Add this line to apply the animation */
+  }
+  
+  .dropped{
+    animation: drop 0.5s;
+  }
+  
+  @keyframes drop {
+    0% {
+      transform: translateY(-300px);
+    }
+    100% {
+      transform: translateY(1px);
+    }
+  }
+  .red {
+    background-color: red;
+  }
+  
+  .black {
+    background-color: black;
+  }

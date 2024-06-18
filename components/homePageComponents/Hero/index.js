@@ -1,0 +1,30 @@
+
+import LightButton from "@/components/utility/button/lightButton"
+import DarkButton from "@/components/utility/button/darkButton"
+import Link from "next/link"
+export default function Hero(){
+    return(
+        <>
+    <div className="backgroundImageContainer" >
+
+          <div className="backgroundImageContainer__titlesBox">
+                <h1 className="backgroundImageContainer__titlesBox__title">Connection </h1>
+                <i className="backgroundImageContainer__titlesBox__subTitle">Through Carefully Crafted Web Design and Outreach</i>
+                <div className="backgroundImageContainer__titlesBox__buttonBox">
+                    <Link href="/skills">
+                    <LightButton content={'skills'}/>
+                    </Link>
+                    {/* <DarkButton content={'freelance'} /> TODO */}
+                    <DarkButton content={'Resume'}/>
+                </div>
+          </div>
+
+
+
+     </div>
+
+
+
+        </>
+    )
+}

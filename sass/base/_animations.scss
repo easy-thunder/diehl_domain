@@ -1,0 +1,35 @@
+@keyframes expand {
+    from {
+      height: 1svh;
+    }
+    to {
+      height: 15svh;
+    }
+  }
+  
+  @keyframes collapse {
+    from {
+      height: 15svh;
+    }
+    to {
+      height: 1svh;
+    }
+  }
+
+
+  @keyframes moveInLeft{
+    0%{opacity:0; transform: translateX(-100px)}
+    80%{transform: translateX(10px);}
+    100%{opacity: 1; transform: translate(0);}
+  }
+  @keyframes fadeIn{
+    0%{opacity:0; scale:.9;}
+    // 80%{transform: translateX(-10px);}
+    100%{opacity: 1; scale:1;}
+  }
+
+  @keyframes moveInBottom {
+    0%{opacity:0; transform: translateY(100px)}
+    80%{transform: translateY(-10px);}
+    100%{opacity: 1; transform: translateY(0);}
+  }
