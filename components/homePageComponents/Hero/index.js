@@ -15,8 +15,9 @@ export default function Hero(){
                     <LightButton content={'skills'}/>
                     </Link>
                     {/* <DarkButton content={'freelance'} /> TODO */}
-                    <DarkButton content={'Resume'}/>
-                </div>
+                    <a href="/JD_SWENG_RES.pdf" download="/JD_SWENG_RES.pdf">
+            <DarkButton content={'Resume'} />
+          </a>                </div>
           </div>
 
 
