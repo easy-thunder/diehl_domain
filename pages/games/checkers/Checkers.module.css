@@ -1,0 +1,67 @@
+.board {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 800px;
+  height: 800px;
+  margin: 0 auto;
+  margin-top: 25vh;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+}
+
+.cell {
+  width: 100px;
+  height: 100px;
+  border: 1px solid #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.blackCell {
+  background-color: #777;
+}
+
+.whiteCell {
+  background-color: #fff;
+}
+
+.pieceX {
+  width: 80px;
+  height: 80px;
+  background-color: #000;
+  border-radius: 50%;
+}
+
+.pieceO {
+  width: 80px;
+  height: 80px;
+  background-color: #fff;
+  border-radius: 50%;
+  border: 1px solid #000;
+}
+
+.kingX {
+  width: 80px;
+  height: 80px;
+  background-color: #000;
+  border-radius: 50%;
+  border: 5px solid gold;
+}
+
+.kingO {
+  width: 80px;
+  height: 80px;
+  background-color: #fff;
+  border-radius: 50%;
+  border: 5px solid gold;
+}
+
+.possibleMove {
+  background-color: #0f0;
+}
