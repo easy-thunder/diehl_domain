@@ -121,7 +121,6 @@ console.log(length)
         </div> */}
 
         <div 
-        // style={{"grid-column":"span 2"}} 
         className="exploreMoreCard">
             <div className="exploreMoreCardSide exploreMoreCardSide--front">
             <div className="exploreMoreCardSide__inner">
