@@ -66,10 +66,9 @@
         left: 12rem;
         top: 30rem;
     }
-
     @media (min-width: 1701px) and (max-width: 3000px) {
         &__photo {
-            scale: 70%;
+            transform: scale(0.7);
         }
         &__photo--p1 {
             left: -2rem;
@@ -84,20 +83,13 @@
             top: 10rem;
         }
     }
+    
     @media (min-width: 601px) and (max-width: 1700px) {
         &__photo {
-            scale: 60%;
+            transform: scale(0.6);
         }
-        &__photo--p1 {
-            left: auto;
-            top: 0rem;
-            position: relative;
-        }
-        &__photo--p2 {
-            left: auto;
-            top: 0rem;
-            position: relative;
-        }
+        &__photo--p1,
+        &__photo--p2,
         &__photo--p3 {
             left: auto;
             top: 0rem;
@@ -107,38 +99,21 @@
     
     @media (max-width: 600px) {
         &__photo {
-            // width: 50rem;
-            scale: 70%;
-            // margin-top: -60%;
+            transform: scale(0.7);
         }
-        &__photo--p1 {
-            left: auto;
-            top: 0rem;
-            position: relative;
-        }
-        &__photo--p2 {
-            left: auto;
-            top: 0rem;
-            position: relative;
-            display: none;
-        }
+        &__photo--p1,
+        &__photo--p2,
         &__photo--p3 {
             left: auto;
             top: 0rem;
             position: relative;
+        }
+        &__photo--p2,
+        &__photo--p3 {
             display: none;
         }
     }
-    &:hover &__photo:not(:hover){
-        transform: scale(.95);
+    
+    &:hover &__photo:not(:hover) {
+        transform: scale(0.95);
     }
-
-}
-
-
-
-
-
-
-
-
