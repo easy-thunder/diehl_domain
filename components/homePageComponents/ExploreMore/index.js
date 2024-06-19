@@ -92,7 +92,7 @@ export default function ExploreMore(){
             </div>
         </div>
 
-        <div className="exploreMoreCard">
+        {/* <div className="exploreMoreCard">
             <div className="exploreMoreCardSide exploreMoreCardSide--front">
             <div className="exploreMoreCardSide__inner">
                 <h3 className="subHeader">SKILLS TIMELINE</h3>
@@ -108,9 +108,12 @@ export default function ExploreMore(){
                 </Link>
             </div>
             </div>
-        </div>
+        </div> */}
 
-        <div style={{"grid-column":"span 2"}} className="exploreMoreCard">
+        <div 
+        // style={{"grid-column":"span 2"}} 
+        
+        className="exploreMoreCard">
             <div className="exploreMoreCardSide exploreMoreCardSide--front">
             <div className="exploreMoreCardSide__inner">
                 <h3 className="subHeader">CONTACT</h3>
