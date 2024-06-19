@@ -41,13 +41,13 @@ export default function ExploreMore(){
     <div className="exploreMoreCard">
         <div className="exploreMoreCardSide exploreMoreCardSide--front">
           <div className="exploreMoreCardSide__inner">
-            <h3 className="subHeader">GAMES</h3>
+            <h3 className="subHeader">PROJECTS</h3>
             <img src="/chess.png" className="exploreMoreCardSide__inner__photo" alt="chess game" />
           </div>
         </div>
         <div className="exploreMoreCardSide exploreMoreCardSide--back">
           <div className="exploreMoreCardSide__inner">
-            <h3 className="subHeader">MORE GAMES</h3>
+            <h3 className="subHeader">PROJECTS</h3>
             <p>I love games. So building games was an interesting way for me to test my algorithm solving skills while having fun. Note these were not made with styling in mind and with my busy schedule some are not perfect. </p>
             <Link href="/games">
               <p className="exploreMoreLink">Discover More</p>
