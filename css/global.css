@@ -358,20 +358,27 @@ body {
 .results {
   background-image: linear-gradient(to left, rgba(126, 213, 111, 0.8), rgba(40, 180, 131, 0.8)), url(../public/raftingUnderBridge.jpg);
   height: 100svh;
+  width: 100%;
   transform: skewY(-7deg);
   background-size: cover;
   padding: 2rem;
   margin-top: 4svh; }
   @media (max-width: 600px) {
     .results {
-      height: 150svh; } }
+      height: 130svh; } }
   .results > * {
     transform: skewY(7deg); }
 
 .featureBoxContainer {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: 2rem; }
+  @media (max-width: 600px) {
+    .featureBoxContainer {
+      height: 50%;
+      width: 100%;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr; } }
 
 .featureBox {
   background-color: white;
@@ -387,7 +394,9 @@ body {
   height: 64%; }
   @media (max-width: 600px) {
     .featureBox {
-      height: 80%; } }
+      height: 90%;
+      width: 90%;
+      margin-top: 2svh; } }
   .featureBox__icon {
     font-size: 6rem;
     margin-bottom: .5rem;
