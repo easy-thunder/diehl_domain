@@ -54,3 +54,35 @@
     transform: rotate(-45deg) translate(5px, -5px);
   }
 }
+
+.headerLinkLargeContainer{
+  margin: auto;
+
+  .headerLinkLarge{
+    font-size: $title-font;
+    margin:2rem;
+    color: white;
+    cursor: pointer;
+  }
+}
+
+.headerLinkSmallContainer{
+  margin: auto;
+  
+  .headerLinkSmall{
+    font-size: $paragraph-font;
+    margin: 1.5rem;
+    color: white;
+    cursor: pointer;
+  }
+
+  .headerSpacers{
+    font-size: $paragraph-font;
+    margin: 1.5rem;
+    color: white;
+  }
+  
+}
+
+
+

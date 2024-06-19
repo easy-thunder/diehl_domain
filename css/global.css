@@ -115,6 +115,26 @@ body {
   .hamburger.expanded span:nth-child(3) {
     transform: rotate(-45deg) translate(5px, -5px); }
 
+.headerLinkLargeContainer {
+  margin: auto; }
+  .headerLinkLargeContainer .headerLinkLarge {
+    font-size: 3.75rem;
+    margin: 2rem;
+    color: white;
+    cursor: pointer; }
+
+.headerLinkSmallContainer {
+  margin: auto; }
+  .headerLinkSmallContainer .headerLinkSmall {
+    font-size: 2.5rem;
+    margin: 1.5rem;
+    color: white;
+    cursor: pointer; }
+  .headerLinkSmallContainer .headerSpacers {
+    font-size: 2.5rem;
+    margin: 1.5rem;
+    color: white; }
+
 .sidebar {
   background-color: #262a38;
   width: .5rem;
