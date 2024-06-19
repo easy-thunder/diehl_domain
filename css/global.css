@@ -26,6 +26,13 @@ body {
   html {
     font-size: 40% !important; } }
 
+.imageContainer {
+  width: 100%;
+  display: flex; }
+  .imageContainer__photo {
+    width: 80%;
+    margin: auto; }
+
 @keyframes expand {
   from {
     height: 1svh; }
@@ -560,6 +567,10 @@ body {
   transition: background-color 0.3s; }
   .backButton:hover {
     background-color: #ca8b16; }
+
+.photo {
+  margin-left: 100%;
+  transform: translateX(-50%); }
 
 .timeline {
   position: relative;

@@ -4,7 +4,7 @@
 import useSWR, { mutate } from 'swr';
 import styles from './connectFour.module.css';
 import { useState, useEffect, useRef } from 'react';
-import { useJoinGame, useColumnClick, useResetGame } from '../../../hooks/connectFourHooks';
+import { useJoinGame, useColumnClick, useResetGame } from '../../../hooks/games/connectFourHooks';
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 

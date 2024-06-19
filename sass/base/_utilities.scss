@@ -1,8 +1,14 @@
 
 
-.col-1-of-4{
-    
+
+
+.imageContainer{
+    width: 100%;
+    display: flex;
+
+
+    &__photo{
+        width: 80%;
+        margin: auto;
+    }
 }
-
-
-

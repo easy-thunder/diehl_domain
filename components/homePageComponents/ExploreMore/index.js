@@ -121,7 +121,7 @@ export default function ExploreMore(){
             <div className="exploreMoreCardSide__inner">
                 <h3 className="subHeader">CONTACT</h3>
                 <p>Please feel free to contact me at my google voice number: 720-773-1934</p>
-                <p>or via email at jakediehl17@gmail.com</p>
+                <p>or via email at jddiehl17@gmail.com</p>
 
             </div>
             </div>
