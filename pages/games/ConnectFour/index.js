@@ -5,6 +5,7 @@ import useSWR, { mutate } from 'swr';
 import styles from './connectFour.module.css';
 import { useState, useEffect, useRef } from 'react';
 import { useJoinGame, useColumnClick, useResetGame } from '../../../hooks/games/connectFourHooks';
+import DarkButton from '@/components/utility/button/darkButton';
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
@@ -52,12 +53,20 @@ export default function ConnectFour() {
     return (
       <div>
         <p>The other player left.</p>
-        <button onClick={joinGame}>Join Game</button>
+        <div style={{height:"20",width:"20%"}}>
+          <DarkButton clicking={joinGame} content={'Join Game'} />
+        </div>
       </div>
     );
   }
   if (error) return <div>Failed to load</div>;
-  if (!data) return <button onClick={joinGame}>Join Game</button>;
+  if (!data) return       <>
+  <div style={{height:"20",width:"20%"}}>
+
+  <DarkButton clicking={joinGame} content={'Join Game'} />
+  </div>
+  </>
+
 
   const { winner } = data;
 
@@ -68,7 +77,13 @@ export default function ConnectFour() {
       {playerId ? (
       <p>{joinMessage}</p>
     ) : (
-      <button onClick={joinGame}>Join Game</button>
+      // <button onClick={joinGame}>Join Game</button>
+      <>
+      <div style={{height:"20",width:"20%"}}>
+
+      <DarkButton clicking={joinGame} content={'Join Game'} />
+      </div>
+      </>
     )}
       <p>{message}</p>
       <p>Player Color: {playerColor}</p>

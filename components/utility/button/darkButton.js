@@ -1,8 +1,9 @@
 
-export default function DarkButton({content}){
+export default function DarkButton({content, clicking}){
+    // onClick()
     return(
         <>
-        <p className="btn btn-dark btn-animated">
+        <p onClick={clicking? clicking: null} className="btn btn-dark btn-animated">
             {content}
         </p>.
 
