@@ -333,7 +333,7 @@ body {
   .photoContainer__photo--p3 {
     left: 12rem;
     top: 30rem; }
-  @media (min-width: 1201px) and (max-width: 2200px) {
+  @media (min-width: 1701px) and (max-width: 3000px) {
     .photoContainer__photo {
       scale: 70%; }
     .photoContainer__photo--p1 {
@@ -345,7 +345,7 @@ body {
     .photoContainer__photo--p3 {
       left: 2rem;
       top: 10rem; } }
-  @media (min-width: 601px) and (max-width: 1790px) {
+  @media (min-width: 601px) and (max-width: 1700px) {
     .photoContainer__photo {
       scale: 60%; }
     .photoContainer__photo--p1 {
