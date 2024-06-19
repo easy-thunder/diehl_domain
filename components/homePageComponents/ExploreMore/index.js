@@ -22,8 +22,7 @@ export default function ExploreMore(){
           });
         });
         
-        // const length = linkedInRef.getTotalLength()
-        // console.log(length)
+
     
         return () => {
           cards.forEach(card => {
