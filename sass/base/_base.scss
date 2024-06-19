@@ -7,11 +7,10 @@
 
 body{
     font-family: "Lato", sans-serif;
-    // box-sizing: border-box;
     padding: $gap-web-border;
     font-weight: 400;
     line-height: 1.7;
-    margin-top: $extra-large-gap;
+    // margin-top: $extra-large-gap;
     height: 100svh;
     color: #777
 }
@@ -23,7 +22,7 @@ body{
         font-size: 70%!important;
     }
 }
-@media (min-width: 800px) and (max-width: 1500px) {
+@media (min-width: 801px) and (max-width: 1500px) {
     html {
         font-size: 50%!important;
     }
@@ -35,5 +34,6 @@ body{
 @media (max-width: 800px) {
     html {
         font-size: 40%!important;
+        width: 100vw;
     }
 }

@@ -19,26 +19,30 @@
             font-size: $paragraph-font;
         }
     }
+
+    @media (max-width: 600px) {
+        height: fit-content;
+        gap: 0rem;
+        grid-template-columns: 0 50;
+        
+    }
     
 }
 
 .photoContainer {
-    width: 50%;
+    width: 45%;
     position: relative;
-    top: 20%;
+    top: 14%;
     justify-content: center;
-    margin-left: 1rem;
     &__photo {
         outline-offset:2rem;
         border-radius: 2px;
         box-shadow: 0 1.5rem 4rem rgba($color-dark, .4);
-        // aspect-ratio: 3/2;
         width: 50rem;
         aspect-ratio: 3/2;
         position: absolute;
 
        &:hover  {
-            // background-color: rgba(40, 180, 131, 0.8);
             outline: 1.5rem solid $gradient-right;
             transform: scale(1.05) translate(-.5rem);
             box-shadow: 0 2.5rem rgba(0, 0, 0, 0.503);
@@ -77,10 +81,9 @@
             top: 10rem;
         }
     }
-    @media (min-width: 1px) and (max-width: 1790px) {
+    @media (min-width: 601px) and (max-width: 1790px) {
         &__photo {
             scale: 60%;
-            margin-top: -50%;
         }
         &__photo--p1 {
             left: auto;
@@ -101,7 +104,9 @@
     
     @media (max-width: 600px) {
         &__photo {
-            width: 60rem;
+            // width: 50rem;
+            scale: 70%;
+            // margin-top: -60%;
         }
         &__photo--p1 {
             left: auto;
@@ -122,6 +127,7 @@
     &:hover &__photo:not(:hover){
         transform: scale(.95);
     }
+
 }
 
 

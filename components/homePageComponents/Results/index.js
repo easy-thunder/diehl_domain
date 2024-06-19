@@ -1,7 +1,9 @@
 export default function Results(){
     return(
         <div className="results ">
+                <div className="featureBoxContainer">
             <div className="col-1-of-4">
+
                 <div className="featureBox">
                     <i className="featureBox__icon icon-basic-rss "></i>
                     <h3 className="heading-tertiary">Connection</h3>
@@ -10,11 +12,11 @@ export default function Results(){
             </div>
             {/* <div className="col-1-of-4">
                 <div className="featureBox">
-                    <i className="featureBox__icon icon-basic-smartphone "></i>
-                    <h3 className="heading-tertiary">Dynamic Design</h3>
-                    <p className="featureBox__text">Crafted for ultimate customization, styling packages include predefined variables for spacing and color, ensuring seamless resizing from desktop to mobile and effortless comparison of color choices.</p>
+                <i className="featureBox__icon icon-basic-smartphone "></i>
+                <h3 className="heading-tertiary">Dynamic Design</h3>
+                <p className="featureBox__text">Crafted for ultimate customization, styling packages include predefined variables for spacing and color, ensuring seamless resizing from desktop to mobile and effortless comparison of color choices.</p>
                 </div>
-            </div> */}
+                </div> */}
             <div className="col-1-of-4">
                 <div className="featureBox">
                     <i className="featureBox__icon icon-basic-cloud "></i>
@@ -29,6 +31,7 @@ export default function Results(){
                     <p className="featureBox__text">Secure your users' passwords with robust encryption using Bcrypt. Safeguard your API keys in secure environment variables for utmost protection.</p>
                 </div>
             </div>
+                </div>
         </div>
     )
 }

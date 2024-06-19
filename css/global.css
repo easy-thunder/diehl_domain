@@ -8,7 +8,6 @@ body {
   padding: 2rem;
   font-weight: 400;
   line-height: 1.7;
-  margin-top: 4rem;
   height: 100svh;
   color: #777; }
 
@@ -17,13 +16,14 @@ body {
   html {
     font-size: 70% !important; } }
 
-@media (min-width: 800px) and (max-width: 1500px) {
+@media (min-width: 801px) and (max-width: 1500px) {
   html {
     font-size: 50% !important; } }
 
 @media (max-width: 800px) {
   html {
-    font-size: 40% !important; } }
+    font-size: 40% !important;
+    width: 100vw; } }
 
 .imageContainer {
   width: 100%;
@@ -179,7 +179,6 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
   height: 95svh;
-  width: 100%;
   background-position: top;
   position: relative;
   clip-path: polygon(0 0, 100% 0, 100% 75%, 0 100%);
@@ -279,13 +278,17 @@ body {
     font-size: 3.75rem; }
   .story__text__paragraph {
     font-size: 2.5rem; }
+  @media (max-width: 600px) {
+    .story {
+      height: fit-content;
+      gap: 0rem;
+      grid-template-columns: 0 50; } }
 
 .photoContainer {
-  width: 50%;
+  width: 45%;
   position: relative;
-  top: 20%;
-  justify-content: center;
-  margin-left: 1rem; }
+  top: 14%;
+  justify-content: center; }
   .photoContainer__photo {
     outline-offset: 2rem;
     border-radius: 2px;
@@ -319,10 +322,9 @@ body {
     .photoContainer__photo--p3 {
       left: 2rem;
       top: 10rem; } }
-  @media (min-width: 1px) and (max-width: 1790px) {
+  @media (min-width: 601px) and (max-width: 1790px) {
     .photoContainer__photo {
-      scale: 60%;
-      margin-top: -50%; }
+      scale: 60%; }
     .photoContainer__photo--p1 {
       left: auto;
       top: 0rem;
@@ -337,7 +339,7 @@ body {
       position: relative; } }
   @media (max-width: 600px) {
     .photoContainer__photo {
-      width: 60rem; }
+      scale: 70%; }
     .photoContainer__photo--p1 {
       left: auto;
       top: 0rem;
@@ -356,13 +358,20 @@ body {
 .results {
   background-image: linear-gradient(to left, rgba(126, 213, 111, 0.8), rgba(40, 180, 131, 0.8)), url(../public/raftingUnderBridge.jpg);
   height: 100svh;
-  width: 100%;
-  clip-path: polygon(0 20%, 100% 0, 100% 80%, 0 100%);
+  transform: skewY(-7deg);
   background-size: cover;
+  padding: 2rem;
+  margin-top: 4svh; }
+  @media (max-width: 600px) {
+    .results {
+      height: 150svh; } }
+  .results > * {
+    transform: skewY(7deg); }
+
+.featureBoxContainer {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  gap: 2rem;
-  padding: 2rem; }
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 2rem; }
 
 .featureBox {
   background-color: white;
@@ -375,8 +384,10 @@ body {
   position: relative;
   transition: transform .3s;
   font-size: 2.5rem;
-  min-height: fit-content;
   height: 64%; }
+  @media (max-width: 600px) {
+    .featureBox {
+      height: 80%; } }
   .featureBox__icon {
     font-size: 6rem;
     margin-bottom: .5rem;
@@ -394,9 +405,11 @@ body {
   height: 150svh;
   width: 100%;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr; }
+  grid-template-rows: 1fr 1fr 1fr;
+  margin-top: 4svh; }
 
 .subTitleContainer {
+  margin-top: 4svh;
   text-align: center;
   width: 100%; }
 
@@ -471,7 +484,6 @@ body {
 
 .footer {
   background-color: #262a38;
-  width: 100vw;
   height: 10rem;
   position: static;
   bottom: 0;
