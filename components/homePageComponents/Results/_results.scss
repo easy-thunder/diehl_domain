@@ -39,7 +39,7 @@
         background-image: linear-gradient(to right, $gradient-left, $gradient-right);
         -webkit-background-clip: text;
         color: transparent;
-        scale: 1.5
+        // scale: 1.5
     }
 
     &:hover{
