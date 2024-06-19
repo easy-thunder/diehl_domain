@@ -24,6 +24,7 @@
         height: fit-content;
         gap: 0rem;
         grid-template-columns: 0 50;
+        display: inline;
         
     }
     
@@ -117,11 +118,13 @@
             left: auto;
             top: 0rem;
             position: relative;
+            display: none;
         }
         &__photo--p3 {
             left: auto;
             top: 0rem;
             position: relative;
+            display: none;
         }
     }
     &:hover &__photo:not(:hover){

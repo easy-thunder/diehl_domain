@@ -282,7 +282,8 @@ body {
     .story {
       height: fit-content;
       gap: 0rem;
-      grid-template-columns: 0 50; } }
+      grid-template-columns: 0 50;
+      display: inline; } }
 
 .photoContainer {
   width: 45%;
@@ -347,18 +348,19 @@ body {
     .photoContainer__photo--p2 {
       left: auto;
       top: 0rem;
-      position: relative; }
+      position: relative;
+      display: none; }
     .photoContainer__photo--p3 {
       left: auto;
       top: 0rem;
-      position: relative; } }
+      position: relative;
+      display: none; } }
   .photoContainer:hover .photoContainer__photo:not(:hover) {
     transform: scale(0.95); }
 
 .results {
   background-image: linear-gradient(to left, rgba(126, 213, 111, 0.8), rgba(40, 180, 131, 0.8)), url(../public/raftingUnderBridge.jpg);
   height: 100svh;
-  width: 100%;
   transform: skewY(-7deg);
   background-size: cover;
   padding: 2rem;
@@ -418,7 +420,7 @@ body {
   margin-top: 4svh; }
 
 .subTitleContainer {
-  margin-top: 4svh;
+  margin-top: 8svh;
   text-align: center;
   width: 100%; }
 
