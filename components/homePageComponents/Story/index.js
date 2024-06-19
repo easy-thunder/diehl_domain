@@ -9,7 +9,7 @@ export default function Story(){
                     alt="Instructing"
                     className="photoContainer__photo photoContainer__photo--p1"
 
-
+// for vercel
 
                 />
                 <img src="/Jake rafting.png"
