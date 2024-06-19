@@ -7,6 +7,9 @@ export default function ExploreMore(){
 
   const linkedInRef = useRef(null);
   const [length, setLength]= useState(0)
+  const contactCardRef = useRef(null);
+
+
 
 
   useEffect(() => {
@@ -121,7 +124,7 @@ console.log(length)
         </div> */}
 
         <div 
-        className="exploreMoreCard">
+        className="exploreMoreCard" ref={contactCardRef}>
             <div className="exploreMoreCardSide exploreMoreCardSide--front">
             <div className="exploreMoreCardSide__inner">
                 <h3 className="subHeader">CONTACT</h3>
