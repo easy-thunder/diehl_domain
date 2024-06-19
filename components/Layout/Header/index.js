@@ -57,27 +57,23 @@ const Header = () => {
       <header className='header'>
         <div className="headerLinkLargeContainer">
           <Link className='headerLinkLarge' href="/">
-            <u className='headerLinkLarge'>HOME</u>
+            <b className='headerLinkLarge'>HOME</b>
           </Link>
-          <Link href="/skills">
-            <u className='headerLinkLarge'>SKILLS</u>
+          <Link className='headerLinkLarge' href="/skills">
+            <b className='headerLinkLarge'>SKILLS</b>
           </Link>
-
-          <a href="/JD_SWENG_RES.pdf" download="/JD_SWENG_RES.pdf">
-              <u className='headerLinkLarge'>RESUME</u>
-          </a>
 
         </div>
         <div className="headerLinkSmallContainer">
           <Link className='headerLinkSmall' href="/static/about-me">
-          <u className="headerLinkSmall">My Story  </u>
+          <b className="headerLinkSmall">About  </b>
           </Link>
           <span className='headerSpacers'>|</span>
           <Link className='headerLinkSmall' href="/games">
-          <u className="headerLinkSmall">Projects  </u>
+          <b className="headerLinkSmall">Projects  </b>
           </Link>
           <span className='headerSpacers'>|</span>
-          <u onClick={scrollToContactCard} className="headerLinkSmall">Contact </u>
+          <b onClick={scrollToContactCard} className="headerLinkSmall">Contact </b>
 
 
         </div>

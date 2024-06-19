@@ -1,6 +1,5 @@
 // components/layout/header/_header.scss
 
-
 .header {
   background-color: $color-dark;
   color: $off-white;
@@ -10,6 +9,7 @@
   top: 0;
   display: flex;
   align-items: center;
+  justify-content:center; // Center horizontally and add space between containers
   padding: 0 $gap-medium;
   z-index: 1000;
   transition: top 0.5s ease;
@@ -54,35 +54,50 @@
     transform: rotate(-45deg) translate(5px, -5px);
   }
 }
+.headerLinkLargeContainer {
+  margin: 0 2rem; // Adjust the margin to control the space between containers
+  display: flex;
+  align-items: center;
 
-.headerLinkLargeContainer{
-  margin: auto;
-
-  .headerLinkLarge{
+  .headerLinkLarge {
+    text-decoration: none;
     font-size: $title-font;
-    margin:2rem;
     color: white;
     cursor: pointer;
+    margin: .5rem
+  }
+
+  @media (max-width: 600px) {
+    transform: scale(0.6);
+    margin: 0; // Adjust as necessary for smaller screens
   }
 }
 
-.headerLinkSmallContainer{
-  margin: auto;
-  
-  .headerLinkSmall{
+.headerLinkSmallContainer {
+  margin: 0 2rem; // Adjust the margin to control the space between containers
+  display: flex;
+  align-items: center;
+
+  .headerLinkSmall {
+    text-decoration: none;
     font-size: $paragraph-font;
-    margin: 1.5rem;
+    margin: 0.5rem;
     color: white;
     cursor: pointer;
   }
 
-  .headerSpacers{
+  .headerSpacers {
     font-size: $paragraph-font;
     margin: 1.5rem;
     color: white;
+
+    @media (max-width: 600px) {
+      display: none;
+    }
   }
-  
+
+  @media (max-width: 600px) {
+    transform: scale(0.6);
+    margin: 1rem; // Adjust as necessary for smaller screens
+  }
 }
-
-
-
