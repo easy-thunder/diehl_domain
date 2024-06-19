@@ -7,10 +7,11 @@
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
     margin-top: 4svh;
+    
   }
   
   .subTitleContainer {
-    margin-top: 8svh;
+    margin-top: 12svh;
     text-align: center;
     width: 100%;
   }
@@ -53,11 +54,13 @@
     justify-content: center;
     align-items: center;
     font-size: $gap-web-border;
+    
 
   
     &--front {
       background-image: linear-gradient(to right, rgba(126, 213, 111, 0.8), rgba(40, 180, 131, 0.8));
       box-shadow: 0 1rem 2rem black;
+      
     }
   
     &--back {
@@ -79,8 +82,8 @@
       text-align: center;
   
       &__photo {
-        max-width: 80%;
-        max-height: 80%;
+        max-width: 70%;
+        max-height: 70%;
         margin-top: $gap-web-border;
       }
     }

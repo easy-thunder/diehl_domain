@@ -10,7 +10,9 @@
     margin-top: 5svh;
     
     &__text{
-
+        top: 14%;
+        position: relative;
+        justify-content: center;
         &__title{
             font-size: $title-font;
             
@@ -31,7 +33,7 @@
 }
 
 .photoContainer {
-    width: 45%;
+    width: 50%;
     position: relative;
     top: 14%;
     justify-content: center;
@@ -39,7 +41,7 @@
         outline-offset:2rem;
         border-radius: 2px;
         box-shadow: 0 1.5rem 4rem rgba($color-dark, .4);
-        width: 50rem;
+        width: 36rem;
         aspect-ratio: 3/2;
         position: absolute;
 
