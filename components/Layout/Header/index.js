@@ -1,24 +1,54 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 const Header = () => {
+  const router = useRouter();
+  const [shouldScroll, setShouldScroll] = useState(false);
+
   const [expanded, setExpanded] = useState(false);
 
   const toggleHeader = () => {
     setExpanded(!expanded);
   };
 
+
+  useEffect(() => {
+    const handleRouteChangeComplete = () => {
+      if (shouldScroll) {
+        const documentHeight = document.documentElement.scrollHeight;
+        const viewportHeight = window.innerHeight;
+        const offset = documentHeight - viewportHeight + (viewportHeight / 2);
+        
+        window.scrollTo({
+          top: offset - viewportHeight,
+          behavior: 'smooth',
+        });
+
+        setShouldScroll(false); // Reset the flag
+      }
+    };
+
+    router.events.on('routeChangeComplete', handleRouteChangeComplete);
+    return () => {
+      router.events.off('routeChangeComplete', handleRouteChangeComplete);
+    };
+  }, [shouldScroll, router.events]);
+
   const scrollToContactCard = () => {
     const documentHeight = document.documentElement.scrollHeight;
-    console.log(documentHeight)
     const viewportHeight = window.innerHeight;
-    console.log(viewportHeight)
     const offset = documentHeight - viewportHeight + (viewportHeight / 2);
-    console.log(offset)
-    window.scrollTo({
-      top: offset-viewportHeight,
-      behavior: 'smooth',
-    });
+
+    if (router.pathname !== '/') {
+      setShouldScroll(true);
+      router.push('/');
+    } else {
+      window.scrollTo({
+        top: offset - viewportHeight,
+        behavior: 'smooth',
+      });
+    }
   };
 
   return (
