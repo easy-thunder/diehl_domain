@@ -4,6 +4,8 @@ import { useMakeMove, useSpin, useReset } from '@/hooks/games/pentago/apiHooks';
 import { useMouseDown } from '@/hooks/games/pentago/frontEndHooks';
 import { useState, useRef } from 'react';
 import fetcher from '@/lib/fetcher';
+import Link from 'next/link';
+import DarkButton from '@/components/utility/button/darkButton';
 
 const Pentago = () => {
   const { data, error, mutate } = useSWR('/api/games/pentago', fetcher,  { refreshInterval: 1000,});
@@ -133,6 +135,9 @@ const Pentago = () => {
         {data.currentPlayer === 'R' ? 'Red' : 'Blue'}'s turn -{' '}
         {moveMade ? 'Spin phase' : 'Move phase'}
       </p>
+      <Link href={'/'}>
+        <DarkButton content={"HOME"} />
+      </Link>
     </div>
   );
 };

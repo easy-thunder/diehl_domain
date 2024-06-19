@@ -411,7 +411,7 @@ body {
   position: relative;
   transition: transform .3s;
   font-size: 2.5rem;
-  height: 64%; }
+  height: 70%; }
   @media (max-width: 600px) {
     .featureBox {
       height: 90%;

@@ -2,6 +2,8 @@
 import { useState } from 'react';
 import styles from './Checkers.module.css';
 import useInitializeBoard from '/hooks/games/checkers/useInitializeBoard';
+import Link from 'next/link';
+import DarkButton from '@/components/utility/button/darkButton';
 
 function Checkers() {
   const [board, setBoard] = useState([]);
@@ -169,6 +171,10 @@ function Checkers() {
           ))}
         </div>
       ))}
+      <Link href={'/'}>
+        <DarkButton content={"HOME"} />
+      </Link>
+      
     </div>
   );
 }

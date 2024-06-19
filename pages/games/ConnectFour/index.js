@@ -6,6 +6,7 @@ import styles from './connectFour.module.css';
 import { useState, useEffect, useRef } from 'react';
 import { useJoinGame, useColumnClick, useResetGame } from '../../../hooks/games/connectFourHooks';
 import DarkButton from '@/components/utility/button/darkButton';
+import Link from 'next/link';
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
@@ -53,18 +54,32 @@ export default function ConnectFour() {
     return (
       <div>
         <p>The other player left.</p>
-        <div style={{height:"20",width:"20%"}}>
-          <DarkButton clicking={joinGame} content={'Join Game'} />
+        <div style={{height:"15%",width:"15%"}}>
+          <DarkButton clicking={joinGame} content={'Join'} />
         </div>
+        <div style={{height:"15%",width:"15%"}}>
+      <Link href={'/'}>
+        <DarkButton content={"HOME"} />
+      </Link>
+      </div>
+
+
       </div>
     );
   }
   if (error) return <div>Failed to load</div>;
   if (!data) return       <>
-  <div style={{height:"20",width:"20%"}}>
+  <div style={{height:"15%",width:"15%"}}>
 
-  <DarkButton clicking={joinGame} content={'Join Game'} />
+  <DarkButton clicking={joinGame} content={'Join'} />
   </div>
+
+
+  <div style={{height:"15%",width:"15%"}}>
+      <Link href={'/'}>
+        <DarkButton content={"HOME"} />
+      </Link>
+      </div>
   </>
 
 
@@ -79,15 +94,23 @@ export default function ConnectFour() {
     ) : (
       // <button onClick={joinGame}>Join Game</button>
       <>
-      <div style={{height:"20",width:"20%"}}>
+      <div style={{height:"15%",width:"15%"}}>
 
-      <DarkButton clicking={joinGame} content={'Join Game'} />
+      <DarkButton clicking={joinGame} content={'Join'} />
       </div>
+
+      
       </>
+      
     )}
       <p>{message}</p>
       <p>Player Color: {playerColor}</p>
-      <button onClick={resetGame}>Reset Game</button>
+      {/* <button onClick={resetGame}>Reset Game</button> */}
+      <div style={{height:"15%",width:"15%"}}>
+
+        <DarkButton clicking={resetGame} content={'Reset'} />
+      </div>
+
       <div className={styles.board}>
         {board.map((row, rowIndex) => (
 
@@ -109,6 +132,13 @@ export default function ConnectFour() {
           </div>
         ))}
       </div>
+      <div style={{height:"15%",width:"15%"}}>
+      <Link href={'/'}>
+        <DarkButton content={"HOME"} />
+      </Link>
+      </div>
+      
+      
     </div>
   );
 }

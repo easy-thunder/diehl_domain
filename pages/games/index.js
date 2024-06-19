@@ -15,22 +15,22 @@ export default function(){
         {
           title: "Connect Four",
           blurb: "Enjoy this classic game with your friends online. To play you and one other friend must click join game(on two different tabs).",
-          tags: "useSWR, online, turn-based",
+          tags: "UseSWR, React, API",
           link: "/games/ConnectFour",
           linkText:"Play Connect4"
       
       },{
           title: "Pentago",
           blurb: "In Pentago you are trying to connect five in a row. The player gets to choose a cell to play in and then after that you click and drag the board to spin it. Unlike connect 4 this game does not have an array state for game instances. Therefore only two players in the whole world can play at a time. To play you must have one other client connect on a different tab, browser, or simply send them the url.",
-          tags: "useSWR, online, turn-based",
+          tags: "UseSWR, React, API",
           link: "/games/pentago",
           linkText:"Play Pentago"
       
       },
       {
-          title: "checkers",
+          title: "Checkers",
           blurb: "This is a local multiplayer game. Take turns with a friend on one tab.",
-          tags: "local-game, board-game, turn-based",
+          tags: "Local-Game, React, Turn-Based",
           link: "/games/checkers",
           linkText:"Play Checkers"
       
