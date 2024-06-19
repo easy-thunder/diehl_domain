@@ -1,28 +1,36 @@
 // pages/games/ConnectFour/hooks.js
 import { v4 as uuidv4 } from 'uuid';
 
-export const useJoinGame = (gameIdRef, setPlayerId, setPlayerColor, setJoinMessage, setBoard) => {
-  return async () => {
-    const newPlayerId = uuidv4();
-    setPlayerId(newPlayerId);
-    const response = await fetch('/api/games/connectFour', {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ playerId: newPlayerId }),
-    });
-    const data = await response.json();
-    gameIdRef.current = data.gameId;
-    if (data.players.length === 1) {
-      setPlayerColor('red');
-    } else {
-      setPlayerColor('black');
-    }
-    setJoinMessage(`You have successfully joined the game as ${data.players.length === 1 ? 'red' : 'black'}`);
-    setBoard(data.board);
+  export const useJoinGame = (gameIdRef, setPlayerId, setPlayerColor, setJoinMessage, setBoard) => {
+    return async () => {
+      const newPlayerId = uuidv4();
+      setPlayerId(newPlayerId);
+      try {
+        const response = await fetch('/api/games/connectFour', {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ playerId: newPlayerId }),
+        });
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        gameIdRef.current = data.gameId;
+        if (data.players.length === 1) {
+          setPlayerColor('red');
+        } else {
+          setPlayerColor('black');
+        }
+        setJoinMessage(`You have successfully joined the game as ${data.players.length === 1 ? 'red' : 'black'}`);
+        setBoard(data.board);
+      } catch (error) {
+        console.error("Error joining the game:", error);
+        setJoinMessage("Failed to join the game. Please try again.");
+      }
+    };
   };
-};
 
 export const useColumnClick = (playerId, gameId, playerColor, setBoard, currentPlayer) => {
   return async (column) => {

@@ -1,5 +1,4 @@
-
-import {v4 as uuidv4} from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 
 let gameStateArray = [];
 
@@ -63,13 +62,11 @@ export default function handler(req, res) {
       gameState.currentPlayer = gameState.currentPlayer === 'red' ? 'black' : 'red';
       
       res.status(200).json(gameState);
-    
       break;
     case 'PUT':
       const newPlayerId = req.body.playerId;
       let gameIdForNewPlayer = req.body.gameId;
       let gameStateForNewPlayer;
-      console.log(gameStateArray)
 
       if (gameIdForNewPlayer) {
         gameStateForNewPlayer = gameStateArray.find((game) => game.gameId === gameIdForNewPlayer);
@@ -103,34 +100,30 @@ export default function handler(req, res) {
         }
         res.status(200).json(gameStateForNewPlayer);
       }
-
-
-
-      case 'DELETE':
-        const currentGameId = req.query.gameId;
-        const playerLeft = req.query.playerLeft === 'true';
-        if (currentGameId) {
-          const index = gameStateArray.findIndex((game) => game.gameId === currentGameId);
-          if (index !== -1) {
-            if (playerLeft) {
-              console.log('playerLeftDelete')
-              gameStateArray.splice(index, 1);
-              console.log(gameStateArray)
-              res.status(200).json({ message: 'Game deleted' });
-            } else {
-              const gameStateToReset = gameStateArray[index];
-              gameStateToReset.board = Array(6).fill(null).map(() => Array(7).fill(null));
-              gameStateToReset.currentPlayer = 'red';
-              gameStateToReset.winner = null;
-              res.status(200).json({ message: 'Game reset' });
-            }
+      break;  // Added break statement here
+    case 'DELETE':
+      const currentGameId = req.query.gameId;
+      const playerLeft = req.query.playerLeft === 'true';
+      if (currentGameId) {
+        const index = gameStateArray.findIndex((game) => game.gameId === currentGameId);
+        if (index !== -1) {
+          if (playerLeft) {
+            gameStateArray.splice(index, 1);
+            res.status(200).json({ message: 'Game deleted' });
           } else {
-            res.status(404).json({ error: 'Game not found' });
+            const gameStateToReset = gameStateArray[index];
+            gameStateToReset.board = Array(6).fill(null).map(() => Array(7).fill(null));
+            gameStateToReset.currentPlayer = 'red';
+            gameStateToReset.winner = null;
+            res.status(200).json({ message: 'Game reset' });
           }
         } else {
-          res.status(400).json({ error: 'Game ID is required' });
+          res.status(404).json({ error: 'Game not found' });
         }
-        break;
+      } else {
+        res.status(400).json({ error: 'Game ID is required' });
+      }
+      break;
     default:
       res.setHeader('Allow', ['GET', 'POST', 'PUT', 'DELETE']);
       res.status(405).end(`Method ${req.method} Not Allowed`);
