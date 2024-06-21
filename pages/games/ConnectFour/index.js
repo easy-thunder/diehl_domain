@@ -112,11 +112,11 @@ export default function ConnectFour() {
       </div>
 
       <div className={styles.board}>
-        {board.map((row, rowIndex) => (
+        {board? board.map((row, rowIndex) => (
 
 
           <div key={rowIndex} className={styles.row}>
-            {row.map((cell, colIndex) => (
+            {row? row.map((cell, colIndex) => (
               <div
                 key={colIndex}
                 className={styles.cell}
@@ -127,10 +127,10 @@ export default function ConnectFour() {
 
 
 
-            ))}
+            )):null}
             
           </div>
-        ))}
+        )):null}
       </div>
       <div style={{height:"15%",width:"15%"}}>
       <Link href={'/'}>

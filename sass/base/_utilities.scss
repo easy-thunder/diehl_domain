@@ -17,3 +17,28 @@
 .linkedInSVG{
     cursor: Pointer;
 }
+
+
+.centerContentHorizontally {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: wrap; /* This ensures that items wrap onto multiple lines if needed */
+    width: 100%;
+    margin: 0 auto;
+  }
+
+
+
+.pageTitle{
+    font-size: $main-title-font;
+    text-align: center;
+    margin-bottom: $gap-web-border;
+}
+
+.pageSubTitle{
+    font-size: $title-font;
+    text-align: center;
+    margin-bottom: $gap-web-border;
+}
+

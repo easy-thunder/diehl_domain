@@ -1,0 +1,46 @@
+.techBucket{
+    min-height: 50svh;
+    width: 98%;
+    // background-color: red;
+
+    font-size: 3rem;
+    border-radius: 3rem;
+    outline-offset: 1rem ;
+    outline: 1.5rem solid $gradient-right;
+    // justify-content: center;
+    margin-bottom: 4rem;
+    margin-left: 1%;
+
+    &__tag{
+        outline-offset: 1rem ;
+        outline: .5rem solid $color-dark;
+        width: fit-content;
+        display: inline-block;
+        border-radius: 2rem;
+        margin: 3rem;
+        cursor: pointer;
+        text-decoration: none;
+        background-color: #fff;
+
+
+
+
+        &:checked{
+            // background-image:to left, $gradient-left, $gradient-right ;
+            background-color: red;
+        }
+
+    }
+
+}
+
+.techBucket__tag input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+  }
+
+  .techBucket__tag.active {
+    background-color: $color-dark;
+    color: #fff;
+  }

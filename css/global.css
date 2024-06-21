@@ -35,6 +35,25 @@ body {
 .linkedInSVG {
   cursor: Pointer; }
 
+.centerContentHorizontally {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  /* This ensures that items wrap onto multiple lines if needed */
+  width: 100%;
+  margin: 0 auto; }
+
+.pageTitle {
+  font-size: 5rem;
+  text-align: center;
+  margin-bottom: 2rem; }
+
+.pageSubTitle {
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 2rem; }
+
 @keyframes expand {
   from {
     height: 1svh; }
@@ -719,3 +738,34 @@ body {
 
 .can-take {
   background-color: #f00; }
+
+.techBucket {
+  min-height: 50svh;
+  width: 98%;
+  font-size: 3rem;
+  border-radius: 3rem;
+  outline-offset: 1rem;
+  outline: 1.5rem solid rgba(40, 180, 131, 0.8);
+  margin-bottom: 4rem;
+  margin-left: 1%; }
+  .techBucket__tag {
+    outline-offset: 1rem;
+    outline: 0.5rem solid #262a38;
+    width: fit-content;
+    display: inline-block;
+    border-radius: 2rem;
+    margin: 3rem;
+    cursor: pointer;
+    text-decoration: none;
+    background-color: #fff; }
+    .techBucket__tag:checked {
+      background-color: red; }
+
+.techBucket__tag input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer; }
+
+.techBucket__tag.active {
+  background-color: #262a38;
+  color: #fff; }
