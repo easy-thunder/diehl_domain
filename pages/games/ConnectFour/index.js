@@ -105,7 +105,6 @@ export default function ConnectFour() {
     )}
       <p>{message}</p>
       <p>Player Color: {playerColor}</p>
-      {/* <button onClick={resetGame}>Reset Game</button> */}
       <div style={{height:"15%",width:"15%"}}>
 
         <DarkButton clicking={resetGame} content={'Reset'} />
