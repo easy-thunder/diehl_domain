@@ -72,6 +72,42 @@
         ]
       },
       {
+        "id": "chrome-extension-web-scrape",
+        "title": "Using Chrome Extensions to Web Scrape Data",
+        "blurb": "Learn how to use Chrome extensions to scrape data from web pages efficiently.",
+        "tags": [
+          "Chrome Extensions",
+          "Web Scraping",
+          "JavaScript"
+        ],
+        "link": "/skills/chrome-extension-web-scrape",
+        "linkText": "Learn to Web Scrape with Chrome Extensions",
+        "paragraphs": [
+          "### Introduction to Chrome Extensions for Web Scraping",
+          "Chrome extensions can be a powerful tool for scraping data directly from web pages. By creating a content script, you can interact with web pages, extract information, and even manipulate the page's appearance.",
+          "### Creating the Manifest File",
+          "The manifest file is the first step in creating a Chrome extension. It defines the metadata of your extension and specifies the content script.",
+          "```json\n{\n  \"manifest_version\": 3,\n  \"name\": \"Web Scraper\",\n  \"version\": \"1.0\",\n  \"content_scripts\": [\n    {\n      \"matches\": [\"\u003Call_urls\u003E\"],\n      \"js\": [\"content.js\"]\n    }\n  ]\n}\n```",
+          "### Using Query Selector in content.js",
+          "In your `content.js` file, you can use `document.querySelector` to target and extract data from specific elements on a web page.",
+          "```js\n// content.js\nconst jobTitle = document.querySelector('.job-title').innerText;\nconst company = document.querySelector('.company-name').innerText;\nconst jobDescription = document.querySelector('.job-description').innerText;\n```",
+          "### Addressing Loading Issues",
+          "One common issue when scraping data is ensuring that all elements have fully loaded. While using the `onLoad` event listener is recommended, it doesn't always guarantee that all elements are accessible. To handle this, you can use a `setTimeout` function to delay the script execution.",
+          "```js\nwindow.addEventListener('load', () =\u003E {\n  setTimeout(() =\u003E {\n    // Your scraping logic here\n  }, 2000); // Wait for 2 seconds\n});\n```",
+          "### Changing Background Color",
+          "You can manipulate the DOM to change the appearance of the webpage. For instance, changing the background color to pink can be done using:",
+          "```js\ndocument.body.style.backgroundColor = 'pink';\n```",
+          "### Practical Application: LinkedIn Web Scraper",
+          "Using these techniques, I created a Chrome extension to scrape job postings from LinkedIn. The extension extracts information such as the job title, company, job description, and mutual skills. Here's an example of how the data is collected:",
+          "```js\n// Example scraping logic\nconst jobTitle = document.querySelector('.job-title').innerText;\nconst company = document.querySelector('.company-name').innerText;\nconst jobDescription = document.querySelector('.job-description').innerText;\nconst mutualSkills = Array.from(document.querySelectorAll('.mutual-skills')).map(skill =\u003E skill.innerText);\n```",
+          "### Automating Cover Letter Customization",
+          "I further automated the job application process by integrating the scraped data with a SQL database containing cover letter templates. Each template had placeholders for skills, which were replaced with the mutual skills identified in the job posting.",
+          "Finally, the job details and the customized cover letter were sent to ChatGPT to refine the content. The process ensured the cover letters were personalized, compliant with AI detection systems, and ready for submission at the click of a button.",
+          "### Conclusion",
+          "Using Chrome extensions to scrape web data can significantly enhance your ability to automate and streamline tasks. This example demonstrates how accessing and manipulating webpage content can be practically applied, from collecting data to automating job applications."
+        ]
+      },
+      {
         "id": "restful-express",
         "title": "Building Scalable APIs with RESTful Express",
         "blurb": "Learn how to use RESTful conventions in Express.js to create scalable and maintainable APIs.",
