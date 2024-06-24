@@ -23,7 +23,11 @@ body {
 @media (max-width: 800px) {
   html {
     font-size: 40% !important;
-    width: 100vw; } }
+    width: 100vw;
+    display: inline; } }
+
+html {
+  font-size: 62.5%; }
 
 .imageContainer {
   width: 100%;
@@ -45,12 +49,12 @@ body {
   margin: 0 auto; }
 
 .pageTitle {
-  font-size: 5rem;
+  font-size: 7rem;
   text-align: center;
   margin-bottom: 2rem; }
 
 .pageSubTitle {
-  font-size: 2.5rem;
+  font-size: 3.5rem;
   text-align: center;
   margin-bottom: 2rem; }
 
@@ -143,7 +147,7 @@ body {
   align-items: center; }
   .headerLinkLargeContainer .headerLinkLarge {
     text-decoration: none;
-    font-size: 2.5rem;
+    font-size: 3.5rem;
     color: white;
     cursor: pointer;
     margin: .5rem; }
@@ -158,12 +162,12 @@ body {
   align-items: center; }
   .headerLinkSmallContainer .headerLinkSmall {
     text-decoration: none;
-    font-size: 1.5rem;
+    font-size: 2rem;
     margin: 0.5rem;
     color: white;
     cursor: pointer; }
   .headerLinkSmallContainer .headerSpacers {
-    font-size: 1.5rem;
+    font-size: 2rem;
     margin: 1.5rem;
     color: white; }
     @media (max-width: 600px) {
@@ -235,16 +239,16 @@ body {
     position: relative;
     display: inline-block; }
     .backgroundImageContainer__titlesBox__title {
-      font-size: 5rem;
+      font-size: 7rem;
       animation-name: moveInLeft;
       animation-duration: 1s;
       animation-timing-function: ease-out; }
     .backgroundImageContainer__titlesBox__subTitle {
-      font-size: 2.5rem;
+      font-size: 3.5rem;
       opacity: 0;
       animation: fadeIn 1.4s ease-in 1s 1 forwards; }
     .backgroundImageContainer__titlesBox__buttonBox {
-      margin-top: 2.5rem; }
+      margin-top: 3.5rem; }
 
 .btn {
   text-transform: uppercase;
@@ -259,7 +263,8 @@ body {
   font-size: 6rem;
   text-align: center;
   margin-top: 2rem;
-  cursor: pointer; }
+  cursor: pointer;
+  min-width: fit-content; }
 
 .btn-white {
   background-color: #fff;
@@ -316,15 +321,9 @@ body {
     position: relative;
     justify-content: center; }
     .story__text__title {
-      font-size: 2.5rem; }
+      font-size: 3.5rem; }
     .story__text__paragraph {
-      font-size: 1.5rem; }
-  @media (max-width: 600px) {
-    .story {
-      height: fit-content;
-      gap: 0rem;
-      grid-template-columns: 0 50;
-      display: inline; } }
+      font-size: 2rem; }
 
 .photoContainer {
   width: 50%;
@@ -351,37 +350,16 @@ body {
     top: 4rem; }
   .photoContainer__photo--p3 {
     left: 12rem;
-    top: 30rem; }
-  @media (min-width: 1701px) and (max-width: 3000px) {
+    top: 20rem; }
+  @media (max-width: 800px) {
     .photoContainer__photo {
-      transform: scale(0.7); }
-    .photoContainer__photo--p1 {
-      left: -2rem;
-      top: -2rem; }
-    .photoContainer__photo--p2 {
-      left: 15rem;
-      top: 2rem; }
-    .photoContainer__photo--p3 {
-      left: 2rem;
-      top: 10rem; } }
-  @media (min-width: 601px) and (max-width: 1700px) {
-    .photoContainer__photo {
-      transform: scale(0.6); }
-    .photoContainer__photo--p1, .photoContainer__photo--p2, .photoContainer__photo--p3 {
-      left: auto;
-      top: 0rem;
-      position: relative; } }
-  @media (max-width: 600px) {
-    .photoContainer__photo {
-      transform: scale(0.7); }
-    .photoContainer__photo--p1, .photoContainer__photo--p2, .photoContainer__photo--p3 {
-      left: auto;
-      top: 0rem;
-      position: relative; }
-    .photoContainer__photo--p2, .photoContainer__photo--p3 {
-      display: none; } }
-  .photoContainer:hover .photoContainer__photo:not(:hover) {
-    transform: scale(0.95); }
+      transform: scale(0.7);
+      position: relative;
+      display: inline-block;
+      left: 4rem;
+      top: 0rem; }
+    .photoContainer {
+      display: grid; } }
 
 .results {
   background-image: linear-gradient(to left, rgba(126, 213, 111, 0.8), rgba(40, 180, 131, 0.8)), url(../public/raftingUnderBridge.jpg);
@@ -389,17 +367,17 @@ body {
   transform: skewY(-7deg);
   background-size: cover;
   padding: 2rem;
-  margin-top: 40svh; }
-  @media (max-width: 600px) {
-    .results {
-      height: 130svh; } }
+  margin-top: 40svh;
+  min-height: fit-content; }
   .results > * {
     transform: skewY(7deg); }
 
 .featureBoxContainer {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  gap: 2rem; }
+  position: absolute;
+  gap: 2rem;
+  margin-left: -2rem; }
   @media (max-width: 600px) {
     .featureBoxContainer {
       height: 50%;
@@ -423,7 +401,7 @@ body {
     .featureBox {
       height: 90%;
       width: 90%;
-      margin-top: 2svh; } }
+      margin-top: 3svh; } }
   .featureBox__icon {
     font-size: 4rem;
     margin-bottom: .5rem;
@@ -548,11 +526,11 @@ body {
     flex-direction: column;
     justify-content: space-between; }
   .fullStretchContainer .fullStretchTitle {
-    font-size: 2.5rem;
+    font-size: 3.5rem;
     text-align: center;
     margin-bottom: 1rem; }
   .fullStretchContainer .fullStretchBlurb {
-    font-size: 1.5rem;
+    font-size: 2rem;
     text-align: left;
     margin-bottom: 1rem; }
   .fullStretchContainer .fullStretchTags {
@@ -593,11 +571,11 @@ body {
 
 .individualSkillTitle {
   text-align: center;
-  font-size: 2.5rem;
+  font-size: 3.5rem;
   margin-bottom: 1.5rem; }
 
 .individualSkillParagraph {
-  font-size: 1.5rem;
+  font-size: 2rem;
   text-align: left;
   margin-bottom: 1rem; }
   .individualSkillParagraph pre {
@@ -605,11 +583,11 @@ body {
     padding: 1rem;
     border-radius: 0.5rem;
     overflow-x: auto;
-    font-size: 1.5rem; }
+    font-size: 2rem; }
   .individualSkillParagraph code {
     font-family: monospace;
     font-size: 1rem;
-    font-size: 1.5rem; }
+    font-size: 2rem; }
 
 .individualSkillTags {
   font-size: 1rem;
@@ -628,7 +606,7 @@ body {
   display: block;
   margin: 2rem auto 0 auto;
   padding: 1rem 2rem;
-  font-size: 1.5rem;
+  font-size: 2rem;
   background-color: rgba(202, 139, 22, 0.8);
   color: white;
   border: none;

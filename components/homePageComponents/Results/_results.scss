@@ -13,12 +13,13 @@
 
     padding: $gap-web-border;
     margin-top: 40svh;
+    min-height: fit-content;
     
-    @media (max-width:600px) {
-        height: 130svh;
-        // width: 100%;
+    // @media (max-width:600px) {
+    //     height: 130svh;
+    //     // width: 100%;
         
-    }
+    // }
     &>*{
         transform: skewY(7deg);
         
@@ -31,8 +32,10 @@
 .featureBoxContainer{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
-    // position: absolute;
+    position: absolute;
     gap: $gap-web-border;
+    margin-left: -2rem;
+
     
     @media (max-width:600px) {
     height: 50%;
@@ -65,8 +68,7 @@
     @media (max-width:600px) {
         height: 90%;
         width: 90%;
-        margin-top: 2svh;
-
+        margin-top: 3svh;
         
     }
     

@@ -45,7 +45,7 @@ const Header = () => {
       router.push('/');
     } else {
       window.scrollTo({
-        top: offset - viewportHeight,
+        top: offset - viewportHeight+150,
         behavior: 'smooth',
       });
     }

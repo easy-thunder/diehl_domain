@@ -16,6 +16,7 @@ body{
 }
 
 
+
 /* Styles for screen widths between 400px and 1220px */
 @media (min-width: 1501px) and (max-width: 2000px) {
     html {
@@ -35,5 +36,10 @@ body{
     html {
         font-size: 40%!important;
         width: 100vw;
+        display: inline;
     }
+}
+
+html{
+    font-size: 62.5%;
 }
