@@ -1,36 +1,36 @@
 import FullStretchCard from "@/components/utility/button/fullStretchCard";
-// import useS3Bucket from "@/hooks/api/useS3Bucket";
+import useS3Bucket from "@/hooks/api/useS3Bucket";
 import { useState, useEffect } from "react";
 
 export default function Skills() {
-  // const apiEndpoint = "api/aws/get-presigned-url";
-  // const bucketName = "diehl-domain-data";
-  // const objectKey = "skillsData.json";
-  const [skillsData, setSkillsData] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const apiEndpoint = "api/aws/get-presigned-url";
+  const bucketName = "diehl-domain-data";
+  const objectKey = "skillsData.json";
+  // const [skillsData, setSkillsData] = useState(null);
+  // const [loading, setLoading] = useState(true);
+  // const [error, setError] = useState(null);
   const [activeSkills, setActiveSkills] = useState([]);
 
-  useEffect(() => {
-    const fetchSkillsData = async () => {
-      try {
-        const response = await fetch('/data/skills.json');
-        if (!response.ok) {
-          throw new Error("Failed to fetch skills data");
-        }
-        const data = await response.json();
-        setSkillsData(data);
-      } catch (error) {
-        setError(error.message);
-      } finally {
-        setLoading(false);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchSkillsData = async () => {
+  //     try {
+  //       const response = await fetch('/data/skills.json');
+  //       if (!response.ok) {
+  //         throw new Error("Failed to fetch skills data");
+  //       }
+  //       const data = await response.json();
+  //       setSkillsData(data);
+  //     } catch (error) {
+  //       setError(error.message);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
 
-    fetchSkillsData();
-  }, []);
+  //   fetchSkillsData();
+  // }, []);
 
-  // const { data: skillsData, loading, error } = useS3Bucket(apiEndpoint, bucketName, objectKey);
+  const { data: skillsData, loading, error } = useS3Bucket(apiEndpoint, bucketName, objectKey);
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
