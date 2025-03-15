@@ -1,3 +1,88 @@
+.exploreMore {
+  display: grid;
+  gap: 2rem;
+  margin-top: 2rem;
+  height: 150svh;
+  width: 100%;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  margin-top: 4svh; }
+
+.subTitleContainer {
+  margin-top: 12svh;
+  text-align: center;
+  width: 100%; }
+
+.exploreMoreSubtitle {
+  font-size: 6rem;
+  position: relative; }
+
+.exploreMoreCard {
+  position: relative;
+  width: 100%;
+  height: 50svh;
+  perspective: 100rem; }
+  .exploreMoreCard.is-flipped {
+    transform: rotateY(180deg); }
+  .exploreMoreCard:hover .exploreMoreCardSide--front {
+    transform: rotateY(180deg); }
+  .exploreMoreCard:hover .exploreMoreCardSide--back {
+    transform: rotateY(0deg); }
+
+.exploreMoreCardSide {
+  color: white;
+  font-size: 2rem;
+  height: 100%;
+  transition: all 0.8s;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  backface-visibility: hidden;
+  border-radius: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem; }
+  .exploreMoreCardSide--front {
+    background-image: linear-gradient(to right, rgba(126, 213, 111, 0.8), rgba(40, 180, 131, 0.8));
+    box-shadow: 0 1rem 2rem black; }
+  .exploreMoreCardSide--back {
+    background-image: linear-gradient(to right, rgba(202, 139, 22, 0.8), rgba(255, 223, 0, 0.8));
+    transform: rotateY(180deg);
+    color: black; }
+  .exploreMoreCardSide__inner {
+    padding: 2rem;
+    background-color: white;
+    height: 80%;
+    width: 80%;
+    margin: auto;
+    border-radius: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center; }
+    .exploreMoreCardSide__inner__photo {
+      max-width: 70%;
+      max-height: 70%;
+      margin-top: 2rem; }
+
+.subHeader {
+  margin-bottom: 2rem;
+  color: black; }
+
+.exploreMoreLink {
+  margin-top: 2rem;
+  padding: 0.5rem 1rem;
+  background-color: rgba(40, 180, 131, 0.8);
+  color: white;
+  text-decoration: none !important;
+  border-radius: 0.5rem;
+  transition: background-color 0.3s;
+  display: inline-block; }
+  .exploreMoreLink:hover {
+    background-color: #28b483; }
+
 *, *::after, *::before {
   margin: 0;
   padding: 0;
@@ -412,90 +497,6 @@ html {
     color: transparent; }
   .featureBox:hover {
     transform: translate(0, -1.5rem) scale(1.03); }
-
-.exploreMore {
-  display: grid;
-  gap: 2rem;
-  margin-top: 2rem;
-  height: 150svh;
-  width: 100%;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr;
-  margin-top: 4svh; }
-
-.subTitleContainer {
-  margin-top: 12svh;
-  text-align: center;
-  width: 100%; }
-
-.exploreMoreSubtitle {
-  font-size: 6rem;
-  position: relative; }
-
-.exploreMoreCard {
-  position: relative;
-  width: 100%;
-  height: 50svh;
-  perspective: 100rem; }
-  .exploreMoreCard.is-flipped {
-    transform: rotateY(180deg); }
-  .exploreMoreCard:hover .exploreMoreCardSide--front {
-    transform: rotateY(180deg); }
-  .exploreMoreCard:hover .exploreMoreCardSide--back {
-    transform: rotateY(0deg); }
-
-.exploreMoreCardSide {
-  color: white;
-  font-size: 2rem;
-  height: 100%;
-  transition: all 0.8s;
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  backface-visibility: hidden;
-  border-radius: 2rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 2rem; }
-  .exploreMoreCardSide--front {
-    background-image: linear-gradient(to right, rgba(126, 213, 111, 0.8), rgba(40, 180, 131, 0.8));
-    box-shadow: 0 1rem 2rem black; }
-  .exploreMoreCardSide--back {
-    background-image: linear-gradient(to right, rgba(202, 139, 22, 0.8), rgba(255, 223, 0, 0.8));
-    transform: rotateY(180deg);
-    color: black; }
-  .exploreMoreCardSide__inner {
-    padding: 2rem;
-    background-color: white;
-    height: 80%;
-    width: 80%;
-    margin: auto;
-    border-radius: 2rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center; }
-    .exploreMoreCardSide__inner__photo {
-      max-width: 70%;
-      max-height: 70%;
-      margin-top: 2rem; }
-
-.subHeader {
-  margin-bottom: 2rem;
-  color: black; }
-
-.exploreMoreLink {
-  margin-top: 2rem;
-  padding: 0.5rem 1rem;
-  background-color: rgba(40, 180, 131, 0.8);
-  color: white;
-  text-decoration: none;
-  border-radius: 0.5rem;
-  transition: background-color 0.3s; }
-  .exploreMoreLink:hover {
-    background-color: #28b483; }
 
 .footer {
   background-color: #262a38;

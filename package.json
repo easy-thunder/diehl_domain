@@ -7,7 +7,10 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "compile:sass": "node-sass sass/main.scss css/global.css -w"
+    "compile:sass": "node-sass --watch sass/main.scss css/global.css",
+    "build:sass": "node-sass sass/main.scss css/global.css",
+    "test": "jest --coverage",
+    "test:watch": "jest --watch"
   },
   "dependencies": {
     "aws-sdk": "^2.1646.0",
@@ -20,6 +23,15 @@
     "uuid": "^10.0.0"
   },
   "devDependencies": {
+    "@babel/preset-env": "^7.26.9",
+    "@babel/preset-react": "^7.26.3",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.2.0",
+    "@testing-library/user-event": "^14.6.1",
+    "babel-jest": "^29.7.0",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
+    "next-router-mock": "^0.9.13",
     "node-sass": "^9.0.0"
   }
 }
