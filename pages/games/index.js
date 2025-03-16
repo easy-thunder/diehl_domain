@@ -1,5 +1,5 @@
 
-import FullStretchCard from "@/components/utility/button/fullStretchCard";
+import FullStretchCard from "@/components/utility/fullStretchCard/fullStretchCard";
 
 export default function(){
 

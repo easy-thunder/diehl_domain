@@ -1,34 +1,15 @@
-import FullStretchCard from "@/components/utility/button/fullStretchCard";
+import FullStretchCard from "@/components/utility/fullStretchCard/fullStretchCard";
 import useS3Bucket from "@/hooks/api/useS3Bucket";
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import SelectDropdown from "@/components/utility/selectDropdown/selectDropdown";
 
 export default function Skills() {
   const apiEndpoint = "api/aws/get-presigned-url";
   const bucketName = "diehl-domain-data";
   const objectKey = "skillsData.json";
-  // const [skillsData, setSkillsData] = useState(null);
-  // const [loading, setLoading] = useState(true);
-  // const [error, setError] = useState(null);
   const [activeSkills, setActiveSkills] = useState([]);
 
-  // useEffect(() => {
-  //   const fetchSkillsData = async () => {
-  //     try {
-  //       const response = await fetch('/data/skills.json');
-  //       if (!response.ok) {
-  //         throw new Error("Failed to fetch skills data");
-  //       }
-  //       const data = await response.json();
-  //       setSkillsData(data);
-  //     } catch (error) {
-  //       setError(error.message);
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   };
 
-  //   fetchSkillsData();
-  // }, []);
 
   const { data: skillsData, loading, error } = useS3Bucket(apiEndpoint, bucketName, objectKey);
 
@@ -69,6 +50,17 @@ export default function Skills() {
       <>
         <h2 className="pageTitle">Skills and tech used</h2>
         <h2 className="pageSubTitle">Click to filter skills</h2>
+        <div className="filterForSkillsContainer">
+          <div className="blurbOnSkillsOverview">
+            <p>I love solving problems through programming. Entering the job market during a period of high saturation pushed me to explore a wide range of skills across multiple domains. Working at a startup further expanded my expertise, as I had to wear many hats and adapt to various challenges.</p>
+            <p>Each skill listed here comes with details on why I acquired it, where and when I learned it, the projects I've applied it to, and any related articles I’ve written. I understand the breadth of skills may seem extensive, but they reflect my adaptability and continuous learning in an ever-evolving industry.</p>
+          </div>
+          <div className="filterSkills">
+            <h2 className="filterHeader">Filters</h2>
+            <SelectDropdown options={techAndSkills} selectLabel='Filter by Skill Name'/>
+
+          </div>
+        </div>
         <div className="techBucket">
           <div className="centerContentHorizontally">
           {techAndSkills.map(skill => (
