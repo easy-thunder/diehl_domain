@@ -6,14 +6,16 @@
     font-size: 3rem;
     border-radius: 3rem;
     outline-offset: 1rem ;
-    outline: 1.5rem solid $gradient-right;
+    // outline: 1.5rem solid $gradient-right;
     // justify-content: center;
     margin-bottom: 4rem;
+    margin-top: 4rem;
+
     margin-left: 1%;
 
     &__tag{
         outline-offset: 1rem ;
-        outline: .5rem solid $color-dark;
+        // outline: .5rem solid $color-dark;
         width: fit-content;
         display: inline-block;
         border-radius: 2rem;
@@ -54,6 +56,7 @@
 .blurbOnSkillsOverview{
     grid-column: span 2;
     font-size: 3rem;
+    padding: 1rem;
 }
 
 
@@ -63,6 +66,10 @@
 
 
 .filterHeader{
-    font-size: 4rem;
+    font-size: 2rem;
+    justify-self: center;
+}
+
+.filterSkillsOptions{
     justify-self: center;
 }
