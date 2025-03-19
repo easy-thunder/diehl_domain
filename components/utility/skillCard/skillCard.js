@@ -19,7 +19,7 @@ export default function SkillCard({
           <span className="skill-card__header-meta-date">{acquisitionDate}</span>
           <span className="skill-card__header-meta-domain">
             {domain.map((item, index) => (
-              <span key={`${skillName}-domain-${index}`}>{item}</span>
+              <span key={`${skillName}-domain-${index}`}>{item}{index < domain.length - 1? ", ": ''}</span>
             ))}
           </span>
         </div>
