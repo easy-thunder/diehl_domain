@@ -380,9 +380,7 @@ export default function Skills() {
     {array:sortedDates,title:'Filter by Date',key:'acquisitionDate'},
   ]
 
-  function clearFilters(){
-    setSelectedFilters(()=>[...sortedSkillsOriginal])
-  }
+
 
   const runFilterArray = (skillsArray, index) => {
     if (!filterArray[index]) {
