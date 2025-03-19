@@ -1,9 +1,11 @@
 @import "abstracts/variables";
-@import "../components/homePageComponents/ExploreMore/exploreMore";
 @import "base/base";
 @import "base/typography";
 @import "base/utilities";
 @import "base/animations";
+@import "../components/utility/selectDropdown/selectDropdown";
+@import "../components/homePageComponents/ExploreMore/exploreMore";
+@import "../components/utility/skillCard/skillCard";
 @import "../components/Layout/Header/header";
 @import "../components/Layout/SideBar/sideBar";
 @import "../components/homePageComponents/Hero/hero";
@@ -11,10 +13,9 @@
 @import "../components/homePageComponents/Story/story";
 @import "../components/homePageComponents/Results/results";
 @import "../components/Layout/Footer/footer";
-@import "../components/utility/button/fullStretchCard";
+@import "../components/utility/fullStretchCard/fullStretchCard";
 @import "../pages/skills/individualSkills";
 @import "../pages/static/timeline";
 @import "abstracts/chess";
 @import "../pages/skills/skills";
-
 
