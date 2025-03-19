@@ -1,23 +1,14 @@
-import FullStretchCard from "@/components/utility/fullStretchCard/fullStretchCard";
 import useS3Bucket from "@/hooks/api/useS3Bucket";
-import { useState } from "react";
-import SelectDropdown from "@/components/utility/selectDropdown/selectDropdown";
-
+import { useEffect, useState } from "react";
+import SelectDropdown from "@/components/utility/selectDropdown/checkboxDropdown";
+import SkillCard from "@/components/utility/skillCard/skillCard";
 export default function Skills() {
+  const [selectedFilters,setSelectedFilters] = useState([])
+  const [filterArray, setFilterArray] = useState([]);
+
   const apiEndpoint = "api/aws/get-presigned-url";
   const bucketName = "diehl-domain-data";
   const objectKey = "skillsData.json";
-  //const [activeSkills, setActiveSkills] = useState([]);
-
-  const monthMap = {
-    January: 1, February: 2, March: 3, April: 4, May: 5, June: 6,
-    July: 7, August: 8, September: 9, October: 10, November: 11, December: 12
-  };
-
-  const { data: skillsData, loading, error } = useS3Bucket(apiEndpoint, bucketName, objectKey);
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error}</div>;
-
 
   const skillsToDisplay=[
     {
@@ -26,7 +17,7 @@ export default function Skills() {
       coreOrSupporting:"Core",
       information: "I started learning Vanilla Javascript with Udemy before I started my classes at FlatIron where I stretched this skill. After graduation I mainly use Vanilla Javascript in Chrome extensions with Rollup to easily webscrape data with query-Selectors.",
       gameProjects:[],
-      articles:["chromeExtension"],
+      articles:["chrome-extension-web-scrape"],
       tools:['JavaScript'],
       acquisitionDate:'June 2022'
     },
@@ -181,7 +172,7 @@ export default function Skills() {
     },
     {
       skillName:"Cleaning and mapping CSV's",
-      domain:['Server Side'],
+      domain:['Server Side','Analytics'],
       coreOrSupporting:"Core",
       information:"CSV Data Processing & Transformation in TypeScriptI use fs.readFileSync to read CSV files in TypeScript, then clean, map, and transform the data into structured formats, ensuring type safety and seamless integration into applications. I have also used Pandas with Jupyter Notebooks, Matplotlib, and Seaborn to clean and transform CSV's into charts and graphs.",
       gameProjects:[],
@@ -285,8 +276,19 @@ export default function Skills() {
       information:"I efficiently manage version control using Git and GitHub, leveraging branching (git checkout), merging (git merge), and repository management (git clone, git push). I follow best practices for staging (git add), committing (git commit), and tracking changes (git status), ensuring smooth collaboration and code integrity.",
       gameProjects:[],
       articles:[],
-      tools:['React'],
+      tools:['Git','GitHub'],
       acquisitionDate:'October 2022'
+
+    },
+    {
+      skillName:"Managing work with Jira",
+      domain:['Client Side','Server Side','Data Engineering'],
+      coreOrSupporting:"Supporting",
+      information:"Using Jira I organize my work on kaban boards based on order of importance and include sub-tasks for larger projects.",
+      gameProjects:[],
+      articles:[],
+      tools:['Jira'],
+      acquisitionDate:'October 2024'
 
     },
     {
@@ -300,8 +302,27 @@ export default function Skills() {
       acquisitionDate:'December 2022'
 
     }
-
   ] 
+
+
+  const monthMap = {
+    January: 1, February: 2, March: 3, April: 4, May: 5, June: 6,
+    July: 7, August: 8, September: 9, October: 10, November: 11, December: 12
+  };
+
+  const { data: skillsData, loading, error } = useS3Bucket(apiEndpoint, bucketName, objectKey);
+
+
+
+  const sortedSkillsOriginal = [...skillsToDisplay].sort((a, b) =>
+    a.skillName.localeCompare(b.skillName)
+  );
+
+  useEffect(() => {
+    if (!loading && !error) {
+      setSelectedFilters(sortedSkillsOriginal);
+    }
+  }, [loading, error]);
 
   const sortedSkillNames = [...new Set(
     skillsToDisplay.flatMap(skill => skill.skillName).sort((a, b) => a.localeCompare(b))
@@ -332,6 +353,8 @@ export default function Skills() {
       })
   )];
   
+
+  
   //skill name, domain,
 // come back to this because we are chaning what we load in for skills
   // const toggleSkill = (skill) => {
@@ -349,30 +372,107 @@ export default function Skills() {
   //   : skillsData.skillsData;
   
 
+  const allFilterText=[
+    {array:sortedSkillNames,title:'Filter by Skill Name',key:'skillName'},
+    {array:sortedDomainNames,title:'Filter by Domain Name',key:'domain'},
+    {array:sortedToolNames,title:'Filter by Tool Name',key:'tools'},
+    {array:sortedCoreOrSupporting,title:'Filter by Core or Supporting Skill',key:'coreOrSupporting'},
+    {array:sortedDates,title:'Filter by Date',key:'acquisitionDate'},
+  ]
+
+  function clearFilters(){
+    setSelectedFilters(()=>[...sortedSkillsOriginal])
+  }
+
+  const runFilterArray = (skillsArray, index) => {
+    if (!filterArray[index]) {
+        setSelectedFilters([...sortedSkillsOriginal]); // Reset when filters are empty
+        return;
+    }
+    const { filterTitle, selectedOptions } = filterArray[index];
+
+    const newFilteredSkills = skillsArray.filter(skill => {
+        const skillValue = skill[filterTitle];
+        return Array.isArray(skillValue)
+            ? selectedOptions.some(opt => skillValue.includes(opt))
+            : selectedOptions.includes(skillValue);
+    });
+
+    setSelectedFilters(newFilteredSkills);
+
+    if (index < filterArray.length - 1) {
+        runFilterArray(newFilteredSkills, index + 1);
+    }
+};
+
+useEffect(() => {
+    if (filterArray.length > 0) {
+        runFilterArray([...sortedSkillsOriginal], 0);
+    } else {
+        setSelectedFilters([...sortedSkillsOriginal]); // Reset filters when empty
+    }
+}, [filterArray]);
+
+const handleFilterSubmit = (filterTitle, selectedOptions) => {
+    setFilterArray(prevFilters => {
+        const existingFilterIndex = prevFilters.findIndex(filter => filter.filterTitle === filterTitle);
+
+        if (existingFilterIndex !== -1) {
+            if (selectedOptions.length === 0) {
+                // Remove filter if no options are selected
+                const updatedFilters = prevFilters.filter((_, index) => index !== existingFilterIndex);
+                return updatedFilters;
+            }
+            // Update existing filter
+            const updatedFilters = [...prevFilters];
+            updatedFilters[existingFilterIndex] = { filterTitle, selectedOptions };
+            return updatedFilters;
+        }
+
+        // Add new filter if not found and has selected options
+        return selectedOptions.length > 0 ? [...prevFilters, { filterTitle, selectedOptions }] : prevFilters;
+    });
+};
 
 
-    return (
+  
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error}</div>;  return (
       <>
         <h2 className="pageTitle">Skills and tech used</h2>
-        <h2 className="pageSubTitle">Click to filter skills</h2>
         <div className="filterForSkillsContainer">
           <div className="blurbOnSkillsOverview">
-            <p>I love solving problems through programming. Entering the job market during a period of high saturation pushed me to explore a wide range of skills across multiple domains. Working at a startup further expanded my expertise, as I had to wear many hats and adapt to various challenges.</p>
-            <p>Each skill listed here comes with details on why I acquired it, where and when I learned it, the projects I've applied it to, and any related articles I’ve written. I understand the breadth of skills may seem extensive, but they reflect my adaptability and continuous learning in an ever-evolving industry.</p>
+            <p>I love solving problems through programming. Entering the job market during a period of high saturation pushed me to explore a wide range of skills across multiple domains. Working at a startup further broadened my expertise, as I had to wear many hats and adapt to various challenges.</p>
+            <p>As a result I have more skills than what I can fit on a Resumé. This is why I wanted to host all of my skills on my website. Since I am applying to several different jobs I have included filters to group skills by the domains I have worked in.</p>
           </div>
           <div className="filterSkills">
             <h2 className="filterHeader">Filters</h2>
             <div className="filterSkillsOptions">
-            <SelectDropdown options={sortedSkillNames} selectLabel='Filter by Skill Name'/>
-            <SelectDropdown options={sortedDomainNames} selectLabel='Filter by Domain Name'/>
-            <SelectDropdown options={sortedToolNames} selectLabel='Filter by Tool Name'/>
-            <SelectDropdown options={sortedCoreOrSupporting} selectLabel='Filter by Core or Supporting Skill'/>
-            <SelectDropdown options={sortedDates} selectLabel='Filter by Date'/>
+              {allFilterText.map((filterTextArray,index)=> 
+                <SelectDropdown  
+                  key={`filter-${index}`}
+                  options={filterTextArray.array} 
+                  selectLabel={filterTextArray.title}
+                  onSubmit={(selectedOptions) => handleFilterSubmit(filterTextArray.key, selectedOptions)}
+                  />
+              )}
             </div>
           </div>
         </div>
         <div className="techBucket">
-
+          {selectedFilters &&selectedFilters.map((skillObject,index)=>
+          <SkillCard 
+            key={`card-${index}`}
+            skillName={skillObject.skillName}
+            domain={skillObject.domain}
+            tools={skillObject.tools}
+            coreOrSupporting={skillObject.coreOrSupporting}
+            information={skillObject.information}
+            gameProjects={skillObject.gameProjects}
+            articles={skillObject.articles}
+            acquisitionDate={skillObject.acquisitionDate}
+                 />)}
         </div>
 
 
