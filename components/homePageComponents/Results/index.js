@@ -1,6 +1,8 @@
 export default function Results(){
     return(
         <div className="results ">
+            <h3 className="pageTitle pageTitle__white">Capabilities at a glance</h3>
+
             <div className="featureBoxContainer">
                     <div className="col-1-of-4">
 

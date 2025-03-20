@@ -9,7 +9,7 @@ export default function Hero(){
 
           <div className="backgroundImageContainer__titlesBox">
           <h1 className="backgroundImageContainer__titlesBox__title">
-Connection
+Meet Jake
 </h1>
 <i className="backgroundImageContainer__titlesBox__subTitle">
 Discover my skills, explore my projects, and learn how I can help you connect your services to your clients.

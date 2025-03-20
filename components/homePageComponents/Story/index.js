@@ -31,7 +31,7 @@ export default function Story(){
                     <br/>
                     <h2 className="story__text__title">How Perseverance applies to tech</h2>
                     <p className="story__text__paragraph">
-                        I entered the tech field knowing the current saturation of the market. Every day I spend time on Udemy learning new skills or honing the ones I already have. When I found my first role at Novata I knew I had turned the "impossible" to "possible", and it is all thanks to perseverance.
+                        I entered the tech field knowing the current saturation of the market. Every day I spend time on Udemy learning new skills or honing the ones I already have. When I found my first role at Novata I knew I had turned the "impossible" to "possible"—and I credit that achievement to the perseverance I developed from a young age.
                     </p>
             </div>
         </div>
