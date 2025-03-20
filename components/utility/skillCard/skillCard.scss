@@ -1,6 +1,6 @@
 .skill-card {
     width: 80%; 
-    height: 30vh; 
+    height: 40vh; 
     background: white;
     border-radius: 10px;
     box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
@@ -8,6 +8,7 @@
     flex-direction: column;
     transition: all 0.3s ease-in-out;
     margin: 20px;
+    overflow: hidden;
     &:hover {
       box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.2);
     }
@@ -22,6 +23,34 @@
         color: #222;
         font-size: 1.5rem;
         margin-top: -4rem;
+      }
+      &.needs-expansion{
+        .skill-card::after {
+          content: "Hover for more";  // Your label text
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          padding: 0.5rem 0;
+          text-align: center;
+          color: #000;      // Adjust text color to contrast with the gradient
+          background: linear-gradient(
+            to top,
+            rgba(255, 255, 255, 0.9),
+            rgba(255, 255, 255, 0)
+          );
+        }
+        &:hover {
+          transform: scale(1.05);  // Slightly enlarge
+          height: auto;  // Expand height dynamically
+          max-height: 40vh;  // Prevent it from getting too large
+        }
+      }
+    
+      &.needs-expansion:hover {
+        transform: scale(1.05);  // Slightly enlarge
+        height: auto;  // Expand height dynamically
+        max-height: 40vh;  // Prevent it from getting too large
       }
   
       .skill-card__header {
