@@ -1,4 +1,3 @@
-import useS3Bucket from "@/hooks/api/useS3Bucket";
 import { useEffect, useState } from "react";
 import SelectDropdown from "@/components/utility/selectDropdown/checkboxDropdown";
 import SkillCard from "@/components/utility/skillCard/skillCard";
@@ -100,7 +99,7 @@ export default function Skills() {
       return selectedOptions.length > 0 ? [...prevFilters, { filterTitle, selectedOptions }] : prevFilters;
     });
   };
-  
+
   return (
     <>
       <h2 className="pageTitle">Skills and tech used</h2>

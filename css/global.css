@@ -299,26 +299,19 @@ html {
   .skill-card .skill-card__header {
     display: grid;
     grid-template-columns: 1fr auto;
-    /* 1fr for name, auto for meta */
     column-gap: 1rem;
-    /* Space between columns */
-    align-items: start;
-    /* Align everything to the top */ }
+    align-items: start; }
     .skill-card .skill-card__header-name {
       font-size: 2.5rem;
       font-weight: 700;
       word-break: break-word;
-      /* Allows name to wrap without overflow */
-      margin: 0;
-      /* Optional reset */ }
+      margin: 0; }
     .skill-card .skill-card__header-meta {
       display: flex;
       flex-direction: column;
       align-items: flex-end;
       white-space: nowrap;
-      /* Prevent meta fields from wrapping */
-      margin: 0;
-      /* Optional reset */ }
+      margin: 0; }
       .skill-card .skill-card__header-meta-date, .skill-card .skill-card__header-meta-domain {
         font-size: 1.5rem;
         color: gray;

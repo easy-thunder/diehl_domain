@@ -3,10 +3,10 @@
     width: 98%;
     font-size: 3rem;
     border-radius: 3rem;
-    margin: 4rem auto; // Centers the container
+    margin: 4rem auto; 
     display: grid;
     grid-template-columns: 1fr 1fr; 
-    gap: 2rem; // Adds spacing between cards
+    gap: 2rem; 
   
     &__tag {
       outline-offset: 1rem;
