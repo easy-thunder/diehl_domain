@@ -1,5 +1,4 @@
-import { skillsToDisplayFunction } from "../skillsToDisplay";
-
+import { skillsToDisplayFunction } from "@/pages/skills/skillsToDisplay";
 describe("skillsToDisplayFunction", () => {
   it("should return an array of skill objects", () => {
     const skills = skillsToDisplayFunction();
