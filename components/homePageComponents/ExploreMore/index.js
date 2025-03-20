@@ -60,7 +60,7 @@ console.log(length)
         <div className="exploreMoreCardSide exploreMoreCardSide--back">
           <div className="exploreMoreCardSide__inner">
             <h3 className="subHeader">PROJECTS</h3>
-            <p>I love games. So building games was an interesting way for me to test my algorithm solving skills while having fun. Note these were not made with styling in mind and with my busy schedule some are not perfect. </p>
+            <p>I love games. So building games was an interesting way for me to test my algorithm solving skills while having fun.</p>
             <Link href="/games">
               <span className="exploreMoreLink">Discover More</span>
             </Link>
@@ -89,14 +89,14 @@ console.log(length)
         <div className="exploreMoreCard">
             <div className="exploreMoreCardSide exploreMoreCardSide--front">
             <div className="exploreMoreCardSide__inner">
-                <h3 className="subHeader">LEARN</h3>
+                <h3 className="subHeader">SKILLS</h3>
                 <img src="/peopleLearning.png" className="exploreMoreCardSide__inner__photo" alt="chess game" />
             </div>
             </div>
             <div className="exploreMoreCardSide exploreMoreCardSide--back">
             <div className="exploreMoreCardSide__inner">
                 <h3 className="subHeader">LEARN</h3>
-                <p>One of the greatest ways to learn is to teach. I invite you to explore my coding knowledge. This link will take you to the directory for my blogs on programming. </p>
+                <p>Explore what skills I have to offer. </p>
                 <Link href="/skills">
                 <span className="exploreMoreLink">Discover More</span>
                 </Link>

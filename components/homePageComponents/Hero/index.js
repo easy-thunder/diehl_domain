@@ -8,8 +8,12 @@ export default function Hero(){
         <div className="backgroundImageContainer" >
 
           <div className="backgroundImageContainer__titlesBox">
-                <h1 className="backgroundImageContainer__titlesBox__title">Connection </h1>
-                <i className="backgroundImageContainer__titlesBox__subTitle">Through Carefully Crafted Web Design and Outreach</i>
+          <h1 className="backgroundImageContainer__titlesBox__title">
+Connection
+</h1>
+<i className="backgroundImageContainer__titlesBox__subTitle">
+Discover my skills, explore my projects, and learn how I can help you connect your services to your clients.
+</i>
                 <div className="backgroundImageContainer__titlesBox__buttonBox">
                     <Link href="/skills">
                     <LightButton content={'skills'}/>

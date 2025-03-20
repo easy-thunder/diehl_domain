@@ -474,7 +474,8 @@ html {
       opacity: 0;
       animation: fadeIn 1.4s ease-in 1s 1 forwards; }
     .backgroundImageContainer__titlesBox__buttonBox {
-      margin-top: 2.5rem; }
+      margin-top: 2.5rem;
+      scale: .5; }
 
 .btn {
   text-transform: uppercase;
