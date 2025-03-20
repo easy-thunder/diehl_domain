@@ -1,6 +1,6 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import Skills from "@/pages/skills";
-import { skillsToDisplayFunction } from "@/pages/skills/skillsToDisplay";
+import { skillsToDisplayFunction } from "@/lib/internalData/skillsToDisplay";
 describe("Skills Component", () => {
   it("renders skill cards", () => {
     render(<Skills />);

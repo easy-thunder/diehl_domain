@@ -1,4 +1,4 @@
-import { skillsToDisplayFunction } from "@/pages/skills/skillsToDisplay";
+import { skillsToDisplayFunction } from "@/lib/internalData/skillsToDisplay";
 describe("skillsToDisplayFunction", () => {
   it("should return an array of skill objects", () => {
     const skills = skillsToDisplayFunction();

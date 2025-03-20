@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import SelectDropdown from "@/components/utility/selectDropdown/checkboxDropdown";
 import SkillCard from "@/components/utility/skillCard/skillCard";
-import { skillsToDisplayFunction } from "./skillsToDisplay";
+import { skillsToDisplayFunction } from "../../lib/internalData/skillsToDisplay";
 export default function Skills() {
   const [selectedFilters, setSelectedFilters] = useState([])
   const [filterArray, setFilterArray] = useState([]);
