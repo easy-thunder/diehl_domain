@@ -78,7 +78,8 @@
     border-radius: 2rem;
     cursor: pointer;
     transition: background-color 0.3s;
-  
+    display: inline-block; 
+
     &:hover {
       background-color: rgba(202, 139, 22, 1);
     }

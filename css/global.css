@@ -838,7 +838,8 @@ html {
   border: none;
   border-radius: 2rem;
   cursor: pointer;
-  transition: background-color 0.3s; }
+  transition: background-color 0.3s;
+  display: inline-block; }
   .backButton:hover {
     background-color: #ca8b16; }
 
