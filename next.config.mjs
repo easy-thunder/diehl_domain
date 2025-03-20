@@ -3,12 +3,10 @@ const nextConfig = {
   reactStrictMode: true,
   webpack(config, { isServer }) {
     if (isServer) {
-      config.externals = [...(config.externals || []), ({ request }, callback) => {
-        if (request && request.match(/\.test\.(js|ts|jsx|tsx)$/)) {
-          return callback(null, 'commonjs ' + request);
-        }
-        callback();
-      }];
+      config.module.rules.push({
+        test: /\.test\.(js|ts|jsx|tsx)$/,
+        use: 'null-loader', // Prevents Next.js from processing test files
+      });
     }
     return config;
   },
