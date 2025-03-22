@@ -6,7 +6,7 @@ import { useEffect, useState, useRef } from 'react';
 
 export default function ExploreMore(){
 
-  const linkedInRef = useRef(null);
+  const linkedInRef = useRef<SVGPathElement>(null);
   const [length, setLength]= useState(0)
   const contactCardRef = useRef(null);
 
@@ -14,7 +14,7 @@ export default function ExploreMore(){
 
 
   useEffect(() => {
-      setLength(()=>linkedInRef.current.getTotalLength())
+      setLength(()=>linkedInRef.current?.getTotalLength() ?? 0)
         const cards = document.querySelectorAll('.exploreMoreCard');
     
         cards.forEach(card => {
