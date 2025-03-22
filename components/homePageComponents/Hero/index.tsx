@@ -1,4 +1,4 @@
-
+import React from 'react'
 import LightButton from "@/components/utility/button/lightButton"
 import DarkButton from "@/components/utility/button/darkButton"
 import Link from "next/link"
@@ -18,9 +18,8 @@ Discover my skills, explore my projects, and learn how I can help you connect yo
                     <Link href="/skills">
                     <LightButton content={'skills'}/>
                     </Link>
-                    {/* <DarkButton content={'freelance'} /> TODO */}
                     <a href="/JD_SWENG_RES.pdf" download="/JD_SWENG_RES.pdf">
-                        <DarkButton content={'Resume'} />
+                        <DarkButton content={'Resume'} clicking={undefined} />
                     </a>               
                 </div>
             </div>
