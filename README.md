@@ -10,7 +10,7 @@ First ensure the proper version of node is installed I am using Node:SASS and th
 OPEN A NEW TERMINAL
 `nvm use 18` in new terminal
 `npm run compile:sass` To watch for SCSS changes from new terminal
-
+This should give everything needed for development. Some keys will be missing since I have my own private .env variables.
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
