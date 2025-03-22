@@ -2,17 +2,15 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
-First, run the development server:
+First ensure the proper version of node is installed I am using Node:SASS and this project so node version 18 needs to be installed and used. Here are the steps if you have NVM:
+`nvm install 18` To install proper node version
+`nvm use 18` To use proper node version
+`npm i` To load dependencies
+`npm run dev` To start application
+OPEN A NEW TERMINAL
+`nvm use 18` in new terminal
+`npm run compile:sass` To watch for SCSS changes from new terminal
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 

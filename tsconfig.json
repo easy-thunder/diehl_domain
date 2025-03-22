@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    // These are typical settings for a React + Next.js project:
     "lib": [
       "dom",
       "dom.iterable",
@@ -18,7 +17,11 @@
     "isolatedModules": true,
     "noEmit": true,
     "incremental": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./*"]
+    }
   },
   "include": [
     "next-env.d.ts",
