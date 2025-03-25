@@ -1,7 +1,7 @@
 import Link from "next/link";
 export default function AboutMe() {
     return (
-      <div className="individualSkillContainer">
+      <div className="">
         <div className="individualSkillInner">
           <h2 className="individualSkillTitle">Hi, I'm Jake</h2>
           <img src="/jake fancy.jpg" alt="Jake" className="individualSkillImage"/>
