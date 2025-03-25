@@ -1,5 +1,5 @@
 
-import FullStretchCard from "@/components/utility/fullStretchCard/fullStretchCard";
+import SkillCard from "@/components/utility/skillCard/skillCard";
 
 export default function(){
 
@@ -15,25 +15,22 @@ export default function(){
         {
           title: "Connect Four",
           blurb: "Enjoy this classic game with your friends online. To play you and one other friend must click join game(on two different tabs).Only Chrome can run!",
-          tags: "UseSWR, React, API",
+          tags: ["UseSWR", "React", "API"],
           link: "/games/ConnectFour",
-          linkText:"Play Connect4"
-      
+          linkText: "Play Connect Four"      
       },{
           title: "Pentago",
           blurb: "In Pentago you are trying to connect five in a row. The player gets to choose a cell to play in and then after that you click and drag the board to spin it. Unlike connect 4 this game does not have an array state for game instances. Therefore only two players in the whole world can play at a time. To play you must have one other client connect on a different tab, browser, or simply send them the url.Only Chrome can run!",
-          tags: "UseSWR, React, API",
-          link: "/games/pentago",
-          linkText:"Play Pentago"
-      
+          tags: ["UseSWR", "React", "API"],
+          link: "/games/pentago", 
+          linkText: "Play Pentago"     
       },
       {
           title: "Checkers",
           blurb: "This is a local multiplayer game. Take turns with a friend on one tab. Only Chrome can run!",
-          tags: "Local-Game, React, Turn-Based",
-          link: "/games/checkers",
-          linkText:"Play Checkers"
-      
+          tags: ["Local-Game", "React", "Turn-Based"],
+          link: "/games/checkers",  
+          linkText: "Play Checkers"    
       },
 
       ];
@@ -44,14 +41,15 @@ export default function(){
 
     return (
         <>
+        <h2 className="pageTitle ">Projects</h2>
           {data.map((node, index) => (
-            <FullStretchCard
+            <SkillCard
               key={index}
               title={node.title}
-              blurb={node.blurb}
-              tags={node.tags}
-              link={node.link}
-              linkText={node.linkText}
+              information={node.blurb}
+              mainListFeatures={node.tags}
+              buttonLink={node.link}
+              buttonText={node.linkText}
             />
           ))}
         </>

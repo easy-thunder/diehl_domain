@@ -1,5 +1,6 @@
 .skill-card {
     width: 80%; 
+    position: relative;
     height: 40vh; 
     background: white;
     border-radius: 10px;
@@ -26,14 +27,14 @@
       }
       &.needs-expansion{
         .skill-card::after {
-          content: "Hover for more";  // Your label text
+          content: "Hover for more";  
           position: absolute;
           bottom: 0;
           left: 0;
           width: 100%;
           padding: 0.5rem 0;
           text-align: center;
-          color: #000;      // Adjust text color to contrast with the gradient
+          color: #000;      
           background: linear-gradient(
             to top,
             rgba(255, 255, 255, 0.9),
@@ -41,16 +42,16 @@
           );
         }
         &:hover {
-          transform: scale(1.05);  // Slightly enlarge
-          height: auto;  // Expand height dynamically
-          max-height: 40vh;  // Prevent it from getting too large
+          transform: scale(1.05);  
+          height: auto;  
+          max-height: 40vh;  
         }
       }
     
       &.needs-expansion:hover {
-        transform: scale(1.05);  // Slightly enlarge
-        height: auto;  // Expand height dynamically
-        max-height: 40vh;  // Prevent it from getting too large
+        transform: scale(1.05);  
+        height: auto;  
+        max-height: 40vh;  
       }
   
       .skill-card__header {
@@ -85,13 +86,26 @@
       
   
     &__info {
-      font-size: 1.5rem; // Bigger text for info
+      font-size: 1.5rem; 
       font-weight: 400;
       color: #333;
       max-width: 100%;
   
 
     }
+    &__button-container {
+      width: 80%;
+      margin-top: 2rem; 
+      justify-self: center;
+    
+      .btn {
+        height: 4rem;
+        font-size: 1.4rem;
+        padding: 0.3rem 1rem;
+        
+      }
+    }
+    
   
 
   }

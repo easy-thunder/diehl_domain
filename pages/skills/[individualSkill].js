@@ -38,7 +38,6 @@ export default function IndividualSkill() {
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
 
-  // Ensure skillsData is available before trying to find the skill
   if (!skillsData) return <div>No data available</div>;
   console.log(skillsData.skillsData)
 

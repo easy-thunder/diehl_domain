@@ -55,7 +55,7 @@ export default function Skills() {
 
   const runFilterArray = (skillsArray, index) => {
     if (!filterArray[index]) {
-      setSelectedFilters([...sortedSkillsOriginal]); // Reset when filters are empty
+      setSelectedFilters([...sortedSkillsOriginal]);
       return;
     }
     const { filterTitle, selectedOptions } = filterArray[index];
@@ -126,13 +126,15 @@ export default function Skills() {
         {selectedFilters && selectedFilters.map((skillObject, index) =>
           <SkillCard
             key={`card-${index}`}
-            skillName={skillObject.skillName}
-            domain={skillObject.domain}
-            tools={skillObject.tools}
-            coreOrSupporting={skillObject.coreOrSupporting}
+            title={skillObject.skillName}
+            supportingListFeatures={skillObject.domain}
+            mainListFeatures={skillObject.tools}
+            keyFeature={skillObject.coreOrSupporting}
             information={skillObject.information}
-            gameProjects={skillObject.gameProjects}
-            articles={skillObject.articles}
+            primaryLinks={skillObject.gameProjects}
+            primaryLinksLabel={skillObject.gameProjectLabel}
+            secondaryLinks={skillObject.articles}
+            secondaryLinksLabel={skillObject.articleLabel}
             acquisitionDate={skillObject.acquisitionDate}
           />)}
       </div>

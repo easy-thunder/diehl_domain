@@ -1,26 +1,31 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import DarkButton from "../button/darkButton";
 
 export default function SkillCard(props) {
   const {
-    skillName,
-    domain = [],
-    tools = [],
-    coreOrSupporting,
+    title,
+    supportingListFeatures = [],
+    mainListFeatures = [],
+    keyFeature,
     information,
-    gameProjects = [],
-    articles = [],
+    primaryLinks = [],
+    primaryLinksLabel = "",
+    secondaryLinks = [],
+    secondaryLinksLabel = "",
     acquisitionDate,
+    buttonText,
+    buttonLink,
   } = props;
 
   const cardRef = useRef(null);
   const [needsExpansion, setNeedsExpansion] = useState(false);
 
   useEffect(() => {
-    if (cardRef.current) {
-      setNeedsExpansion(
-        cardRef.current.scrollHeight > cardRef.current.clientHeight
-      );
+    const card = cardRef.current;
+    if (card) {
+      const needsScroll = card.scrollHeight > card.clientHeight + 2; 
+      setNeedsExpansion(needsScroll);
     }
   }, []);
 
@@ -30,16 +35,16 @@ export default function SkillCard(props) {
       ref={cardRef}
     >
       <div className="skill-card__header">
-        <h2 className="skill-card__header-name">{skillName}</h2>
+        <h2 className="skill-card__header-name">{title}</h2>
         <div className="skill-card__header-meta">
           <span className="skill-card__header-meta-date">
             {acquisitionDate}
           </span>
           <span className="skill-card__header-meta-domain">
-            {domain.map((item, index) => (
-              <span key={`${skillName}-domain-${index}`}>
+            {supportingListFeatures.map((item, index) => (
+              <span key={`${title}-domain-${index}`}>
                 {item}
-                {index < domain.length - 1 ? ", " : ""}
+                {index < supportingListFeatures.length - 1 ? ", " : ""}
               </span>
             ))}
           </span>
@@ -47,40 +52,43 @@ export default function SkillCard(props) {
       </div>
 
       <span className="skill-card__core">
-        <strong>{coreOrSupporting} Skill | </strong>
-        {tools.map((tool, index) => (
-          <span key={`${skillName}-tool-${index}`}>
+        <strong>{keyFeature ? `${keyFeature} Skill |`:""} </strong>
+        {mainListFeatures.map((tool, index) => (
+          <span key={`${title}-tool-${index}`}>
             {tool}
-            {index < tools.length - 1 ? ", " : ""}
+            {index < mainListFeatures.length - 1 ? ", " : ""}
           </span>
         ))}
       </span>
 
       <p className="skill-card__info">{information}</p>
 
-      {articles.length > 0 && (
+      {secondaryLinks.length > 0 && (
         <p className="skill-card__articles">
-          <strong>Articles:</strong>{" "}
-          {articles.map((article, index) => (
-            <Link key={`${skillName}-article-${index}`} href={`skills/${article}`}>
-              {article}
-              {index < articles.length - 1 ? ", " : ""}
+          <strong>{secondaryLinksLabel}</strong>{" "}
+          {secondaryLinks.map((article, index) => (
+            <Link key={`${title}-article-${index}`} href={`${article.href}`}>
+              {article.text}
+              {index < secondaryLinks.length - 1 ? " | " : ""}
             </Link>
           ))}
         </p>
       )}
 
-      {gameProjects.length > 0 && (
+      {primaryLinks.length > 0 && (
         <p className="skill-card__projects">
-          <strong>Projects:</strong>{" "}
-          {gameProjects.map((game, index) => (
-            <Link key={`${skillName}-game-${index}`} href={`games/${game}`}>
-              {game}
-              {index < gameProjects.length - 1 ? ", " : ""}
+          <strong>{primaryLinksLabel}</strong>{" "}
+          {primaryLinks.map((game, index) => (
+            <Link key={`${title}-game-${index}`} href={`${game.href}`}>
+              {game.text}
+              {index < primaryLinks.length - 1 ? " | " : ""}
             </Link>
           ))}
         </p>
       )}
+      <div className="skill-card__button-container">
+      {buttonText&&<Link href={buttonLink}><DarkButton content={buttonText}/></Link>}
+      </div>
     </div>
   );
 }

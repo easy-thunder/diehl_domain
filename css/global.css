@@ -51,7 +51,8 @@ html {
 .pageTitle {
   font-size: 6.5rem;
   text-align: center;
-  margin-bottom: 2rem; }
+  margin-bottom: 2rem;
+  margin-top: 7rem; }
   .pageTitle__white {
     color: white; }
 
@@ -279,6 +280,7 @@ html {
 
 .skill-card {
   width: 80%;
+  position: relative;
   height: 40vh;
   background: white;
   border-radius: 10px;
@@ -343,6 +345,14 @@ html {
     font-weight: 400;
     color: #333;
     max-width: 100%; }
+  .skill-card__button-container {
+    width: 80%;
+    margin-top: 2rem;
+    justify-self: center; }
+    .skill-card__button-container .btn {
+      height: 4rem;
+      font-size: 1.4rem;
+      padding: 0.3rem 1rem; }
 
 .header {
   background-color: #262a38;
@@ -922,9 +932,6 @@ html {
   grid-column: span 2;
   font-size: 3rem;
   padding: 1rem; }
-
-.pageTitle {
-  margin-top: 7rem; }
 
 .filterHeader {
   font-size: 2rem;

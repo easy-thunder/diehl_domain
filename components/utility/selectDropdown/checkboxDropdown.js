@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function CheckboxDropdown({ options = [], selectLabel, onSubmit, clearFilters }) {
+export default function CheckboxDropdown({ options = [], selectLabel, onSubmit }) {
     const [selectedOptions, setSelectedOptions] = useState([]);
     const [isOpen, setIsOpen] = useState(false); 
 
