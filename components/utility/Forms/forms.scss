@@ -1,54 +1,140 @@
 
-.form-box{
-    width: 90%; 
-    position: relative;
-    height: 80vh; 
-    background: rgb(255, 255, 255);
-    border-radius: 10px;
-    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
-    padding: 16px;
-    flex-direction: column;
-    transition: all 0.3s ease-in-out;
-    margin: 4rem;
-    overflow: hidden;
-    justify-self: center;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+$break-laptop: 1200px;
+$break-tablet: 900px;
+$break-mobile: 600px;
+.spaceBelow {
+  margin-bottom: 2rem;
+}
+.form-box {
+
+  width: 90%;
+  max-width: 900px;             
+  min-height: 600px;            
+  height: 88svh;                
+  margin: 4rem;            
+  padding: 2rem;
+  box-sizing: border-box;
+  position: relative;
+  background: rgb(255, 255, 255);
+  border-radius: 10px;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease-in-out;
+  overflow: hidden;
+  justify-self: center;
+
+  @media (max-width: $break-laptop) {
+    padding: 1.5rem;
+  }
+}
+
+.inputContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+
+  @media (max-width: $break-tablet) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.buttonContainer {
+  width: 80%;
+  justify-self: center;
+
+  .btn {
+    height: 2rem;
+    font-size: 1rem;
+    padding: 0.3rem 1rem;
+
+    @media (max-width: $break-tablet) {
+      font-size: 0.9rem;
+      height: 2.2rem;
+    }
+  }
 }
 
 .text-input {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  
-    &__label {
-      font-size: 1rem;
-      font-weight: 600;
-      color: #333;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  &__label {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #333;
+  }
+
+  &__field {
+    padding: 0.5rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    transition: border-color 0.2s;
+
+    &:focus {
+      outline: none;
+      border-color: #0070f3;
     }
-  
-    &__field {
-      padding: 0.5rem 1rem;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      font-size: 1rem;
-      transition: border-color 0.2s;
-  
-      &:focus {
-        outline: none;
-        border-color: #0070f3;
-      }
-    }
-  
-    &--error {
-      .text-input__field {
-        border-color: red;
-      }
-  
-      .text-input__label {
-        color: red;
-      }
+
+    @media (max-width: $break-tablet) {
+      font-size: 0.9rem;
     }
   }
-  
 
+  &--error {
+    .text-input__field {
+      border-color: red;
+    }
+
+    .text-input__label {
+      color: red;
+    }
+  }
+}
+
+.social-login {
+  display: flex;
+  gap: 1rem;
+  justify-self: center;
+  align-items: center;
+  width: 80%;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+
+
+  &__social-button {
+    height: 2rem;
+    font-size: 1.4rem;
+    padding: 0.3rem 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    border: 1px solid #ccc;
+    background: white;
+    color: #333;
+    font-weight: 600;
+    text-transform: capitalize;
+    width: 100%;
+    max-width: 20rem;
+    justify-self: center;
+    align-self: center;
+
+    &:hover {
+      background: #f0f0f0;
+    }
+
+    @media (max-width: $break-tablet) {
+      font-size: 1.2rem;
+    }
+
+    @media (max-width: $break-mobile) {
+      font-size: 1rem;
+    }
+  }
+}
