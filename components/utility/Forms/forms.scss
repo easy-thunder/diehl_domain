@@ -1,0 +1,54 @@
+
+.form-box{
+    width: 90%; 
+    position: relative;
+    height: 80vh; 
+    background: rgb(255, 255, 255);
+    border-radius: 10px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 16px;
+    flex-direction: column;
+    transition: all 0.3s ease-in-out;
+    margin: 4rem;
+    overflow: hidden;
+    justify-self: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.text-input {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  
+    &__label {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #333;
+    }
+  
+    &__field {
+      padding: 0.5rem 1rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 1rem;
+      transition: border-color 0.2s;
+  
+      &:focus {
+        outline: none;
+        border-color: #0070f3;
+      }
+    }
+  
+    &--error {
+      .text-input__field {
+        border-color: red;
+      }
+  
+      .text-input__label {
+        color: red;
+      }
+    }
+  }
+  
+
