@@ -42,6 +42,8 @@ export default function(){
     return (
         <>
         <h2 className="pageTitle ">Projects</h2>
+        <div className="projectsContainer">
+
           {data.map((node, index) => (
             <SkillCard
               key={index}
@@ -52,6 +54,8 @@ export default function(){
               buttonText={node.linkText}
             />
           ))}
+        </div>
+
         </>
       );
 }
