@@ -1,4 +1,3 @@
-import TextInput from "../../../BearsHaresAndSnares/UI/FormBox/textInput/TextInput"
 import DarkButton from "../../button/darkButton"
 export default function GuestForm(){  
     return(<div>

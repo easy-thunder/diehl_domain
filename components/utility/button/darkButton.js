@@ -5,7 +5,7 @@ export default function DarkButton({content, clicking, type="button"}){
         <>
         <button onClick={clicking? clicking: null} className="btn btn-dark btn-animated">
             {content}
-        </button>.
+        </button>
 
         </>
     )
