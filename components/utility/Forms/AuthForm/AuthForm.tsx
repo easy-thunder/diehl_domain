@@ -1,7 +1,7 @@
 import DarkButton from "@/components/utility/button/darkButton"
-import FormLogin from "../../../utility/Forms/FormLogin/FormLogin"
-import GuestForm from "../../../utility/Forms/GuestForm/GuestForm"
-import SignUpForm from "../../../utility/Forms/SignUpForm/SignUpForm"
+import FormLogin from "../FormLogin/FormLogin"
+import GuestForm from "../GuestForm/GuestForm"
+import SignUpForm from "../SignUpForm/SignUpForm"
 import {useState} from "react"
 export default function FormBox(){
 

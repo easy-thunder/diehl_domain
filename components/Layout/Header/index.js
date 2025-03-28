@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { useSession } from 'next-auth/react';
 
 const Header = () => {
+  const { data: session,status } = useSession();
+  console.log("Header status: ", status);
+  const isAuthenticated = status === 'authenticated';
   const router = useRouter();
   const [shouldScroll, setShouldScroll] = useState(false);
 
@@ -62,16 +66,21 @@ const Header = () => {
           <Link className='headerLinkLarge' href="/skills">
             <b className='headerLinkLarge'>SKILLS</b>
           </Link>
+          <Link className='headerLinkLarge' href="/games">
+            <b className="headerLinkLarge">Projects  </b>
+          </Link>
+          <Link className='headerLinkLarge' href="/static/about-me">
+            <b className="headerLinkLarge">About  </b>
+          </Link>
 
         </div>
         <div className="headerLinkSmallContainer">
-          <Link className='headerLinkSmall' href="/static/about-me">
-          <b className="headerLinkSmall">About  </b>
+
+        <Link className='headerLinkSmall' href="/static/about-me">
+            {isAuthenticated?<b className="headerLinkSmall">Sign out  </b>:<b className="headerLinkSmall">Log in  </b>}
           </Link>
-          <span className='headerSpacers'>|</span>
-          <Link className='headerLinkSmall' href="/games">
-          <b className="headerLinkSmall">Projects  </b>
-          </Link>
+
+
           <span className='headerSpacers'>|</span>
           <b onClick={scrollToContactCard} className="headerLinkSmall">Contact </b>
 
