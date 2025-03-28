@@ -21,33 +21,35 @@ declare module "next-auth/jwt" {
 }
 
 export const authOptions: AuthOptions = {
-  providers: [
-    GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID!,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
-    }),
-  ],
-  session: {
-    strategy: "jwt",
-  },
-  callbacks: {
-    async signIn({ profile }) {
-      if (!profile?.email) {
-        throw new Error("No profile email found");
-      }
-      return true;
+    secret: process.env.NEXTAUTH_SECRET,
+
+    providers: [
+        GoogleProvider({
+        clientId: process.env.GOOGLE_CLIENT_ID!,
+        clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+        }),
+    ],
+    session: {
+        strategy: "jwt",
     },
-    async jwt({ token, profile }) {
-      if (profile) token.userProfile = profile;
-      return token;
+    callbacks: {
+        async signIn({ profile }) {
+        if (!profile?.email) {
+            throw new Error("No profile email found");
+        }
+        return true;
+        },
+        async jwt({ token, profile }) {
+        if (profile) token.userProfile = profile;
+        return token;
+        },
+        async session({ session, token }) {
+        if (session.user && token.userProfile) {
+            session.user.profile = token.userProfile;
+        }
+        return session;
+        },
     },
-    async session({ session, token }) {
-      if (session.user && token.userProfile) {
-        session.user.profile = token.userProfile;
-      }
-      return session;
-    },
-  },
 };
 
 export default NextAuth(authOptions);
