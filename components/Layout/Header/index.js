@@ -6,18 +6,18 @@ import Modal from '@/components/utility/Modal/Modal';
 import AuthForm from '@/components/utility/Forms/AuthForm/AuthForm';
 const Header = () => {
   const { data: session,status } = useSession();
-  const isAuthenticated = status === 'authenticated';
-  const router = useRouter();
   const [shouldScroll, setShouldScroll] = useState(false);
-
   const [expanded, setExpanded] = useState(false);
+  const [displayLogInModal, setDisplayLogInModal] = useState(false);
+  const router = useRouter();
+  const isAuthenticated = status === 'authenticated';
+
 
   const toggleHeader = () => {
     setExpanded(!expanded);
   };
 
 
-  const [displayLogInModal, setDisplayLogInModal] = useState(false);
   const handleLogInModal = () => {
     setDisplayLogInModal((displayLogInModalPrev)=>!displayLogInModalPrev);
   }
