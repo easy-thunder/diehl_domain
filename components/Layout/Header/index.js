@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useSession } from 'next-auth/react';
-
+import { useSession, signOut } from 'next-auth/react';
+import Modal from '@/components/utility/Modal/Modal';
+import AuthForm from '@/components/utility/Forms/AuthForm/AuthForm';
 const Header = () => {
   const { data: session,status } = useSession();
-  console.log("Header status: ", status);
   const isAuthenticated = status === 'authenticated';
   const router = useRouter();
   const [shouldScroll, setShouldScroll] = useState(false);
@@ -16,6 +16,11 @@ const Header = () => {
     setExpanded(!expanded);
   };
 
+
+  const [displayLogInModal, setDisplayLogInModal] = useState(false);
+  const handleLogInModal = () => {
+    setDisplayLogInModal((displayLogInModalPrev)=>!displayLogInModalPrev);
+  }
 
   useEffect(() => {
     const handleRouteChangeComplete = () => {
@@ -76,9 +81,7 @@ const Header = () => {
         </div>
         <div className="headerLinkSmallContainer">
 
-        <Link className='headerLinkSmall' href="/static/about-me">
-            {isAuthenticated?<b className="headerLinkSmall">Sign out  </b>:<b className="headerLinkSmall">Log in  </b>}
-          </Link>
+            {isAuthenticated?<b onClick={() => signOut()} className="headerLinkSmall">Sign out  </b>:<b onClick={()=>handleLogInModal()} className="headerLinkSmall">Log in  </b>}
 
 
           <span className='headerSpacers'>|</span>
@@ -96,6 +99,7 @@ const Header = () => {
         <span></span>
         <span></span>
       </button>
+      {displayLogInModal && <Modal component={ <AuthForm /> } setModal={ ()=>handleLogInModal()}/>}
     </>
   );
 };

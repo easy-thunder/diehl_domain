@@ -1,4 +1,4 @@
-import TextInput from "../../textInput/TextInput"
+import TextInput from "../textInput/TextInput"
 import DarkButton from "../../button/darkButton"
 import { signIn } from "next-auth/react";
 
@@ -6,7 +6,7 @@ export default function FormLogin(){
     
 
     return(<div className="spaceBelow">
-        <h1>Login for Bears, Hares, and Snares</h1>
+        <h1>Login for Games</h1>
         <form>
             <div className="inputContainer">
                 <TextInput label="Email" placeholder="Please Enter Email" name="Email" type="email"/>

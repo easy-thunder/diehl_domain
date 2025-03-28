@@ -1,4 +1,4 @@
-import TextInput from "../../textInput/TextInput"
+import TextInput from "../textInput/TextInput"
 import DarkButton from "../../button/darkButton"
 import { signIn } from "next-auth/react"
 
