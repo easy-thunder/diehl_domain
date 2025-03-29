@@ -1,20 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useSession, signOut } from 'next-auth/react';
 import Modal from '@/components/utility/Modal/Modal';
 import AuthForm from '@/components/utility/Forms/AuthForm/AuthForm';
+import { useUser } from '@/context/UserContext';
+import { supabase } from "@/lib/supabaseClient";
+
 const Header = () => {
-  const { data: session,status } = useSession();
   const [shouldScroll, setShouldScroll] = useState(false);
   const [expanded, setExpanded] = useState(false);
   const [displayLogInModal, setDisplayLogInModal] = useState(false);
   const router = useRouter();
-  const isAuthenticated = status === 'authenticated';
 
+  const {user} = useUser()
+  const isAuthenticated = !!user?.aud;
+  
 
   const toggleHeader = () => {
     setExpanded(!expanded);
+  };
+
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
   };
 
 
@@ -81,7 +88,7 @@ const Header = () => {
         </div>
         <div className="headerLinkSmallContainer">
 
-            {isAuthenticated?<b onClick={() => signOut()} className="headerLinkSmall">Sign out  </b>:<b onClick={()=>handleLogInModal()} className="headerLinkSmall">Log in  </b>}
+            {isAuthenticated?<b onClick={()=>handleLogout()} className="headerLinkSmall">Sign out  </b>:<b onClick={()=>handleLogInModal()} className="headerLinkSmall">Log in  </b>}
 
 
           <span className='headerSpacers'>|</span>

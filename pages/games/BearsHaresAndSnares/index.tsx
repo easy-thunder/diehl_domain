@@ -1,15 +1,18 @@
-
+import { useUser } from '@/context/UserContext'
 import AuthForm from '@/components/utility/Forms/AuthForm/AuthForm'
-import { useSession } from 'next-auth/react'
 export default function BearsHaresAndSnares(){
-    const { data: session, status } = useSession()
 
-    if (status === "loading") return <p>Loading...</p>;
-    if (!session) return         <AuthForm/>;
+    const {user,loading} = useUser()
+    if(loading){return <>loading...</>}//TODO MAKE A LOADING modal
+    const isAuthenticated = !!user?.aud;
 
-    console.log(session, status)
-    return<>
-
-    </>
+    return( 
+        <>
+            { isAuthenticated? <>
+                You're logged in!
+            </>: 
+            <AuthForm/>}
+        </>
+    )
 }
 
