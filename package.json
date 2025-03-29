@@ -13,6 +13,7 @@
     "test:watch": "jest --watch"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.49.4",
     "aws-sdk": "^2.1646.0",
     "bcrypt": "^5.1.1",
     "dotenv": "^16.4.5",

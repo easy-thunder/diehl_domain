@@ -163,7 +163,7 @@ html {
   width: 80%;
   justify-self: center; }
   .buttonContainer .btn {
-    height: 2rem;
+    height: 3rem;
     font-size: 1rem;
     padding: 0.3rem 1rem; }
     @media (max-width: 900px) {
@@ -205,7 +205,7 @@ html {
   margin-top: 1rem;
   flex-wrap: wrap; }
   .social-login__social-button {
-    height: 2rem;
+    height: 3rem;
     font-size: 1.4rem;
     padding: 0.3rem 1rem;
     display: flex;

@@ -1,7 +1,10 @@
-// pages/api/auth/[...nextauth].ts
+
+//Deprecated route but I am keeping it for reference.
 import NextAuth from "next-auth/next";
 import GoogleProvider from "next-auth/providers/google";
+import GitHubProvider from "next-auth/providers/github";
 import type { AuthOptions } from "next-auth/core/types";
+
 
 declare module "next-auth" {
   interface Session {
@@ -28,6 +31,10 @@ export const authOptions: AuthOptions = {
         clientId: process.env.GOOGLE_CLIENT_ID!,
         clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
         }),
+        GitHubProvider({
+            clientId: process.env.GITHUB_CLIENT_ID!,
+            clientSecret: process.env.GITHUB_CLIENT_SECRET!,
+          }),
     ],
     session: {
         strategy: "jwt",

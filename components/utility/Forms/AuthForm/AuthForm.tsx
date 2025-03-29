@@ -3,7 +3,7 @@ import FormLogin from "../FormLogin/FormLogin"
 import GuestForm from "../GuestForm/GuestForm"
 import SignUpForm from "../SignUpForm/SignUpForm"
 import {useState} from "react"
-export default function FormBox(){
+export default function AuthForm(){
 
     const [loginToggle, setLoginToggle] = useState(true);
 
