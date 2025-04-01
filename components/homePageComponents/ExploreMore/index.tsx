@@ -63,7 +63,7 @@ console.log(length)
             <h3 className="subHeader">PROJECTS</h3>
             <p>I love games. So building games was an interesting way for me to test my algorithm solving skills while having fun.</p>
             <Link href="/games">
-              <span className="exploreMoreLink">Discover More</span>
+              <span className="button-natural">Discover More</span>
             </Link>
           </div>
         </div>
@@ -81,7 +81,7 @@ console.log(length)
                 <h3 className="subHeader">MY STORY</h3>
                 <p> I love solving the puzzles of programming. I have dedicated myself to my craft. I am obsessed with growing in this field and often will be found watching Udemy courses to further hone my skills. </p>
                 <Link href="/static/about-me">
-                <span className="exploreMoreLink">Discover More</span>
+                <span className="button-natural">Discover More</span>
                 </Link>
             </div>
             </div>
@@ -99,7 +99,7 @@ console.log(length)
                 <h3 className="subHeader">LEARN</h3>
                 <p>Explore what skills I have to offer. </p>
                 <Link href="/skills">
-                <span className="exploreMoreLink">Discover More</span>
+                <span className="button-natural">Discover More</span>
                 </Link>
             </div>
             </div>
@@ -118,7 +118,7 @@ console.log(length)
             </div>
             <div className="exploreMoreCardSide exploreMoreCardSide--back">
             <div className="exploreMoreCardSide__inner">
-                <h3 className="subHeader">CONTACT</h3>
+                <h3 className="subHeader">Contact</h3>
                 <p>My google voice number: 720-773-1934</p>
                 <p>email at jddiehl17@gmail.com</p>
                 <a href="https://www.linkedin.com/in/jake-diehl/" >

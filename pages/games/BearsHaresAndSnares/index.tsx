@@ -1,5 +1,6 @@
 import { useUser } from '@/context/UserContext'
 import AuthForm from '@/components/utility/Forms/AuthForm/AuthForm'
+import BHSLayout from '@/components/BearsHaresAndSnares/UI/BHSLayout/BHSLayout';
 export default function BearsHaresAndSnares(){
 
     const {user,loading} = useUser()
@@ -9,7 +10,7 @@ export default function BearsHaresAndSnares(){
     return( 
         <>
             { isAuthenticated? <>
-                You're logged in!
+                <BHSLayout />
             </>: 
             <AuthForm/>}
         </>

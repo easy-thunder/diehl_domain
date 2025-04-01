@@ -23,10 +23,7 @@
     color: #777;
 }
 
-.btn:hover{
-    transform: translateY(-.3rem);
-    box-shadow: 0 1rem 2rem rgba(0,0,0,.2);
-}
+
 
 .btn:active{
     transform: translate(0,-.1rem);
@@ -65,7 +62,28 @@
         background-color: $color-dark;
         color: $white;
 }
+.btn-dark:hover{
+    transform: translateY(-.3rem);
+    box-shadow: 0 1rem 2rem rgba(0,0,0,.2);
+}
 .btn-dark::after{
     background-color: $color-dark;
 }
 
+.button-natural {
+    margin-top: $gap-web-border;
+    padding: 0.5rem 1rem;
+    background-color: rgba(40, 180, 131, 0.8);
+    color: white;
+    text-decoration: none !important;
+    border-radius: 0.5rem;
+    transition: background-color 0.3s;
+    display: inline-block; 
+
+    &:hover {
+        transform: translateY(-.3rem);
+        box-shadow: 0 1rem 2rem rgba(40,180,131,.2);
+    }
+
+  }
+  

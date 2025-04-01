@@ -9,7 +9,7 @@ $break-mobile: 600px;
 
   width: 90%;
   max-width: 900px;             
-  min-height: 600px;            
+  min-height: 600px;       
   height: 88svh;                
   margin: 4rem;            
   padding: 2rem;
@@ -23,9 +23,20 @@ $break-mobile: 600px;
   transition: all 0.3s ease-in-out;
   overflow: hidden;
   justify-self: center;
+  align-items: center;
+  justify-content: center;
 
   @media (max-width: $break-laptop) {
     padding: 1.5rem;
+  }
+  &__in-container{
+    margin: 1rem;
+    height: 88%;
+  }
+
+  &__skinny{
+    width: 40%;
+    min-width: 300px;
   }
 }
 

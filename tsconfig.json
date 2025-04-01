@@ -29,7 +29,7 @@
     "**/*.tsx",
     "**/*.js",
     "**/*.jsx"
-  ],
+, "components/BearsHaresAndSnares/UI/BHSLayout"  ],
   "exclude": [
     "node_modules"
   ]

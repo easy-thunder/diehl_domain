@@ -94,19 +94,6 @@
     color: black;
   }
   
-  .exploreMoreLink {
-    margin-top: $gap-web-border;
-    padding: 0.5rem 1rem;
-    background-color: rgba(40, 180, 131, 0.8);
-    color: white;
-    text-decoration: none !important;
-    border-radius: 0.5rem;
-    transition: background-color 0.3s;
-    display: inline-block; 
 
-    &:hover {
-      background-color: rgba(40, 180, 131, 1);
-    }
-  }
 
   
