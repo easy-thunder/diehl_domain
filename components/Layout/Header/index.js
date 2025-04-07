@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import Modal from '@/components/utility/Modal/Modal';
 import AuthForm from '@/components/utility/Forms/AuthForm/AuthForm';
 import { useUser } from '@/context/UserContext';
-import { supabase } from "@/lib/supabaseClient";
+import { supabase } from "@/lib/supaBase/supabaseClient";
 
 const Header = () => {
   const [shouldScroll, setShouldScroll] = useState(false);

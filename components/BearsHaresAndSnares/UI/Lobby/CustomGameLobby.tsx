@@ -1,16 +1,65 @@
+// I considered making this file more modular, however, I don't anticipate in any near or distant future that I will be creating a custom game lobby.
 import { JSX, useState, useRef, useEffect } from "react";
 import PlayerLobbyCard from "./PlayerLobbyCard";
 import PlayerMissing from "./PlayerMissing";
 import TextInput from "@/components/utility/Forms/textInput/TextInput";
+import { useUser } from "@/context/UserContext";
+import { getUserProfile } from "@/lib/supaBase/getUserProfile";
 
 
+type LobbyUser = {
+    id: string;
+    name: string;
+    host: boolean;
+    winPercent: number;
+    playing: boolean;
+  };
+
+type CustomGameLobbyProps ={
+    lobbyId: string
+}
 
 
-export default function CustomGameLobby() {
+export default function CustomGameLobby({lobbyId}:CustomGameLobbyProps) {
 
     const [chatInput, setChatInput] = useState('');
     const [chatMessages, setChatMessages] = useState<string[]>([]);
+    const [allLobbyUsers, setAllLobbyUsers] = useState<LobbyUser[]>([]);
+    const [error, setError] = useState<string | null>(null);
     const messagesEndRef = useRef<HTMLDivElement>(null);
+    const {user, loading} = useUser()
+    const [profile, setProfile] = useState<any>(null);
+    useEffect(() => {
+        if (!user || loading) return;
+        getUserProfile(user.id)
+          .then(setProfile)
+          .catch((err) => {
+            console.error("Failed to load profile:", err.message);
+            setError("Couldn't load profile.");
+          });
+      }, [user, loading]);
+
+      useEffect(() => {
+        if (!profile || !lobbyId) return;
+      
+        const fetchLobby = async () => {
+          try {
+            const response = await fetch(`http://localhost:8000/lobby?lobbyId=${lobbyId}&name=${encodeURIComponent(profile.username || 'Guest')}&win_percent=${profile.win_percent}`, {
+              headers: {
+                'x-user-id': profile.id,
+
+              },
+            });
+            if (!response.ok) throw new Error(`Server error: ${response.status}`);
+            const data = await response.json();
+            setAllLobbyUsers(data.users);
+          } catch (err: any) {
+            setError(err.message || 'Failed to join lobby');
+          }
+        };
+      
+        fetchLobby();
+      }, [profile, lobbyId]);
 
     useEffect(() => {
         if (messagesEndRef.current) {
@@ -27,74 +76,64 @@ export default function CustomGameLobby() {
         setChatInput('');
     }
 
-    const allLobbyUsers = [
-        {
-            name: 'TestPlayer1',
-            host: true,
-            winPercent: 43,
-            playing: true
-        },
-        // {   name:'TestPlayer2',
-        //     host: false,
-        //     winPercent: 33,
-        //     playing: true
-        // },
-        {
-            name: 'TestPlayer3',
-            host: false,
-            winPercent: 18,
-            playing: false
-        },
-        {
-            name: 'TestPlayer3',
-            host: false,
-            winPercent: 18,
-            playing: false
-        },
-        {
-            name: 'TestPlayer3',
-            host: false,
-            winPercent: 18,
-            playing: false
-        },
-        {
-            name: 'TestPlayer3',
-            host: false,
-            winPercent: 18,
-            playing: false
-        },
-        {
-            name: 'TestPlayer3',
-            host: false,
-            winPercent: 18,
-            playing: false
-        },
-        {
-            name: 'TestPlayer3',
-            host: false,
-            winPercent: 18,
-            playing: false
-        },
-        // {   name:'TestPlayer4',
-        //     host: false,
-        //     winPercent: 18,
-        //     playing: true
-        // },
-        {
-            name: 'TestPlayer5',
-            host: false,
-            winPercent: 18,
-            playing: true
-        },
-        {
-            name: 'TestPlayer6',
-            host: false,
-            winPercent: 18,
-            playing: true
-        },
+    // const allLobbyUsers = [
+    //     {
+    //         name: 'TestPlayer1',
+    //         host: true,
+    //         winPercent: 43,
+    //         playing: true
+    //     },
+    //     {
+    //         name: 'TestPlayer3',
+    //         host: false,
+    //         winPercent: 18,
+    //         playing: false
+    //     },
+    //     {
+    //         name: 'TestPlayer3',
+    //         host: false,
+    //         winPercent: 18,
+    //         playing: false
+    //     },
+    //     {
+    //         name: 'TestPlayer3',
+    //         host: false,
+    //         winPercent: 18,
+    //         playing: false
+    //     },
+    //     {
+    //         name: 'TestPlayer3',
+    //         host: false,
+    //         winPercent: 18,
+    //         playing: false
+    //     },
+    //     {
+    //         name: 'TestPlayer3',
+    //         host: false,
+    //         winPercent: 18,
+    //         playing: false
+    //     },
+    //     {
+    //         name: 'TestPlayer3',
+    //         host: false,
+    //         winPercent: 18,
+    //         playing: false
+    //     },
+    //     {
+    //         name: 'TestPlayer5',
+    //         host: false,
+    //         winPercent: 18,
+    //         playing: true
+    //     },
+    //     {
+    //         name: 'TestPlayer6',
+    //         host: false,
+    //         winPercent: 18,
+    //         playing: true
+    //     },
 
 
-    ]
+    // ]
 
     const sortedAllLobbyUsers = allLobbyUsers.sort((playerA, playerB) => {
         if (playerA.playing && !playerB.playing) return -1;
@@ -111,7 +150,6 @@ export default function CustomGameLobby() {
     });
 
 
-    console.log(players.length, spectators.length,)
 
 
     function determinePlayer(number: number): JSX.Element | undefined {
@@ -120,7 +158,8 @@ export default function CustomGameLobby() {
         return <PlayerLobbyCard name={thisPlayer.name} host={thisPlayer.host} winPercent={thisPlayer.winPercent} />
     }
 
-
+    if (error) return <div>Error: {error}</div>;
+    if (!allLobbyUsers) return <div>Loading...</div>;
     return (
         <div className="form-box form-box__in-container transparent">
             <div className="lobby-grid">
@@ -135,7 +174,7 @@ export default function CustomGameLobby() {
                 </div>
                 <div className="lobby-box spectators-box">
                     <div className="lobby-box__title">Spectators</div>
-                    <div className="lobby-box__content player-rows">{spectators.map(spectator => <PlayerLobbyCard name={spectator.name} host={spectator.host} winPercent={spectator.winPercent} />)}</div>
+                    <div className="lobby-box__content player-rows">{spectators.map((spectator, index) => <PlayerLobbyCard key={`${spectator.name}-${index}`} name={spectator.name} host={spectator.host} winPercent={spectator.winPercent} />)}</div>
 
                 </div>
                 <div className="lobby-box chat-box">
@@ -163,7 +202,9 @@ export default function CustomGameLobby() {
                 </div>
                 <div className="lobby-box config-box">
                     <div className="lobby-box__title">Game Settings</div>
-                    <div className="lobby-box__content"></div>
+                    <div className="lobby-box__content">
+                        <h2>Game id: {lobbyId}</h2>
+                    </div>
                 </div>
 
                 <button className="gap-button gap-button--left">Play</button>

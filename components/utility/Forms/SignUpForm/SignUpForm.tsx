@@ -1,7 +1,7 @@
 import TextInput from "../textInput/TextInput"
 import DarkButton from "../../button/darkButton"
 import SocialsComponent from "../SocialsComponent"
-import { supabase } from "@/lib/supabaseClient";
+import { supabase } from "@/lib/supaBase/supabaseClient";
 import { useState } from "react";
 
 export default function SignUpForm(){  

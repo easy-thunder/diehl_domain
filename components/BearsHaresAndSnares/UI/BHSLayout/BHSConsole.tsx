@@ -1,38 +1,42 @@
 import ButtonMenu from "@/components/utility/Menu/ButtonMenu";
 import { useState } from "react";
 import CustomGameLobby from "../Lobby/CustomGameLobby";
+import PublicOrPrivateOptions from "../PublicOrPrivateOptions";
+import Modal from "@/components/utility/Modal/Modal";
+export default function BHSConsole() {
+  const [route, setRoute] = useState("buttonMenu");
+  const [displayModal, setDisplayModal] = useState(false);
 
-export default function BHSConsole(){
-    const buttonMenuArray=[
-        {textContent:'Custom Game', onClick:()=>routeConsole('customGame'), type:'button'}
-        
-    ]
-    const [route,setRoute]=useState('buttonMenu')
-    function routeConsole(route:string){
-        setRoute(prev=>prev=route)
+  const buttonMenuArray = [
+    {
+      textContent: "Custom Game",
+      onClick: () => handleModal(),
+      type: "button"
     }
-    
-    //onClick, content, type
-    //auth: store, profile, friends
-    // unauth: custom game, quick game, about
-    function renderRoute(){
-        switch(route){
-            case('buttonMenu'):
-                return <ButtonMenu buttons={buttonMenuArray} />
-            case('customGame'):
-                return <CustomGameLobby />
-            default:
-                return<>404 not found</>
-        }
-    }
+  ];
 
-    return<>
-        <div className="BHSConsole">
-            {renderRoute()}
-        </div>
-    </>
+  function routeConsole(route: string) {
+    setRoute(route);
+  }
+
+  function handleModal() {
+    setDisplayModal((displayModalPrev)=>!displayModalPrev);
+  }
+
+  function renderRoute() {
+    switch (route) {
+      case "buttonMenu":
+        return <ButtonMenu buttons={buttonMenuArray} />;
+      case "customPrivateGame":
+        return <CustomGameLobby lobbyId={crypto.randomUUID().slice(9,23)} />;
+      default:
+        return <>404 not found</>;
+    }
+  }
+
+  return (
+    <div className="BHSConsole">
+      {displayModal ? <Modal component={<PublicOrPrivateOptions handleModal={()=>handleModal()} route={routeConsole}/>} setModal={ ()=>handleModal()}/> : renderRoute()}
+    </div>
+  );
 }
-
-
-
-

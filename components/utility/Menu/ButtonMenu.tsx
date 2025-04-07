@@ -21,7 +21,7 @@ export default function ButtonMenu({buttons}:ButtonMenuGroupProps){
             if(button.needAuth && !isAuthenticated){return}
             return <>
                 <div className="buttonContainer">
-                    <DarkButton clicking={button.onClick} content={button.textContent} type={button.type} classModdifier={"btn button-natural"}/>
+                    <DarkButton clicking={button.onClick} content={button.textContent} type={button.type} classModdifier={"button-natural"}/>
                 </div>
             </>
         })}

@@ -412,7 +412,8 @@ html {
       padding: 1.5rem; } }
   .form-box__in-container {
     margin: 1rem;
-    height: 88%; }
+    height: 88%;
+    margin-top: 4rem; }
   .form-box__skinny {
     width: 40%;
     min-width: 300px; }

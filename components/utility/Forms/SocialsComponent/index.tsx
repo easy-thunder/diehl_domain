@@ -1,16 +1,16 @@
-import { signIn } from "next-auth/react"
-import { supabase } from "@/lib/supabaseClient"
+import { supabase } from "@/lib/supaBase/supabaseClient"
 
 
 const handleLogin = async (provider: 'google' | 'github') => {
     const { data, error } = await supabase.auth.signInWithOAuth({
       provider,
     });
-
+  
     if (error) {
-        console.error('Login error:', error.message);
-      }
-    };
+      console.error('Login error:', error.message);
+    }
+  
+  };
 
 export default function SocialsComponent(){
     return(

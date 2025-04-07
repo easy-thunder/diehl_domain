@@ -7,4 +7,5 @@ export type TextInputType={
     type?: string
     onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
     required?: boolean
+    customLabelStyle?: React.CSSProperties
 }

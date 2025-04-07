@@ -6,7 +6,6 @@ export default function BearsHaresAndSnares(){
     const {user,loading} = useUser()
     if(loading){return <>loading...</>}//TODO MAKE A LOADING modal
     const isAuthenticated = !!user?.aud;
-
     return( 
         <>
             { isAuthenticated? <>
