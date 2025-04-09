@@ -5,29 +5,7 @@ import useS3Bucket from "@/hooks/api/useS3Bucket";
 export default function IndividualSkill() {
   const router = useRouter();
   const { individualSkill } = router.query;
-  // const [skillsData, setSkillsData] = useState(null);
-  // const [loading, setLoading] = useState(true);
-  // const [error, setError] = useState(null);
 
-
-  // useEffect(() => {
-  //   const fetchSkillsData = async () => {
-  //     try {
-  //       const response = await fetch('/data/skills.json');
-  //       if (!response.ok) {
-  //         throw new Error("Failed to fetch skills data");
-  //       }
-  //       const data = await response.json();
-  //       setSkillsData(data);
-  //     } catch (error) {
-  //       setError(error.message);
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   };
-
-  //   fetchSkillsData();
-  // }, []);
 
   const apiEndpoint = "/api/aws/get-presigned-url";
   const bucketName = "diehl-domain-data";

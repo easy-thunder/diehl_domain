@@ -1,0 +1,100 @@
+/* pages/games/StudyWarmUps/Kubernetes/Kubernetes.module.css */
+.container {
+    padding: 2rem;
+    background-color: white;
+    font-family: Arial, sans-serif;
+  }
+  
+  .heading {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #262a38;
+  }
+  
+  .card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    margin-bottom: 1.5rem;
+  }
+  
+  .prompt {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    font-weight: 500;
+    color: #262a38;
+  }
+  
+  .hint, .answer {
+    margin-top: 1rem;
+    padding: 0.75rem;
+    background-color: #f9f9f9;
+    border-left: 4px solid #A77B3A;
+    font-style: italic;
+    color: #333;
+  }
+  
+  .buttonRow {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 1rem;
+  }
+  
+  .button {
+    background-color: #262a38;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .button:hover {
+    background-color: #3a3f58;
+  }
+  
+  .navButton {
+    background-color: #A77B3A;
+    color: white;
+    border: none;
+    padding: 0.5rem 1.25rem;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .navButton:hover {
+    background-color: #996b2f;
+  }
+  
+  .directory {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+  }
+  
+  .dirButton {
+    padding: 0.4rem 0.8rem;
+    border: 1px solid #A77B3A;
+    background-color: transparent;
+    border-radius: 4px;
+    cursor: pointer;
+    color: #262a38;
+  }
+  
+  .dirButton.active {
+    background-color: #A77B3A;
+    color: white;
+  }
+
+  .inputWrapper {
+    padding: 0.25rem;
+    border-radius: 4px;
+  }
+  
+  .inputWrapperCorrect {
+    padding: 0.25rem;
+    border: 2px solid #4CAF50; /* Green border */
+    border-radius: 4px;
+  }

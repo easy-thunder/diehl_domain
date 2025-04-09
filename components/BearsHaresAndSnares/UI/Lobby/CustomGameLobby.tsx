@@ -5,6 +5,7 @@ import PlayerMissing from "./PlayerMissing";
 import TextInput from "@/components/utility/Forms/textInput/TextInput";
 import { useUser } from "@/context/UserContext";
 import { getUserProfile } from "@/lib/supaBase/getUserProfile";
+import Peer from 'peerjs';
 
 
 type LobbyUser = {
@@ -22,6 +23,13 @@ type CustomGameLobbyProps ={
 
 export default function CustomGameLobby({lobbyId}:CustomGameLobbyProps) {
 
+    const peer = new Peer({
+        host: 'localhost',
+        port: 8000,
+        path: '/peerjs',
+      });
+
+    console.log("Peer ID:", peer);
     const [chatInput, setChatInput] = useState('');
     const [chatMessages, setChatMessages] = useState<string[]>([]);
     const [allLobbyUsers, setAllLobbyUsers] = useState<LobbyUser[]>([]);
