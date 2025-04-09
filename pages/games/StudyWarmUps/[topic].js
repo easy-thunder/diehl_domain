@@ -1,6 +1,6 @@
 // pages/games/StudyWarmUps/Kubernetes/index.tsx
 import { useState, useEffect } from "react";
-import styles from "./Kubernetes.module.css";
+import styles from "./kubernetes.module.css";
 import TextInput from "@/components/utility/Forms/textInput/TextInput"; 
 
   
