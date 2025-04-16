@@ -25,18 +25,6 @@ const questions = [
         hint: ["target port", "node port", "container port", "entry port"],
     },
     {
-    id: "concept-target-port",
-    prompt: "CONCEPT: What is the port called on the node-service.",
-    answer: "port",
-    hint: ["port", "node port", "container port", "entry port"],
-    },
-    {
-        id: "concept-target-port",
-        prompt: "CONCEPT: What is the port called on the node?",
-        answer: "node port",
-        hint: ["node port", "node port", "container port", "entry port"],
-    },
-    {
         id: "yaml-kind-nodeport",
         prompt: "YAML: What is the kind used in a YAML file to define a NodePort service?",
         answer: "service",

@@ -1,20 +1,20 @@
 // pages/games/StudyWarmUps/Kubernetes/index.tsx
 import { useState, useEffect } from "react";
-import styles from "./kubernetes.module.css";
+import styles from "./quizzes.module.css";
 import TextInput from "@/components/utility/Forms/textInput/TextInput"; 
+import { useRouter } from "next/router";
+export default function Quizzes({title, questions, version, currentQuizSet, numberOfRelatedVersions}) {
 
-  
-export default function Quizzes({title, questions}) {
+
   const [currentIndex, setCurrentIndex] = useState(0);
   const [userInput, setUserInput] = useState("");
   const [showHint, setShowHint] = useState(false);
   const [showAnswer, setShowAnswer] = useState(false);
-
-
+  //Get the version and currentQuizSet. Then we need to route based on what question set
+  const router = useRouter();
 
   const current = questions[currentIndex];
   const isCorrect = userInput.trim().toLowerCase() === current.answer.toLowerCase();
-
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === "Enter" || e.key === "Return") {
@@ -29,14 +29,35 @@ export default function Quizzes({title, questions}) {
         }
       }
     };
-
     window.addEventListener("keydown", handleKeyDown);
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
   }, [isCorrect, questions.length]);
 
+  const renderButtonsForRelatedVersions = (currentQuizSet, version, numberOfRelatedVersions) => {
+    return (
+      <div className={styles.buttonRow}>
+        {Array.from({ length: numberOfRelatedVersions }, (_, i) => (
+          <button
+            key={i+version+currentQuizSet}
+            className={styles.button}
+            onClick={() => {
+              setCurrentIndex(() => 0);
+              setUserInput("");
+              setShowHint(false);
+              setShowAnswer(false);
+              router.push(`/games/StudyWarmUps/${currentQuizSet}V${i+1}`);
 
+            }}
+          >
+            {currentQuizSet} {i + 1}
+          </button>
+        ))}
+      </div>
+    );
+  };
+  console.log(questions)
   return (
     <div className={styles.container}>
       <h1 className={styles.heading}>{title}</h1>
@@ -111,7 +132,7 @@ export default function Quizzes({title, questions}) {
       <div className={styles.directory}>
         {questions.map((q, i) => (
           <button
-            key={q.id}
+            key={q.id+version+currentQuizSet}
             className={`${styles.dirButton} ${i === currentIndex ? styles.active : ""}`}
             onClick={() => {
               setCurrentIndex(i);
@@ -124,6 +145,7 @@ export default function Quizzes({title, questions}) {
           </button>
         ))}
       </div>
+      {numberOfRelatedVersions > 1 && renderButtonsForRelatedVersions(currentQuizSet, version, numberOfRelatedVersions)}
     </div>
   );
 }
@@ -135,11 +157,18 @@ export async function getStaticProps(context) {
   const { topic } = context.params;
   const questions = allQuestionSets[topic]?.questions || [];
   const title = allQuestionSets[topic]?.title || "Study Guide";
-
+  const version = allQuestionSets[topic]?.version || "1";
+  const currentQuizSet = allQuestionSets[topic]?.currentQuizSet || [];
+  const numberOfRelatedVersions = Object.values(allQuestionSets).filter(
+    (item) => item.currentQuizSet === currentQuizSet
+  ).length;
   return {
     props: {
       questions,
       title,
+      version,
+      currentQuizSet,
+      numberOfRelatedVersions
     },
   };
 }

@@ -29,7 +29,7 @@
     "**/*.tsx",
     "**/*.js",
     "**/*.jsx"
-, "components/BearsHaresAndSnares/UI/BHSLayout"  ],
+, "components/BearsHaresAndSnares/UI/BHSLayout", "pages/games/StudyWarmUps/[topic].tsx"  ],
   "exclude": [
     "node_modules"
   ]

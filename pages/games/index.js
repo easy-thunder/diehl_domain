@@ -13,6 +13,13 @@ export default function(){
         //   linkText: "Play chess"
         // },
         {
+          title: "Study Warm Ups",
+          blurb: "I have found that progress is not linear. Sometimes you need to take a step back and do some warm ups. This is a collection of warm ups I have created for myself. I am not sure if they are useful to anyone else. They are a collection of quizzes and games that I have created to help me learn. I hope you find them useful. Currently I only have quizzes for Kubernetes, howeever, I have set this up to include many more quizzes later on.",
+          tags: ["React","Static Props", "Kubernetes"],
+          link: "/games/StudyWarmUps/kubernetesV1",
+          linkText: "Kubernetes Quizzes"
+        },
+        {
           title: "Connect Four",
           blurb: "Enjoy this classic game with your friends online. To play you and one other friend must click join game(on two different tabs).Only Chrome can run!",
           tags: ["UseSWR", "React", "API"],

@@ -1,4 +1,4 @@
-
+import { randomUUID } from "crypto"
 const questions = [
     {
         id: "concept-pod",
@@ -155,12 +155,6 @@ const questions = [
       prompt: "TERMINAL: Apply a config file to a resource",
       answer: "apply",
       hint: ["apply", "create", "set", "config"],
-    },
-    {
-      id: "kubectl get services",
-      prompt: "TERMINAL: List all services",
-      answer: "get services",
-      hint: ["get services", "show services", "list svc", "display services"],
     },
     {
       id: "minikube start",
