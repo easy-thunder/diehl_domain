@@ -6,7 +6,7 @@ import Modal from "@/components/utility/Modal/Modal";
 export default function BHSConsole() {
   const [route, setRoute] = useState("buttonMenu");
   const [displayModal, setDisplayModal] = useState(false);
-
+  const [existingLobbyId, setExistingLobbyId] = useState<string | null>(null);
   const buttonMenuArray = [
     {
       textContent: "Custom Game",
@@ -28,7 +28,8 @@ export default function BHSConsole() {
       case "buttonMenu":
         return <ButtonMenu buttons={buttonMenuArray} />;
       case "customPrivateGame":
-        return <CustomGameLobby lobbyId={crypto.randomUUID().slice(9,23)} />;
+        console.log(existingLobbyId)
+        return <CustomGameLobby lobbyId={existingLobbyId? existingLobbyId:crypto.randomUUID().slice(9,23)} />;
       default:
         return <>404 not found</>;
     }
@@ -36,7 +37,8 @@ export default function BHSConsole() {
 
   return (
     <div className="BHSConsole">
-      {displayModal ? <Modal component={<PublicOrPrivateOptions handleModal={()=>handleModal()} route={routeConsole}/>} setModal={ ()=>handleModal()}/> : renderRoute()}
+      {displayModal ? <Modal component={<PublicOrPrivateOptions handleModal={()=>handleModal()} route={routeConsole} setExistingLobbyId={setExistingLobbyId} />}
+       setModal={ ()=>handleModal()} /> : renderRoute()}
     </div>
   );
 }

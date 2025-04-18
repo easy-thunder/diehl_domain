@@ -1,16 +1,20 @@
 
 import DarkButton from "@/components/utility/button/darkButton"
 import TextInput from "@/components/utility/Forms/textInput/TextInput";
-
+import { useState } from "react";
 
 type PublicOrPrivateOptionsProps = {
     route: (routeName: string) => void
     handleModal?: () => void
+    setExistingLobbyId: (lobbyId: string) => void
   };
 
-export default function PublicOrPrivateOptions({route, handleModal}:PublicOrPrivateOptionsProps){
+export default function PublicOrPrivateOptions({route, handleModal, setExistingLobbyId}:PublicOrPrivateOptionsProps){
+    const [gameID, setGameID] = useState<string>("");
 
+    function handleJoinExistingGameViaCode(){
 
+    }
 
 
     return<>
@@ -25,8 +29,10 @@ export default function PublicOrPrivateOptions({route, handleModal}:PublicOrPriv
             <DarkButton  classModdifier="button-natural" content="Game List" type="button" clicking={() => {route("gameList"); handleModal&& handleModal()}}/>
         </div>
         <div style={{ display: 'grid', justifyContent: 'center' }}>
-        <TextInput label="Join Custom Game" placeholder="paste existing game id" name="gameID" customLabelStyle={{textAlign:'left'}}  />
-            <button className="chat-submit-button" >Submit</button>
+        <TextInput label="Join Custom Game"  placeholder="paste existing game id" name="gameID" onChange={(e)=>setExistingLobbyId(e.target.value)} customLabelStyle={{textAlign:'left'}}  />
+            <button className="chat-submit-button" onClick={()=>{route("customPrivateGame"); handleModal&& handleModal()}}>
+                Submit
+            </button>
         </div>
     </>
 }
