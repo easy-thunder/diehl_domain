@@ -48,54 +48,65 @@ export const UserContextProvider = ({ children }: { children: React.ReactNode })
 
 // /context/UserContext.tsx
 useEffect(() => {
-    const init = async () => {
-      const { data: { session } } = await supabase.auth.getSession();
-      setSession(session);
-      setUser(session?.user ?? null);
-      setLoading(false);
-  
-      if (session?.user) {
-        const userId = session.user.id;
-  
-        // Check if user exists
-        const { data: existingUser, error } = await supabase
-          .from("users")
-          .select("id")
-          .eq("id", userId)
-          .maybeSingle();
-          console.log("existingUser:", existingUser, "error:", error);
+  let loading = false;
 
-          if (error) {
-            console.error("Error checking user:", error);
-            return;
-          }
+  const init = async () => {
+    if (loading) return;
+    loading = true;
+    const { data: { session } } = await supabase.auth.getSession();
+    setSession(session);
+    setUser(session?.user ?? null);
+    setLoading(false);
 
-          if (!existingUser) {
-            console.log("No existing user found, creating...");
-            const username = `${adjectives[Math.floor(Math.random() * adjectives.length)]}-${animals[Math.floor(Math.random() * animals.length)]}`;
-            const { error: insertError } = await supabase
-              .from("users")
-              .insert([{ id: userId, username, win_percent: 100, wins: 0, losses: 0, games_played: 0 }]);
-          
-            if (insertError) {
-              console.error("Insert error:", insertError.message);
-            }
-          } else {
-            console.log("User found:", existingUser);
-          }
+    if (session?.user) {
+      const userId = session.user.id;
+      const usernameFromMeta = session.user.user_metadata?.username;
+
+      const { data: existingUser, error } = await supabase
+        .from("users")
+        .select("id")
+        .eq("id", userId)
+        .maybeSingle();
+      console.log("existingUser:", existingUser, "error:", error);
+
+      if (error) {
+        console.error("Error checking user:", error);
+        return;
       }
-    };
-  
-    init();
-  
-    const { data: listener } = supabase.auth.onAuthStateChange((event, session) => {
-      setSession(session);
-      setUser(session?.user ?? null);
-      if (event === "SIGNED_IN" && session?.user) init(); // Ensure user is created
-    });
-  
-    return () => listener.subscription.unsubscribe();
-  }, []);
+
+      if (!existingUser) {
+        console.log("No existing user found, creating...");
+        const username = usernameFromMeta || `${adjectives[Math.floor(Math.random() * adjectives.length)]}-${animals[Math.floor(Math.random() * animals.length)]}`;
+
+        const { error: upsertError } = await supabase
+          .from("users")
+          .upsert([{ id: userId, username, win_percent: 100, wins: 0, losses: 0, games_played: 0 }], { onConflict: "id" });
+
+        if (upsertError) {
+          console.error("Upsert error:", upsertError.message);
+        }
+      } else {
+        console.log("User found:", existingUser);
+      }
+    }
+    loading = false;
+  };
+
+  init();
+
+  const { data: listener } = supabase.auth.onAuthStateChange((event, session) => {
+    setSession(session);
+    setUser(session?.user ?? null);
+    if (event === "SIGNED_IN" && session?.user) {
+      setTimeout(() => init(), 0); // safer defer
+    }
+  });
+
+  return () => {
+    listener.subscription.unsubscribe();
+  };
+}, []);
+
   
   
 
