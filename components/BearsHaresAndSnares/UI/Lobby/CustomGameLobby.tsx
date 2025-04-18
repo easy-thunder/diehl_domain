@@ -22,6 +22,7 @@ type CustomGameLobbyProps ={
 
 
 export default function CustomGameLobby({lobbyId}:CustomGameLobbyProps) {
+    console.log(lobbyId,'lobbyId')
 
     const peer = new Peer({
         host: 'localhost',
@@ -49,6 +50,7 @@ export default function CustomGameLobby({lobbyId}:CustomGameLobbyProps) {
 
       useEffect(() => {
         if (!profile || !lobbyId) return;
+        console.log('we are running fetchLobby')
       
         const fetchLobby = async () => {
           try {
@@ -62,12 +64,14 @@ export default function CustomGameLobby({lobbyId}:CustomGameLobbyProps) {
             const data = await response.json();
             setAllLobbyUsers(data.users);
           } catch (err: any) {
+            console.error(err.message+'Failed to join lobby');
             setError(err.message || 'Failed to join lobby');
           }
         };
-      
         fetchLobby();
       }, [profile, lobbyId]);
+      console.log(allLobbyUsers, "Jake Here")
+
 
     useEffect(() => {
         if (messagesEndRef.current) {
