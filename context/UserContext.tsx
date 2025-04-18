@@ -67,7 +67,6 @@ useEffect(() => {
         .select("id")
         .eq("id", userId)
         .maybeSingle();
-      console.log("existingUser:", existingUser, "error:", error);
 
       if (error) {
         console.error("Error checking user:", error);
@@ -75,7 +74,6 @@ useEffect(() => {
       }
 
       if (!existingUser) {
-        console.log("No existing user found, creating...");
         const username = usernameFromMeta || `${adjectives[Math.floor(Math.random() * adjectives.length)]}-${animals[Math.floor(Math.random() * animals.length)]}`;
 
         const { error: upsertError } = await supabase
@@ -86,7 +84,6 @@ useEffect(() => {
           console.error("Upsert error:", upsertError.message);
         }
       } else {
-        console.log("User found:", existingUser);
       }
     }
     loading = false;

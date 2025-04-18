@@ -26,7 +26,6 @@ export default function FormLogin() {
     if (error) {
       setErrorMessage(error.message);
     } else {
-      console.log("Signed in:", data);
       router.push("/games/bearsHaresAndSnares"); // or wherever you want to go
     }
 

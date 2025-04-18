@@ -61,7 +61,6 @@ export default async function handler(req, res) {
         const winner = checkWin(game.board);
         if (winner) {
           game.winner = winner;
-          console.log("winner")
         }
         game.currentPlayer = game.currentPlayer === 'R' ? 'B' : 'R';
         game.moveMade = false;
@@ -197,7 +196,6 @@ for (let i = 0; i < 6; i++) {
 // }
 
 // Check diagonal wins
-console.log('Checking diagonal wins');
 for (let row = 0; row < 6; row++) {
   for (let col = 0; col < 6; col++) {
     let count = 0;
@@ -209,7 +207,6 @@ for (let row = 0; row < 6; row++) {
         if (player === null || grid[nextRow][nextCol] === player) {
           player = grid[nextRow][nextCol];
           count++;
-          console.log(count);
         } else {
           break;
         }
@@ -226,7 +223,6 @@ for (let row = 0; row < 6; row++) {
 }
 
 // Check anti-diagonal wins
-console.log('Checking anti-diagonal wins');
 for (let row = 0; row < 6; row++) {
   for (let col = 5; col >= 0; col--) {
     let count = 0;
@@ -238,7 +234,6 @@ for (let row = 0; row < 6; row++) {
         if (player === null || grid[nextRow][nextCol] === player) {
           player = grid[nextRow][nextCol];
           count++;
-          console.log(count);
         } else {
           break;
         }
@@ -257,14 +252,12 @@ for (let row = 0; row < 6; row++) {
   }
   
   // Unit tests
-  console.log('Running unit tests');
   let board1 = [
     [ [ null, null, null ], [ null, null, null ], [ null, null, null ] ],
     [ [ null, null, null ], [ null, 'R', null ], [ 'R', null, null ] ],
     [ [ null, null, 'R' ], [ null, 'R', null ], [ 'R', null, null ] ],
     [ [ null, null, null ], [ null, null, null ], [ null, null, null ] ]
   ];
-  console.log(checkWin(board1)); // Should return 'R'
   
   let board2 = [
     [ [ null, null, null ], [ 'R', null, null ], [ null, 'R', null ] ],
@@ -272,4 +265,3 @@ for (let row = 0; row < 6; row++) {
     [ [ null, null, 'R' ], [ null, null, null ], [ null, null, null ] ],
     [ [ null, null, null ], [ 'R', null, null ], [ null, 'R', null ] ]
   ];
-//   console.log(checkWin(board2)); // Should return 'R'

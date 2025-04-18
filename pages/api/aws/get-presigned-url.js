@@ -24,7 +24,6 @@ export default function handler(req, res) {
 
         // Generate the presigned URL
         const presignedUrl = s3.getSignedUrl('getObject', params);
-        console.log('Presigned URL:', presignedUrl);
 
         // Send the presigned URL back in the response
         res.status(200).json({ presignedUrl });

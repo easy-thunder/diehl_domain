@@ -22,15 +22,26 @@ type CustomGameLobbyProps ={
 
 
 export default function CustomGameLobby({lobbyId}:CustomGameLobbyProps) {
-    console.log(lobbyId,'lobbyId')
+    const [peerId, setPeerId] = useState<null|string>(null);
+    const peerRef = useRef<null| Peer>(null);
+    useEffect(() => {
+        const peer = new Peer();
+        peer.on('open', id => {
+            setPeerId(id);
+            console.log('My peer ID is:', id);
+        });
+            
+        peer.on('call', call => {
+            // Handle incoming calls
+            console.log('Incoming call from:', call.peer);
+        });
+    
+        peerRef.current = peer;
+        return () => peer.destroy();
 
-    const peer = new Peer({
-        host: 'localhost',
-        port: 8000,
-        path: '/peerjs',
-      });
+    },[])
+    console.log(peerId)
 
-    console.log("Peer ID:", peer);
     const [chatInput, setChatInput] = useState('');
     const [chatMessages, setChatMessages] = useState<string[]>([]);
     const [allLobbyUsers, setAllLobbyUsers] = useState<LobbyUser[]>([]);
@@ -39,7 +50,7 @@ export default function CustomGameLobby({lobbyId}:CustomGameLobbyProps) {
     const {user, loading} = useUser()
     const [profile, setProfile] = useState<any>(null);
     useEffect(() => {
-        if (!user || loading) return;
+        if (!user || loading || profile) return; 
         getUserProfile(user.id)
           .then(setProfile)
           .catch((err) => {
@@ -49,15 +60,13 @@ export default function CustomGameLobby({lobbyId}:CustomGameLobbyProps) {
       }, [user, loading]);
 
       useEffect(() => {
-        if (!profile || !lobbyId) return;
-        console.log('we are running fetchLobby')
+        if (!profile || !peerId) return;
       
         const fetchLobby = async () => {
           try {
-            const response = await fetch(`http://localhost:8000/lobby?lobbyId=${lobbyId}&name=${encodeURIComponent(profile.username || 'Guest')}&win_percent=${profile.win_percent}`, {
+            const response = await fetch(`http://localhost:8000/lobby?peerId=${peerId}&name=${encodeURIComponent(profile.username || 'Guest')}&win_percent=${profile.win_percent}`, {
               headers: {
                 'x-user-id': profile.id,
-
               },
             });
             if (!response.ok) throw new Error(`Server error: ${response.status}`);
@@ -69,8 +78,7 @@ export default function CustomGameLobby({lobbyId}:CustomGameLobbyProps) {
           }
         };
         fetchLobby();
-      }, [profile, lobbyId]);
-      console.log(allLobbyUsers, "Jake Here")
+    }, [profile, peerId]);
 
 
     useEffect(() => {
@@ -215,7 +223,7 @@ export default function CustomGameLobby({lobbyId}:CustomGameLobbyProps) {
                 <div className="lobby-box config-box">
                     <div className="lobby-box__title">Game Settings</div>
                     <div className="lobby-box__content">
-                        <h2>Game id: {lobbyId}</h2>
+                        <h2>Game id: {peerId}</h2>
                     </div>
                 </div>
 

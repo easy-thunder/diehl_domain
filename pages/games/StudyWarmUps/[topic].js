@@ -57,7 +57,6 @@ export default function Quizzes({title, questions, version, currentQuizSet, numb
       </div>
     );
   };
-  console.log(questions)
   return (
     <div className={styles.container}>
       <h1 className={styles.heading}>{title}</h1>

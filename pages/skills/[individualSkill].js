@@ -17,7 +17,6 @@ export default function IndividualSkill() {
   if (error) return <div>Error: {error}</div>;
 
   if (!skillsData) return <div>No data available</div>;
-  console.log(skillsData.skillsData)
 
   const skill = skillsData.skillsData.find(skill => skill.id === individualSkill);
 

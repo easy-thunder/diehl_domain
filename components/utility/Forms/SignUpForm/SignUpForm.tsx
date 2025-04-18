@@ -32,7 +32,6 @@ export default function SignUpForm(){
             emailRedirectTo: `${location.origin}`,
           },
         });
-        console.log(data?.user?.id)
 
         if (error) {
           setErrorMessage(error.message);

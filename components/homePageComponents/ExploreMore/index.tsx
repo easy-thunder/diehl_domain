@@ -37,7 +37,6 @@ export default function ExploreMore(){
       }, []);
 
 
-console.log(length)
 
 
     return(
