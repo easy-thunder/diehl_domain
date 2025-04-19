@@ -28,7 +28,7 @@ export default function BHSConsole() {
       case "buttonMenu":
         return <ButtonMenu buttons={buttonMenuArray} />;
       case "customPrivateGame":
-        return <CustomGameLobby lobbyId={existingLobbyId? existingLobbyId:crypto.randomUUID().slice(9,23)} />;
+        return <CustomGameLobby lobbyId={existingLobbyId} />;
       default:
         return <>404 not found</>;
     }

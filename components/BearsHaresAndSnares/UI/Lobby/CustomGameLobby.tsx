@@ -5,7 +5,7 @@ import PlayerMissing from "./PlayerMissing";
 import TextInput from "@/components/utility/Forms/textInput/TextInput";
 import { useUser } from "@/context/UserContext";
 import { getUserProfile } from "@/lib/supaBase/getUserProfile";
-import Peer from 'peerjs';
+import Peer, { DataConnection } from 'peerjs';
 
 
 type LobbyUser = {
@@ -17,13 +17,15 @@ type LobbyUser = {
   };
 
 type CustomGameLobbyProps ={
-    lobbyId: string
+    lobbyId: string | null | undefined
 }
 
 
 export default function CustomGameLobby({lobbyId}:CustomGameLobbyProps) {
     const [peerId, setPeerId] = useState<null|string>(null);
     const peerRef = useRef<null| Peer>(null);
+    const connectionsRef = useRef<{ [peerId: string]: DataConnection }>({});
+
     useEffect(() => {
         const peer = new Peer();
         peer.on('open', id => {
@@ -32,9 +34,46 @@ export default function CustomGameLobby({lobbyId}:CustomGameLobbyProps) {
         });
             
         peer.on('call', call => {
-            // Handle incoming calls
+            
+            // Not using this but eventually will use for chat functionality
             console.log('Incoming call from:', call.peer);
         });
+        peer.on("connection", conn => {
+            conn.on("data", (data: any) => {
+              if (data.type === "join_notification") {
+                const newUser = data.from as {name: string, peerId: string, winPercent:number};
+                console.log(`🚀 ${newUser.name} (${newUser.peerId}) just joined!`);
+                setAllLobbyUsers(prev => {
+                  const alreadyExists = prev.some(u => u.id ===  newUser.peerId);
+                  if (alreadyExists) return prev;
+          
+                  return [...prev, {
+                    id: newUser.peerId,
+                    name: newUser.name,
+                    host: false,
+                    winPercent: newUser.winPercent,
+                    playing: true,
+                    peerId: newUser.peerId,
+                  }];
+                });
+              }
+            });
+          
+            conn.on("open", () => {
+              console.log("🟢 Received peer connection from", conn.peer);
+              connectionsRef.current[conn.peer] = conn;
+            });
+          
+            conn.on("close", () => {
+              console.log("🔴 Connection from", conn.peer, "closed");
+              delete connectionsRef.current[conn.peer];
+            });
+          
+            conn.on("error", (err) => {
+              console.error("⚠️ Incoming connection error:", err);
+            });
+          });
+          
     
         peerRef.current = peer;
         return () => peer.destroy();
@@ -62,23 +101,68 @@ export default function CustomGameLobby({lobbyId}:CustomGameLobbyProps) {
       useEffect(() => {
         if (!profile || !peerId) return;
       
+        const actualLobbyId = lobbyId || peerId; // ✅ join existing or create new
+        const isCreatingLobby = !lobbyId;
+      
         const fetchLobby = async () => {
           try {
-            const response = await fetch(`http://localhost:8000/lobby?peerId=${peerId}&name=${encodeURIComponent(profile.username || 'Guest')}&win_percent=${profile.win_percent}`, {
+            const response = await fetch(`http://localhost:8000/lobby?lobbyId=${actualLobbyId}&peerId=${peerId}&name=${encodeURIComponent(profile.username)}&win_percent=${profile.win_percent}`, {
               headers: {
                 'x-user-id': profile.id,
               },
             });
+      
             if (!response.ok) throw new Error(`Server error: ${response.status}`);
             const data = await response.json();
             setAllLobbyUsers(data.users);
+            if (!isCreatingLobby) {
+                const others = data.users.filter((u:any) => u.peerId !== peerId);
+                others.forEach((u:any)=> {
+                  if (!connectionsRef.current[u.peerId]) {
+                    const conn = peerRef.current?.connect(u.peerId);
+                    if (!conn) return;
+              
+                    conn.on("open", () => {
+                      console.log(`🔌 Connected to ${u.name} (${u.peerId})`);
+                      connectionsRef.current[u.peerId] = conn;
+              
+                      conn.send({
+                        type: "join_notification",
+                        from: {
+                          name: profile.username,
+                          peerId,
+                          winPercent: profile.win_percent
+                        },
+                      });
+                    });
+              
+                    conn.on("close", () => {
+                      console.log(`❌ Connection to ${u.peerId} closed`);
+                      delete connectionsRef.current[u.peerId];
+                    });
+              
+                    conn.on("error", (err) => {
+                      console.error("❗ Peer connection error:", err);
+                    });
+                  }
+                });
+              }
+              
+      
+            if (isCreatingLobby) {
+              console.log("Created new lobby as host:", actualLobbyId);
+            } else {
+              console.log("Joined existing lobby:", actualLobbyId);
+            }
+      
           } catch (err: any) {
-            console.error(err.message+'Failed to join lobby');
+            console.error(err.message + ' Failed to join/create lobby');
             setError(err.message || 'Failed to join lobby');
           }
         };
+      
         fetchLobby();
-    }, [profile, peerId]);
+      }, [profile, peerId]);
 
 
     useEffect(() => {
