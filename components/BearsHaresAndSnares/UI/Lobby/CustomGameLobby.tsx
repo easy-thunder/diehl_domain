@@ -41,6 +41,7 @@ export default function CustomGameLobby({lobbyId}:CustomGameLobbyProps) {
         peer.on("connection", conn => {
             conn.on("data", (data: any) => {
               if (data.type === "join_notification") {
+                console.log('join notification has been received')
                 const newUser = data.from as {name: string, peerId: string, winPercent:number};
                 console.log(`🚀 ${newUser.name} (${newUser.peerId}) just joined!`);
                 setAllLobbyUsers(prev => {
@@ -101,12 +102,11 @@ export default function CustomGameLobby({lobbyId}:CustomGameLobbyProps) {
       useEffect(() => {
         if (!profile || !peerId) return;
       
-        const actualLobbyId = lobbyId || peerId; // ✅ join existing or create new
         const isCreatingLobby = !lobbyId;
       
         const fetchLobby = async () => {
           try {
-            const response = await fetch(`http://localhost:8000/lobby?lobbyId=${actualLobbyId}&peerId=${peerId}&name=${encodeURIComponent(profile.username)}&win_percent=${profile.win_percent}`, {
+            const response = await fetch(`http://localhost:8000/lobby?lobbyId=${lobbyId}&peerId=${peerId}&name=${encodeURIComponent(profile.username)}&win_percent=${profile.win_percent}`, {
               headers: {
                 'x-user-id': profile.id,
               },
@@ -125,7 +125,7 @@ export default function CustomGameLobby({lobbyId}:CustomGameLobbyProps) {
                     conn.on("open", () => {
                       console.log(`🔌 Connected to ${u.name} (${u.peerId})`);
                       connectionsRef.current[u.peerId] = conn;
-              
+                      console.log('about to send join notification')
                       conn.send({
                         type: "join_notification",
                         from: {
@@ -150,9 +150,9 @@ export default function CustomGameLobby({lobbyId}:CustomGameLobbyProps) {
               
       
             if (isCreatingLobby) {
-              console.log("Created new lobby as host:", actualLobbyId);
+              console.log("Created new lobby as host:", lobbyId);
             } else {
-              console.log("Joined existing lobby:", actualLobbyId);
+              console.log("Joined existing lobby:", lobbyId);
             }
       
           } catch (err: any) {
@@ -180,64 +180,7 @@ export default function CustomGameLobby({lobbyId}:CustomGameLobbyProps) {
         setChatInput('');
     }
 
-    // const allLobbyUsers = [
-    //     {
-    //         name: 'TestPlayer1',
-    //         host: true,
-    //         winPercent: 43,
-    //         playing: true
-    //     },
-    //     {
-    //         name: 'TestPlayer3',
-    //         host: false,
-    //         winPercent: 18,
-    //         playing: false
-    //     },
-    //     {
-    //         name: 'TestPlayer3',
-    //         host: false,
-    //         winPercent: 18,
-    //         playing: false
-    //     },
-    //     {
-    //         name: 'TestPlayer3',
-    //         host: false,
-    //         winPercent: 18,
-    //         playing: false
-    //     },
-    //     {
-    //         name: 'TestPlayer3',
-    //         host: false,
-    //         winPercent: 18,
-    //         playing: false
-    //     },
-    //     {
-    //         name: 'TestPlayer3',
-    //         host: false,
-    //         winPercent: 18,
-    //         playing: false
-    //     },
-    //     {
-    //         name: 'TestPlayer3',
-    //         host: false,
-    //         winPercent: 18,
-    //         playing: false
-    //     },
-    //     {
-    //         name: 'TestPlayer5',
-    //         host: false,
-    //         winPercent: 18,
-    //         playing: true
-    //     },
-    //     {
-    //         name: 'TestPlayer6',
-    //         host: false,
-    //         winPercent: 18,
-    //         playing: true
-    //     },
 
-
-    // ]
 
     const sortedAllLobbyUsers = allLobbyUsers.sort((playerA, playerB) => {
         if (playerA.playing && !playerB.playing) return -1;
@@ -307,7 +250,7 @@ export default function CustomGameLobby({lobbyId}:CustomGameLobbyProps) {
                 <div className="lobby-box config-box">
                     <div className="lobby-box__title">Game Settings</div>
                     <div className="lobby-box__content">
-                        <h2>Game id: {peerId}</h2>
+                        <h2>Game id: {lobbyId}</h2>
                     </div>
                 </div>
 

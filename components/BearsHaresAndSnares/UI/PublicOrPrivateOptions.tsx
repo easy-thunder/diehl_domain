@@ -10,11 +10,7 @@ type PublicOrPrivateOptionsProps = {
   };
 
 export default function PublicOrPrivateOptions({route, handleModal, setExistingLobbyId}:PublicOrPrivateOptionsProps){
-    const [gameID, setGameID] = useState<string>("");
 
-    function handleJoinExistingGameViaCode(){
-
-    }
 
 
     return<>
