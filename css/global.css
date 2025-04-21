@@ -313,6 +313,12 @@ html {
   font-size: 1.5rem;
   max-width: 90%; }
 
+.chat-message__me {
+  color: #1ca071; }
+
+.chat-message__system {
+  color: #997950; }
+
 .players-box {
   grid-area: 1 / 1; }
 

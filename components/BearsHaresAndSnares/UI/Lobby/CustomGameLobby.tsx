@@ -14,10 +14,16 @@ type LobbyUser = {
     host: boolean;
     winPercent: number;
     playing: boolean;
+    peerId: string;
   };
 
 type CustomGameLobbyProps ={
     lobbyId: string | null | undefined
+}
+type ChatMessage ={
+  message:string;
+  userName:string;
+  peerId: string;
 }
 
 
@@ -27,7 +33,7 @@ export default function CustomGameLobby({lobbyId}:CustomGameLobbyProps) {
     const connectionsRef = useRef<{ [peerId: string]: DataConnection }>({});
     const [connections, setConnections] = useState<DataConnection[]>([]);
     const [chatInput, setChatInput] = useState('');
-    const [chatMessages, setChatMessages] = useState<string[]>([]);
+    const [chatMessages, setChatMessages] = useState<ChatMessage[]>([]);
     const [allLobbyUsers, setAllLobbyUsers] = useState<LobbyUser[]>([]);
     const [error, setError] = useState<string | null>(null);
     const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -36,6 +42,19 @@ export default function CustomGameLobby({lobbyId}:CustomGameLobbyProps) {
 
     //Setup peer, listen for connections
     useEffect(() => {
+
+      const handleBeforeUnload = () => {
+        // Optional: notify other peer  s you're leaving
+        
+        Object.values(connectionsRef.current).forEach(conn => {
+          conn.send({
+            type: "user_left",
+            from: { peerId: peerRef.current?.id },
+          });
+        });
+    
+        peer.destroy();
+      };
         const peer = new Peer();
         peer.on('open', id => {
             setPeerId(id);
@@ -93,39 +112,41 @@ export default function CustomGameLobby({lobbyId}:CustomGameLobbyProps) {
                     console.error("❗ Peer connection error (connect-back):", err);
                   });
                 }
+                //setChatMessages(prev=>[...prev,{`${newUser.name} has joined`}])
+                chatMessageHandler(`${newUser.name} has joined`,'**System**','NA')
               }
 
               if(data.type==='chat_message'){
                 const messageObject=data.from as {name:string, peerId:string, message:string}
-                setChatMessages(prev => [...prev, messageObject.message.trim()]);
+               // setChatMessages(prev => [...prev, messageObject.message.trim()]);
+                chatMessageHandler(messageObject.message.trim(),messageObject.name,messageObject.peerId)
+              }
 
+              if (data.type === "user_left") {
+                console.log('a user is leaving')
+                const peerIdWhoLeft = data.from.peerId;
+                console.log(`👋 ${peerIdWhoLeft} has left the lobby`);
+              
+                // Clean up user from the lobby UI
+                console.log(allLobbyUsers,'this is right before setting the lobby users')
+                setAllLobbyUsers(prev => prev.filter(u => u.peerId !== peerIdWhoLeft));
+              
+                // Optionally remove connection
+                delete connectionsRef.current[peerIdWhoLeft];
               }
             });
-          
-            // conn.on("open", () => {
-            //   console.log("🟢 Received peer connection from", conn.peer);
-            //   connectionsRef.current[conn.peer] = conn;
-            //   setConnections(prev => [...prev, conn]);
-            // });
-          
-            // conn.on("close", () => {
-            //   console.log("🔴 Connection from", conn.peer, "closed");
-            //   delete connectionsRef.current[conn.peer];
-            //   setConnections(prev => prev.filter(c => c.peer !== conn.peer));
-            // });
-          
-            // conn.on("error", (err) => {
-            //   console.error("⚠️ Incoming connection error:", err);
-            // });
           });
           
     
         peerRef.current = peer;
+        window.addEventListener('beforeunload', handleBeforeUnload);
         return () => peer.destroy();
 
     },[])
-
-
+    //Save before getting to far
+    function chatMessageHandler(message:string,userName:string,peerId:string){
+      setChatMessages(prev=>[...prev,{message,userName,peerId}])
+    }
     // load user profile
     useEffect(() => {
         if (!user || loading || profile) return; 
@@ -229,11 +250,10 @@ export default function CustomGameLobby({lobbyId}:CustomGameLobbyProps) {
 
 
         if (chatInput.trim() === '') return;
-        setChatMessages(prev => [...prev, chatInput.trim()]);
+        //setChatMessages(prev => [...prev, {message: chatInput.trim(), username: profile.username, peerId}]);
+        chatMessageHandler(chatInput.trim(),profile.username, peerId)
         setChatInput('');
     }
-
-
 
     const sortedAllLobbyUsers = allLobbyUsers.sort((playerA, playerB) => {
         if (playerA.playing && !playerB.playing) return -1;
@@ -282,7 +302,7 @@ export default function CustomGameLobby({lobbyId}:CustomGameLobbyProps) {
                     <div className="lobby-box__content">
                         <div className="chat-messages">
                             {chatMessages.map((msg, i) => (
-                                <div key={i} className="chat-message">{msg}</div>
+                                <div key={`${i}${msg.message}${msg.peerId}${msg.userName}`} className={`chat-message ${msg.peerId===peerId? `chat-message__me`:null} ${msg.peerId==='NA'?'chat-message__system':null}`}>{msg.userName}: {msg.message}</div>
                             ))}
                             <div ref={messagesEndRef} />
 
