@@ -22,10 +22,19 @@ type CustomGameLobbyProps ={
 
 
 export default function CustomGameLobby({lobbyId}:CustomGameLobbyProps) {
-    const [peerId, setPeerId] = useState<null|string>(null);
+    const [peerId, setPeerId] = useState<string>('');
     const peerRef = useRef<null| Peer>(null);
     const connectionsRef = useRef<{ [peerId: string]: DataConnection }>({});
+    const [connections, setConnections] = useState<DataConnection[]>([]);
+    const [chatInput, setChatInput] = useState('');
+    const [chatMessages, setChatMessages] = useState<string[]>([]);
+    const [allLobbyUsers, setAllLobbyUsers] = useState<LobbyUser[]>([]);
+    const [error, setError] = useState<string | null>(null);
+    const messagesEndRef = useRef<HTMLDivElement>(null);
+    const {user, loading} = useUser()
+    const [profile, setProfile] = useState<any>(null);
 
+    //Setup peer, listen for connections
     useEffect(() => {
         const peer = new Peer();
         peer.on('open', id => {
@@ -41,38 +50,73 @@ export default function CustomGameLobby({lobbyId}:CustomGameLobbyProps) {
         peer.on("connection", conn => {
             conn.on("data", (data: any) => {
               if (data.type === "join_notification") {
-                console.log('join notification has been received')
-                const newUser = data.from as {name: string, peerId: string, winPercent:number};
+                const newUser = data.from as { name: string; peerId: string; winPercent: number };
                 console.log(`🚀 ${newUser.name} (${newUser.peerId}) just joined!`);
+              
                 setAllLobbyUsers(prev => {
-                  const alreadyExists = prev.some(u => u.id ===  newUser.peerId);
+                  const alreadyExists = prev.some(u => u.id === newUser.peerId);
                   if (alreadyExists) return prev;
-          
-                  return [...prev, {
-                    id: newUser.peerId,
-                    name: newUser.name,
-                    host: false,
-                    winPercent: newUser.winPercent,
-                    playing: true,
-                    peerId: newUser.peerId,
-                  }];
+              
+                  return [
+                    ...prev,
+                    {
+                      id: newUser.peerId,
+                      name: newUser.name,
+                      host: false,
+                      winPercent: newUser.winPercent,
+                      playing: true,
+                      peerId: newUser.peerId,
+                    },
+                  ];
                 });
+              
+                // 🔁 CONNECT BACK TO NEW USER (if we haven't yet)
+                if (!connectionsRef.current[newUser.peerId]) {
+                  const conn = peerRef.current?.connect(newUser.peerId);
+                  if (!conn) return;
+              
+                  conn.on("open", () => {
+                    console.log(`🔁 Connected back to ${newUser.name} (${newUser.peerId})`);
+                    connectionsRef.current[newUser.peerId] = conn;
+                    setConnections(Object.values(connectionsRef.current));
+
+                  });
+              
+                  conn.on("close", () => {
+                    console.log(`🔁 Connection to ${newUser.peerId} closed`);
+                    delete connectionsRef.current[newUser.peerId];
+                    setConnections(Object.values(connectionsRef.current));
+
+                  });
+              
+                  conn.on("error", (err) => {
+                    console.error("❗ Peer connection error (connect-back):", err);
+                  });
+                }
+              }
+
+              if(data.type==='chat_message'){
+                const messageObject=data.from as {name:string, peerId:string, message:string}
+                setChatMessages(prev => [...prev, messageObject.message.trim()]);
+
               }
             });
           
-            conn.on("open", () => {
-              console.log("🟢 Received peer connection from", conn.peer);
-              connectionsRef.current[conn.peer] = conn;
-            });
+            // conn.on("open", () => {
+            //   console.log("🟢 Received peer connection from", conn.peer);
+            //   connectionsRef.current[conn.peer] = conn;
+            //   setConnections(prev => [...prev, conn]);
+            // });
           
-            conn.on("close", () => {
-              console.log("🔴 Connection from", conn.peer, "closed");
-              delete connectionsRef.current[conn.peer];
-            });
+            // conn.on("close", () => {
+            //   console.log("🔴 Connection from", conn.peer, "closed");
+            //   delete connectionsRef.current[conn.peer];
+            //   setConnections(prev => prev.filter(c => c.peer !== conn.peer));
+            // });
           
-            conn.on("error", (err) => {
-              console.error("⚠️ Incoming connection error:", err);
-            });
+            // conn.on("error", (err) => {
+            //   console.error("⚠️ Incoming connection error:", err);
+            // });
           });
           
     
@@ -80,15 +124,9 @@ export default function CustomGameLobby({lobbyId}:CustomGameLobbyProps) {
         return () => peer.destroy();
 
     },[])
-    console.log(peerId)
 
-    const [chatInput, setChatInput] = useState('');
-    const [chatMessages, setChatMessages] = useState<string[]>([]);
-    const [allLobbyUsers, setAllLobbyUsers] = useState<LobbyUser[]>([]);
-    const [error, setError] = useState<string | null>(null);
-    const messagesEndRef = useRef<HTMLDivElement>(null);
-    const {user, loading} = useUser()
-    const [profile, setProfile] = useState<any>(null);
+
+    // load user profile
     useEffect(() => {
         if (!user || loading || profile) return; 
         getUserProfile(user.id)
@@ -98,7 +136,7 @@ export default function CustomGameLobby({lobbyId}:CustomGameLobbyProps) {
             setError("Couldn't load profile.");
           });
       }, [user, loading]);
-
+      // Get the lobby and send connections
       useEffect(() => {
         if (!profile || !peerId) return;
       
@@ -125,6 +163,7 @@ export default function CustomGameLobby({lobbyId}:CustomGameLobbyProps) {
                     conn.on("open", () => {
                       console.log(`🔌 Connected to ${u.name} (${u.peerId})`);
                       connectionsRef.current[u.peerId] = conn;
+                      setConnections(prev => [...prev, conn]);
                       console.log('about to send join notification')
                       conn.send({
                         type: "join_notification",
@@ -138,7 +177,8 @@ export default function CustomGameLobby({lobbyId}:CustomGameLobbyProps) {
               
                     conn.on("close", () => {
                       console.log(`❌ Connection to ${u.peerId} closed`);
-                      delete connectionsRef.current[u.peerId];
+                      delete connectionsRef.current[u.peerId]; // remove connections
+                      setConnections(prev => prev.filter(c => c.peer !== conn.peer)); // clean up connections
                     });
               
                     conn.on("error", (err) => {
@@ -148,7 +188,7 @@ export default function CustomGameLobby({lobbyId}:CustomGameLobbyProps) {
                 });
               }
               
-      
+            
             if (isCreatingLobby) {
               console.log("Created new lobby as host:", lobbyId);
             } else {
@@ -175,6 +215,19 @@ export default function CustomGameLobby({lobbyId}:CustomGameLobbyProps) {
         setChatInput(e.target.value);
     }
     function handleChatSubmit() {
+      console.log(connections,'connections in handle chat')
+      connections.forEach(conn=>{
+        conn.send({
+          type: "chat_message",
+          from: {
+            name: profile.username,
+            peerId,
+            message: chatInput
+          }
+        })
+      })
+
+
         if (chatInput.trim() === '') return;
         setChatMessages(prev => [...prev, chatInput.trim()]);
         setChatInput('');
