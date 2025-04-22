@@ -6,6 +6,7 @@ import TextInput from "@/components/utility/Forms/textInput/TextInput";
 import { useUser } from "@/context/UserContext";
 import { getUserProfile } from "@/lib/supaBase/getUserProfile";
 import Peer, { DataConnection } from 'peerjs';
+import { ClientPageRoot } from "next/dist/client/components/client-page";
 
 
 type LobbyUser = {
@@ -39,12 +40,14 @@ export default function CustomGameLobby({lobbyId}:CustomGameLobbyProps) {
     const messagesEndRef = useRef<HTMLDivElement>(null);
     const {user, loading} = useUser()
     const [profile, setProfile] = useState<any>(null);
+    const handshakeUrl = process.env.NEXT_PUBLIC_HANDSHAKE_URL;
+    console.log(handshakeUrl)
 
     //Setup peer, listen for connections
     useEffect(() => {
 
-      const handleBeforeUnload = () => {
-        // Optional: notify other peer  s you're leaving
+      function handleBeforeUnload(){
+        // Optional: notify other peers you're leaving
         
         Object.values(connectionsRef.current).forEach(conn => {
           conn.send({
@@ -165,65 +168,74 @@ export default function CustomGameLobby({lobbyId}:CustomGameLobbyProps) {
       
         const fetchLobby = async () => {
           try {
-            const response = await fetch(`http://localhost:8000/lobby?lobbyId=${lobbyId}&peerId=${peerId}&name=${encodeURIComponent(profile.username)}&win_percent=${profile.win_percent}`, {
+            const lobbyUrl = `${handshakeUrl}/lobby/${lobbyId}`;
+            const response = await fetch(lobbyUrl, {
+              method: "POST",
               headers: {
-                'x-user-id': profile.id,
+                "Content-Type": "application/json",
+                "x-user-id": profile.id,
               },
+              body: JSON.stringify({
+                peerId,
+                name: profile.username,
+                win_percent: profile.win_percent,
+              }),
             });
       
             if (!response.ok) throw new Error(`Server error: ${response.status}`);
+      
             const data = await response.json();
             setAllLobbyUsers(data.users);
+      
             if (!isCreatingLobby) {
-                const others = data.users.filter((u:any) => u.peerId !== peerId);
-                others.forEach((u:any)=> {
-                  if (!connectionsRef.current[u.peerId]) {
-                    const conn = peerRef.current?.connect(u.peerId);
-                    if (!conn) return;
-              
-                    conn.on("open", () => {
-                      console.log(`🔌 Connected to ${u.name} (${u.peerId})`);
-                      connectionsRef.current[u.peerId] = conn;
-                      setConnections(prev => [...prev, conn]);
-                      console.log('about to send join notification')
-                      conn.send({
-                        type: "join_notification",
-                        from: {
-                          name: profile.username,
-                          peerId,
-                          winPercent: profile.win_percent
-                        },
-                      });
+              const others = data.users.filter((u: any) => u.peerId !== peerId);
+              others.forEach((u: any) => {
+                if (!connectionsRef.current[u.peerId]) {
+                  const conn = peerRef.current?.connect(u.peerId);
+                  if (!conn) return;
+      
+                  conn.on("open", () => {
+                    console.log(`🔌 Connected to ${u.name} (${u.peerId})`);
+                    connectionsRef.current[u.peerId] = conn;
+                    setConnections(prev => [...prev, conn]);
+                    console.log("about to send join notification");
+                    conn.send({
+                      type: "join_notification",
+                      from: {
+                        name: profile.username,
+                        peerId,
+                        winPercent: profile.win_percent,
+                      },
                     });
-              
-                    conn.on("close", () => {
-                      console.log(`❌ Connection to ${u.peerId} closed`);
-                      delete connectionsRef.current[u.peerId]; // remove connections
-                      setConnections(prev => prev.filter(c => c.peer !== conn.peer)); // clean up connections
-                    });
-              
-                    conn.on("error", (err) => {
-                      console.error("❗ Peer connection error:", err);
-                    });
-                  }
-                });
-              }
-              
-            
+                  });
+      
+                  conn.on("close", () => {
+                    console.log(`❌ Connection to ${u.peerId} closed`);
+                    delete connectionsRef.current[u.peerId];
+                    setConnections(prev => prev.filter(c => c.peer !== conn.peer));
+                  });
+      
+                  conn.on("error", (err) => {
+                    console.error("❗ Peer connection error:", err);
+                  });
+                }
+              });
+            }
+      
             if (isCreatingLobby) {
               console.log("Created new lobby as host:", lobbyId);
             } else {
               console.log("Joined existing lobby:", lobbyId);
             }
-      
           } catch (err: any) {
-            console.error(err.message + ' Failed to join/create lobby');
-            setError(err.message || 'Failed to join lobby');
+            console.error(err.message + " Failed to join/create lobby");
+            setError(err.message || "Failed to join lobby");
           }
         };
       
         fetchLobby();
       }, [profile, peerId]);
+      
 
 
     useEffect(() => {
@@ -270,7 +282,12 @@ export default function CustomGameLobby({lobbyId}:CustomGameLobbyProps) {
     });
 
 
-
+    async function swapToSpectate(){
+      console.log('hi')
+      const response = await fetch(`${handshakeUrl}/lobby/spectate`, {
+        
+      })
+    }
 
     function determinePlayer(number: number): JSX.Element | undefined {
         const thisPlayer = players[number]
@@ -327,8 +344,8 @@ export default function CustomGameLobby({lobbyId}:CustomGameLobbyProps) {
                     </div>
                 </div>
 
-                <button className="gap-button gap-button--left">Play</button>
-                <button className="gap-button gap-button--right">Spectate</button>
+                <button className="gap-button gap-button--left" >Play</button>
+                <button className="gap-button gap-button--right" onClick={()=>swapToSpectate()}>Spectate</button>
             </div>
         </div>
     );
