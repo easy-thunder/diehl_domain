@@ -7,7 +7,7 @@ import { useUser } from "@/context/UserContext";
 import { getUserProfile } from "@/lib/supaBase/getUserProfile";
 import Peer, { DataConnection } from 'peerjs';
 import { ClientPageRoot } from "next/dist/client/components/client-page";
-
+import { useLeaveLobby } from "../../GameHooks/useLeaveLobby";
 
 type LobbyUser = {
     id: string;
@@ -41,6 +41,7 @@ export default function CustomGameLobby({lobbyId}:CustomGameLobbyProps) {
     const {user, loading} = useUser()
     const [profile, setProfile] = useState<any>(null);
     const handshakeUrl = process.env.NEXT_PUBLIC_HANDSHAKE_URL;
+    const {leaveLobby} = useLeaveLobby()
     console.log(handshakeUrl)
 
     //Setup peer, listen for connections
@@ -106,6 +107,7 @@ export default function CustomGameLobby({lobbyId}:CustomGameLobbyProps) {
               
                   conn.on("close", () => {
                     console.log(`🔁 Connection to ${newUser.peerId} closed`);
+
                     delete connectionsRef.current[newUser.peerId];
                     setConnections(Object.values(connectionsRef.current));
 
@@ -211,8 +213,8 @@ export default function CustomGameLobby({lobbyId}:CustomGameLobbyProps) {
       
                   conn.on("close", () => {
                     console.log(`❌ Connection to ${u.peerId} closed`);
-                    delete connectionsRef.current[u.peerId];
-                    setConnections(prev => prev.filter(c => c.peer !== conn.peer));
+                    leaveLobby(lobbyId, peerId)
+                    location.reload();
                   });
       
                   conn.on("error", (err) => {
