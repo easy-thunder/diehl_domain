@@ -1,7 +1,6 @@
 
 import DarkButton from "@/components/utility/button/darkButton"
 import TextInput from "@/components/utility/Forms/textInput/TextInput";
-import { useState } from "react";
 
 type PublicOrPrivateOptionsProps = {
     route: (routeName: string) => void

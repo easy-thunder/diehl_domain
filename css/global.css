@@ -297,6 +297,21 @@ html {
   .chat-submit-button:hover {
     background-color: #785f3e; }
 
+.play-button {
+  background-color: #997950;
+  color: white;
+  border: none;
+  padding: 1rem;
+  border-radius: 6px;
+  font-weight: bold;
+  font-size: 1.8rem;
+  cursor: pointer;
+  width: 100%;
+  display: block;
+  text-align: center; }
+  .play-button:hover {
+    background-color: #785f3e; }
+
 .chat-messages {
   display: flex;
   flex-direction: column;

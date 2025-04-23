@@ -1,4 +1,10 @@
-// I considered making this file more modular, however, I don't anticipate in any near or distant future that I will be creating a custom game lobby.
+//Here is what needs to be thought about
+// 1. How to handle the lobby creation and joining
+// 2. Coupling peer connections with the lobby
+// 3. When peer connection is closed how to update the lobby and how to update the other players UI
+
+// 4. I could modularize this code more and clean it up. But as it is it currently works.
+
 import { JSX, useState, useRef, useEffect } from "react";
 import PlayerLobbyCard from "./PlayerLobbyCard";
 import PlayerMissing from "./PlayerMissing";
@@ -6,7 +12,6 @@ import TextInput from "@/components/utility/Forms/textInput/TextInput";
 import { useUser } from "@/context/UserContext";
 import { getUserProfile } from "@/lib/supaBase/getUserProfile";
 import Peer, { DataConnection } from 'peerjs';
-import { ClientPageRoot } from "next/dist/client/components/client-page";
 import { useLeaveLobby } from "../../GameHooks/useLeaveLobby";
 
 type LobbyUser = {
@@ -42,6 +47,8 @@ export default function CustomGameLobby({lobbyId}:CustomGameLobbyProps) {
     const [profile, setProfile] = useState<any>(null);
     const handshakeUrl = process.env.NEXT_PUBLIC_HANDSHAKE_URL;
     const {leaveLobby} = useLeaveLobby()
+    const chatInputRef = useRef<HTMLInputElement>(null);
+
     console.log(handshakeUrl)
 
     //Setup peer, listen for connections
@@ -72,6 +79,22 @@ export default function CustomGameLobby({lobbyId}:CustomGameLobbyProps) {
         });
         peer.on("connection", conn => {
             conn.on("data", (data: any) => {
+              if(data.type === "user_status_changed"){
+                const userStatus = data.from as { peerId: string; playing: boolean; name: string; winPercent: number; host: boolean };
+                console.log(`User status changed: ${userStatus.name} (${userStatus.peerId}) is now ${userStatus.playing ? 'playing' : 'not playing'}`);
+                setAllLobbyUsers(prev => {
+                  const userIndex = prev.findIndex(u => u.peerId === userStatus.peerId);
+                  if (userIndex !== -1) {
+                    const updatedUser = { ...prev[userIndex], playing: userStatus.playing, host: userStatus.host, winPercent: userStatus.winPercent };
+                    const updatedUsers = [...prev];
+                    updatedUsers[userIndex] = updatedUser;
+                    return updatedUsers;
+                  }
+                  return prev;
+                })
+              }
+
+
               if (data.type === "join_notification") {
                 const newUser = data.from as { name: string; peerId: string; winPercent: number };
                 console.log(`🚀 ${newUser.name} (${newUser.peerId}) just joined!`);
@@ -140,7 +163,22 @@ export default function CustomGameLobby({lobbyId}:CustomGameLobbyProps) {
                 delete connectionsRef.current[peerIdWhoLeft];
               }
             });
+
+            conn.on("close", () => {
+              console.log(`🔁 Incoming connection from ${conn.peer} closed`);
+              setAllLobbyUsers(prev =>
+                prev.map(user =>
+                  user.peerId === conn.peer
+                    ? { ...user, playing: false } // or a `connected: false` flag
+                    : user
+                )
+              );
+
+            });
           });
+
+
+          
           
     
         peerRef.current = peer;
@@ -284,11 +322,50 @@ export default function CustomGameLobby({lobbyId}:CustomGameLobbyProps) {
     });
 
 
-    async function swapToSpectate(){
-      console.log('hi')
-      const response = await fetch(`${handshakeUrl}/lobby/spectate`, {
-        
-      })
+    async function updatePlayerStatus(playing: boolean) {
+      if(!profile) return;
+      if(profile.playing === playing) return;
+      if(playing===true&& players.length>=4){
+        alert("There are already 4 players in the game");
+        return
+      }
+
+      try {
+        const response = await fetch(`${handshakeUrl}/lobby/${lobbyId}/status`, {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            peerId,
+            playing,
+          }),
+        });
+    
+        if (!response.ok) throw new Error("Failed to update player status");
+    
+        setAllLobbyUsers(prev =>
+          prev.map(user =>
+            user.peerId === peerId ? { ...user, playing } : user
+          )
+        );
+
+        connections.forEach(conn =>{
+          conn.send({
+            type: "user_status_changed",
+            from:{
+              peerId,
+              playing,
+              name: profile.username,
+              winPercent: profile.win_percent,
+              host: profile.host
+            }
+          })
+        })
+      } catch (err) {
+        console.error("Error updating player status:", err);
+        setError("Unable to update player status");
+      }
     }
 
     function determinePlayer(number: number): JSX.Element | undefined {
@@ -296,6 +373,39 @@ export default function CustomGameLobby({lobbyId}:CustomGameLobbyProps) {
         if (!thisPlayer) return <PlayerMissing />
         return <PlayerLobbyCard name={thisPlayer.name} host={thisPlayer.host} winPercent={thisPlayer.winPercent} />
     }
+
+    useEffect(() => {
+      const handleKeyDown = (e: KeyboardEvent) => {
+        const input = document.querySelector('input[name="lobbyChat"]') as HTMLInputElement;
+        if (!input) return;
+    
+        const isFocused = document.activeElement === input;
+    
+        if (e.key === 'Enter') {
+          if (isFocused) {
+            e.preventDefault();
+            handleChatSubmit();
+            input.blur();
+          } else {
+            input.focus();
+          }
+        }
+      };
+    
+      document.addEventListener('keydown', handleKeyDown);
+    
+      // Cleanup on unmount or rerun
+      return () => {
+        document.removeEventListener('keydown', handleKeyDown);
+      };
+    }, [handleChatSubmit]);
+
+
+    function buildGame(){
+      console.log('building game')
+      
+    }
+
 
     if (error) return <div>Error: {error}</div>;
     if (!allLobbyUsers) return <div>Loading...</div>;
@@ -343,11 +453,12 @@ export default function CustomGameLobby({lobbyId}:CustomGameLobbyProps) {
                     <div className="lobby-box__title">Game Settings</div>
                     <div className="lobby-box__content">
                         <h2>Game id: {lobbyId}</h2>
+                        <button onClick={()=>buildGame()} className="play-button">Play</button>
                     </div>
                 </div>
 
-                <button className="gap-button gap-button--left" >Play</button>
-                <button className="gap-button gap-button--right" onClick={()=>swapToSpectate()}>Spectate</button>
+                <button className="gap-button gap-button--left" onClick={()=>updatePlayerStatus(true)}>Play</button>
+                <button className="gap-button gap-button--right" onClick={()=>updatePlayerStatus(false)}>Spectate</button>
             </div>
         </div>
     );

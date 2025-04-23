@@ -245,6 +245,24 @@
   }
 }
 
+.play-button {
+  background-color: $BHSBrown;
+  color: white;
+  border: none;
+  padding: 1rem; // more padding for larger click area
+  border-radius: 6px;
+  font-weight: bold;
+  font-size: 1.8rem; // larger text
+  cursor: pointer;
+  width: 100%; // span entire container
+  display: block; // ensure it respects width
+  text-align: center;
+
+  &:hover {
+    background-color: darken($BHSBrown, 10%);
+  }
+}
+
 .chat-messages {
   display: flex;
   flex-direction: column;
