@@ -12,7 +12,8 @@ import TextInput from "@/components/utility/Forms/textInput/TextInput";
 import { useUser } from "@/context/UserContext";
 import { getUserProfile } from "@/lib/supaBase/getUserProfile";
 import Peer, { DataConnection } from 'peerjs';
-import { useLeaveLobby } from "../../GameHooks/useLeaveLobby";
+import { useLeaveLobby } from "./hooks/useLeaveLobby";
+import Game from "../Game/Game";
 
 type LobbyUser = {
     id: string;
@@ -25,6 +26,7 @@ type LobbyUser = {
 
 type CustomGameLobbyProps ={
     lobbyId: string | null | undefined
+    route: (routeName: string) => void
 }
 type ChatMessage ={
   message:string;
@@ -33,7 +35,7 @@ type ChatMessage ={
 }
 
 
-export default function CustomGameLobby({lobbyId}:CustomGameLobbyProps) {
+export default function CustomGameLobby({lobbyId, route}:CustomGameLobbyProps) {
     const [peerId, setPeerId] = useState<string>('');
     const peerRef = useRef<null| Peer>(null);
     const connectionsRef = useRef<{ [peerId: string]: DataConnection }>({});
@@ -48,6 +50,7 @@ export default function CustomGameLobby({lobbyId}:CustomGameLobbyProps) {
     const handshakeUrl = process.env.NEXT_PUBLIC_HANDSHAKE_URL;
     const {leaveLobby} = useLeaveLobby()
     const chatInputRef = useRef<HTMLInputElement>(null);
+    const [playGameStarted, setPlayGameStarted] = useState(false);
 
     console.log(handshakeUrl)
 
@@ -402,14 +405,15 @@ export default function CustomGameLobby({lobbyId}:CustomGameLobbyProps) {
 
 
     function buildGame(){
-      console.log('building game')
-      
+      // if(players.length<2){alert("There are not enough players to start the game");return}
+      setPlayGameStarted(()=> true)
     }
-
 
     if (error) return <div>Error: {error}</div>;
     if (!allLobbyUsers) return <div>Loading...</div>;
     return (
+      <>
+    {playGameStarted? <Game/>:<>
         <div className="form-box form-box__in-container transparent">
             <div className="lobby-grid">
                 <div className="lobby-box players-box">
@@ -461,5 +465,7 @@ export default function CustomGameLobby({lobbyId}:CustomGameLobbyProps) {
                 <button className="gap-button gap-button--right" onClick={()=>updatePlayerStatus(false)}>Spectate</button>
             </div>
         </div>
+      </>}
+      </>
     );
 }

@@ -29,7 +29,7 @@ export default function BHSConsole() {
       case "buttonMenu":
         return <ButtonMenu buttons={buttonMenuArray} />;
       case "customPrivateGame":
-        return <CustomGameLobby lobbyId={existingLobbyId?existingLobbyId:newLobbyId.current} />;
+        return <CustomGameLobby lobbyId={existingLobbyId?existingLobbyId:newLobbyId.current} route={routeConsole}/>;
       default:
         return <>404 not found</>;
     }

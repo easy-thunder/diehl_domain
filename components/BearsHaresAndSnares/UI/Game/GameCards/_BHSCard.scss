@@ -1,0 +1,37 @@
+
+.BHS_card{
+    border: 1px solid #666;
+    border-radius: 8px;
+    position: relative;
+    width: 10%;
+    height: 6rem;
+    justify-self: center;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem;
+    color: #fff;
+  
+    align-items: stretch;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+}
+
+.BHS_back-of-card-bear {
+    background-image: url(../public/Bear_Back.png);
+    background-size: cover;        // ✅ ensures the image scales to fill the card
+    background-position: center;   // ✅ centers the image
+    background-repeat: no-repeat;  // ✅ prevents tiling
+  }
+
+.deck-container{
+    justify-self: center;
+    width: 60%;
+    margin-top: 40%;
+    margin-bottom: 50%;
+
+}
+
