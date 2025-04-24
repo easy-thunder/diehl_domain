@@ -108,8 +108,8 @@ html {
   border: 1px solid #666;
   border-radius: 8px;
   position: relative;
-  width: 10%;
-  height: 6rem;
+  width: 6rem;
+  height: 9rem;
   justify-self: center;
   display: flex;
   align-items: center;
@@ -129,10 +129,15 @@ html {
   background-repeat: no-repeat; }
 
 .deck-container {
-  justify-self: center;
-  width: 60%;
-  margin-top: 40%;
-  margin-bottom: 50%; }
+  grid-area: deck-container;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  overflow: hidden; }
+  .deck-container > * {
+    cursor: pointer; }
 
 .lobby-grid {
   display: grid;

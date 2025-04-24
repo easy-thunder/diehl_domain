@@ -8,6 +8,11 @@ export default function Game(){
         <div className='invisible-game-grid'>
             <div className="zone deck-container">
                 <Deck cardClass="bear"/>
+                <Deck cardClass="bear"/>
+                <Deck cardClass="bear"/>
+                <Deck cardClass="bear"/>
+                <Deck cardClass="bear"/>
+                <Deck cardClass="bear"/>
             </div>
             <div className="zone left-hand">Left Hand</div>
             <div className="zone right-hand">Right Hand</div>
