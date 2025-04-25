@@ -108,8 +108,8 @@ html {
   border: 1px solid #666;
   border-radius: 8px;
   position: relative;
-  width: 6rem;
-  height: 9rem;
+  width: 4.66667rem;
+  height: 7rem;
   justify-self: center;
   display: flex;
   align-items: center;
@@ -138,6 +138,21 @@ html {
   overflow: hidden; }
   .deck-container > * {
     cursor: pointer; }
+
+.BHS_back-of-card-hare {
+  background-image: url(../public/Hares_Back.png);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat; }
+
+.BHS_back-of-card-snare {
+  background-image: url(../public/Snares_Back.png);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat; }
+
+.BHS_midden {
+  filter: grayscale(1) opacity(0.4); }
 
 .lobby-grid {
   display: grid;
@@ -418,9 +433,9 @@ html {
   display: grid;
   width: 100%;
   height: 100%;
-  grid-template-columns: 10% 15% auto 15% 10%;
-  grid-template-rows: 10% 20% auto 20% 10%;
-  grid-template-areas: "left-hand .            top-hand         .           right-hand" "left-hand left-field   top-field        right-field right-hand" "left-hand left-field   deck-container        right-field right-hand" "left-hand left-field   player-field     right-field right-hand" "left-hand .            player-hand      .           right-hand";
+  grid-template-columns: 8% 15% auto 15% 8%;
+  grid-template-rows: 15% 22% auto 22% 22%;
+  grid-template-areas: ". .            top-hand         .           ." "left-hand left-field   top-field        right-field right-hand" "left-hand left-field   deck-container        right-field right-hand" "left-hand left-field   player-field     right-field right-hand" "player-hand player-hand            player-hand      player-hand           player-hand";
   gap: 2px; }
 
 .zone {

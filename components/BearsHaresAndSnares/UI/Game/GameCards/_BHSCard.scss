@@ -3,8 +3,8 @@
     border: 1px solid #666;
     border-radius: 8px;
     position: relative;
-    width: 6rem;
-    height: 9rem;
+    width: 4.66667rem;
+    height: 7rem;
     justify-self: center;
     display: flex;
     align-items: center;
@@ -39,5 +39,20 @@
         cursor: pointer;
     }
   }
-  
+  .BHS_back-of-card-hare {
+    background-image: url(../public/Hares_Back.png);
+    background-size: cover;        
+    background-position: center;   
+    background-repeat: no-repeat;  
+  }
+  .BHS_back-of-card-snare {
+    background-image: url(../public/Snares_Back.png);
+    background-size: cover;        
+    background-position: center;   
+    background-repeat: no-repeat;  
+  }
+  .BHS_midden{
+    filter:grayscale(1)
+    opacity(0.4);
+  }
 

@@ -58,14 +58,14 @@
   display: grid;
   width: 100%;
   height: 100%;
-  grid-template-columns: 10% 15% auto 15% 10%;
-  grid-template-rows: 10% 20% auto 20% 10%;
+  grid-template-columns: 8% 15% auto 15% 8%;
+  grid-template-rows: 15% 22% auto 22% 22%;
   grid-template-areas:
-    "left-hand .            top-hand         .           right-hand"
+    ". .            top-hand         .           ."
     "left-hand left-field   top-field        right-field right-hand"
     "left-hand left-field   deck-container        right-field right-hand"
     "left-hand left-field   player-field     right-field right-hand"
-    "left-hand .            player-hand      .           right-hand";
+    "player-hand player-hand            player-hand      player-hand           player-hand";
   gap: 2px; // optional spacing between areas
 }
 
