@@ -26,7 +26,7 @@ type LobbyUser = {
 
 type CustomGameLobbyProps ={
     lobbyId: string | null | undefined
-    // route: (routeName: string) => void
+    route: (routeName: string) => void
 }
 type ChatMessage ={
   message:string;
