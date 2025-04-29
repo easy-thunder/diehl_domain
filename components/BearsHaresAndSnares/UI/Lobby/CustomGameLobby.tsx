@@ -1,4 +1,4 @@
-//Here is what needs to be thought about
+
 // 1. How to handle the lobby creation and joining
 // 2. Coupling peer connections with the lobby
 // 3. When peer connection is closed how to update the lobby and how to update the other players UI
@@ -26,7 +26,7 @@ type LobbyUser = {
 
 type CustomGameLobbyProps ={
     lobbyId: string | null | undefined
-    route: (routeName: string) => void
+    // route: (routeName: string) => void
 }
 type ChatMessage ={
   message:string;
@@ -35,7 +35,7 @@ type ChatMessage ={
 }
 
 
-export default function CustomGameLobby({lobbyId, route}:CustomGameLobbyProps) {
+export default function CustomGameLobby({lobbyId}:CustomGameLobbyProps) {
     const [peerId, setPeerId] = useState<string>('');
     const peerRef = useRef<null| Peer>(null);
     const connectionsRef = useRef<{ [peerId: string]: DataConnection }>({});
@@ -49,16 +49,16 @@ export default function CustomGameLobby({lobbyId, route}:CustomGameLobbyProps) {
     const [profile, setProfile] = useState<any>(null);
     const handshakeUrl = process.env.NEXT_PUBLIC_HANDSHAKE_URL;
     const {leaveLobby} = useLeaveLobby()
-    const chatInputRef = useRef<HTMLInputElement>(null);
+    // const chatInputRef = useRef<HTMLInputElement>(null);//JAKE wasn't used any where but I made it so maybe I need it later?
     const [playGameStarted, setPlayGameStarted] = useState(false);
 
     console.log(handshakeUrl)
 
-    //Setup peer, listen for connections
+    
     useEffect(() => {
 
       function handleBeforeUnload(){
-        // Optional: notify other peers you're leaving
+        
         
         Object.values(connectionsRef.current).forEach(conn => {
           conn.send({
@@ -77,7 +77,7 @@ export default function CustomGameLobby({lobbyId, route}:CustomGameLobbyProps) {
             
         peer.on('call', call => {
             
-            // Not using this but eventually will use for chat functionality
+            
             console.log('Incoming call from:', call.peer);
         });
         peer.on("connection", conn => {
@@ -119,7 +119,6 @@ export default function CustomGameLobby({lobbyId, route}:CustomGameLobbyProps) {
                   ];
                 });
               
-                // 🔁 CONNECT BACK TO NEW USER (if we haven't yet)
                 if (!connectionsRef.current[newUser.peerId]) {
                   const conn = peerRef.current?.connect(newUser.peerId);
                   if (!conn) return;
@@ -143,13 +142,13 @@ export default function CustomGameLobby({lobbyId, route}:CustomGameLobbyProps) {
                     console.error("❗ Peer connection error (connect-back):", err);
                   });
                 }
-                //setChatMessages(prev=>[...prev,{`${newUser.name} has joined`}])
+                
                 chatMessageHandler(`${newUser.name} has joined`,'**System**','NA')
               }
 
               if(data.type==='chat_message'){
                 const messageObject=data.from as {name:string, peerId:string, message:string}
-               // setChatMessages(prev => [...prev, messageObject.message.trim()]);
+               
                 chatMessageHandler(messageObject.message.trim(),messageObject.name,messageObject.peerId)
               }
 
@@ -158,12 +157,15 @@ export default function CustomGameLobby({lobbyId, route}:CustomGameLobbyProps) {
                 const peerIdWhoLeft = data.from.peerId;
                 console.log(`👋 ${peerIdWhoLeft} has left the lobby`);
               
-                // Clean up user from the lobby UI
+                
                 console.log(allLobbyUsers,'this is right before setting the lobby users')
                 setAllLobbyUsers(prev => prev.filter(u => u.peerId !== peerIdWhoLeft));
               
-                // Optionally remove connection
+                
                 delete connectionsRef.current[peerIdWhoLeft];
+              }
+              if(data.type === "game_start"){
+                setPlayGameStarted(()=>true)
               }
             });
 
@@ -172,7 +174,7 @@ export default function CustomGameLobby({lobbyId, route}:CustomGameLobbyProps) {
               setAllLobbyUsers(prev =>
                 prev.map(user =>
                   user.peerId === conn.peer
-                    ? { ...user, playing: false } // or a `connected: false` flag
+                    ? { ...user, playing: false } 
                     : user
                 )
               );
@@ -189,11 +191,11 @@ export default function CustomGameLobby({lobbyId, route}:CustomGameLobbyProps) {
         return () => peer.destroy();
 
     },[])
-    //Save before getting to far
+    
     function chatMessageHandler(message:string,userName:string,peerId:string){
       setChatMessages(prev=>[...prev,{message,userName,peerId}])
     }
-    // load user profile
+    
     useEffect(() => {
         if (!user || loading || profile) return; 
         getUserProfile(user.id)
@@ -203,7 +205,7 @@ export default function CustomGameLobby({lobbyId, route}:CustomGameLobbyProps) {
             setError("Couldn't load profile.");
           });
       }, [user, loading]);
-      // Get the lobby and send connections
+      
       useEffect(() => {
         if (!profile || !peerId) return;
       
@@ -305,7 +307,7 @@ export default function CustomGameLobby({lobbyId, route}:CustomGameLobbyProps) {
 
 
         if (chatInput.trim() === '') return;
-        //setChatMessages(prev => [...prev, {message: chatInput.trim(), username: profile.username, peerId}]);
+        
         chatMessageHandler(chatInput.trim(),profile.username, peerId)
         setChatInput('');
     }
@@ -397,7 +399,7 @@ export default function CustomGameLobby({lobbyId, route}:CustomGameLobbyProps) {
     
       document.addEventListener('keydown', handleKeyDown);
     
-      // Cleanup on unmount or rerun
+      
       return () => {
         document.removeEventListener('keydown', handleKeyDown);
       };
@@ -405,15 +407,24 @@ export default function CustomGameLobby({lobbyId, route}:CustomGameLobbyProps) {
 
 
     function buildGame(){
-      // if(players.length<2){alert("There are not enough players to start the game");return}
+      
       setPlayGameStarted(()=> true)
+      connections.forEach(conn=>{
+        conn.send({
+          type: "game_start",
+          from: {
+            peerId,
+            playing: true
+          }
+        })
+      })
     }
 
     if (error) return <div>Error: {error}</div>;
     if (!allLobbyUsers) return <div>Loading...</div>;
     return (
       <>
-    {playGameStarted? <Game/>:<>
+    {playGameStarted? <Game players={players} peerId={peerId} thisUserProfile={profile} connections={connections}/>:<>
         <div className="form-box form-box__in-container transparent">
             <div className="lobby-grid">
                 <div className="lobby-box players-box">
