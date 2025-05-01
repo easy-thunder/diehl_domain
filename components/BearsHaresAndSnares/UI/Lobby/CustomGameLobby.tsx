@@ -52,7 +52,7 @@ export default function CustomGameLobby({lobbyId}:CustomGameLobbyProps) {
     // const chatInputRef = useRef<HTMLInputElement>(null);//JAKE wasn't used any where but I made it so maybe I need it later?
     const [playGameStarted, setPlayGameStarted] = useState(false);
 
-    console.log(handshakeUrl)
+    
 
     
     useEffect(() => {
@@ -72,19 +72,20 @@ export default function CustomGameLobby({lobbyId}:CustomGameLobbyProps) {
         const peer = new Peer();
         peer.on('open', id => {
             setPeerId(id);
-            console.log('My peer ID is:', id);
+            
         });
             
         peer.on('call', call => {
             
             
-            console.log('Incoming call from:', call.peer);
+            
         });
         peer.on("connection", conn => {
+          
             conn.on("data", (data: any) => {
               if(data.type === "user_status_changed"){
                 const userStatus = data.from as { peerId: string; playing: boolean; name: string; winPercent: number; host: boolean };
-                console.log(`User status changed: ${userStatus.name} (${userStatus.peerId}) is now ${userStatus.playing ? 'playing' : 'not playing'}`);
+                
                 setAllLobbyUsers(prev => {
                   const userIndex = prev.findIndex(u => u.peerId === userStatus.peerId);
                   if (userIndex !== -1) {
@@ -96,11 +97,12 @@ export default function CustomGameLobby({lobbyId}:CustomGameLobbyProps) {
                   return prev;
                 })
               }
+              
 
 
               if (data.type === "join_notification") {
                 const newUser = data.from as { name: string; peerId: string; winPercent: number };
-                console.log(`🚀 ${newUser.name} (${newUser.peerId}) just joined!`);
+                
               
                 setAllLobbyUsers(prev => {
                   const alreadyExists = prev.some(u => u.id === newUser.peerId);
@@ -124,14 +126,14 @@ export default function CustomGameLobby({lobbyId}:CustomGameLobbyProps) {
                   if (!conn) return;
               
                   conn.on("open", () => {
-                    console.log(`🔁 Connected back to ${newUser.name} (${newUser.peerId})`);
+                    
                     connectionsRef.current[newUser.peerId] = conn;
                     setConnections(Object.values(connectionsRef.current));
 
                   });
               
                   conn.on("close", () => {
-                    console.log(`🔁 Connection to ${newUser.peerId} closed`);
+                    
 
                     delete connectionsRef.current[newUser.peerId];
                     setConnections(Object.values(connectionsRef.current));
@@ -151,14 +153,15 @@ export default function CustomGameLobby({lobbyId}:CustomGameLobbyProps) {
                
                 chatMessageHandler(messageObject.message.trim(),messageObject.name,messageObject.peerId)
               }
+              
 
               if (data.type === "user_left") {
-                console.log('a user is leaving')
+                
                 const peerIdWhoLeft = data.from.peerId;
-                console.log(`👋 ${peerIdWhoLeft} has left the lobby`);
+                
               
                 
-                console.log(allLobbyUsers,'this is right before setting the lobby users')
+                
                 setAllLobbyUsers(prev => prev.filter(u => u.peerId !== peerIdWhoLeft));
               
                 
@@ -170,7 +173,7 @@ export default function CustomGameLobby({lobbyId}:CustomGameLobbyProps) {
             });
 
             conn.on("close", () => {
-              console.log(`🔁 Incoming connection from ${conn.peer} closed`);
+              
               setAllLobbyUsers(prev =>
                 prev.map(user =>
                   user.peerId === conn.peer
@@ -240,10 +243,10 @@ export default function CustomGameLobby({lobbyId}:CustomGameLobbyProps) {
                   if (!conn) return;
       
                   conn.on("open", () => {
-                    console.log(`🔌 Connected to ${u.name} (${u.peerId})`);
+                    
                     connectionsRef.current[u.peerId] = conn;
                     setConnections(prev => [...prev, conn]);
-                    console.log("about to send join notification");
+                    
                     conn.send({
                       type: "join_notification",
                       from: {
@@ -255,7 +258,7 @@ export default function CustomGameLobby({lobbyId}:CustomGameLobbyProps) {
                   });
       
                   conn.on("close", () => {
-                    console.log(`❌ Connection to ${u.peerId} closed`);
+                    
                     leaveLobby(lobbyId, peerId)
                     location.reload();
                   });
@@ -268,9 +271,9 @@ export default function CustomGameLobby({lobbyId}:CustomGameLobbyProps) {
             }
       
             if (isCreatingLobby) {
-              console.log("Created new lobby as host:", lobbyId);
+              
             } else {
-              console.log("Joined existing lobby:", lobbyId);
+              
             }
           } catch (err: any) {
             console.error(err.message + " Failed to join/create lobby");
@@ -293,7 +296,7 @@ export default function CustomGameLobby({lobbyId}:CustomGameLobbyProps) {
         setChatInput(e.target.value);
     }
     function handleChatSubmit() {
-      console.log(connections,'connections in handle chat')
+      
       connections.forEach(conn=>{
         conn.send({
           type: "chat_message",
@@ -424,7 +427,8 @@ export default function CustomGameLobby({lobbyId}:CustomGameLobbyProps) {
     if (!allLobbyUsers) return <div>Loading...</div>;
     return (
       <>
-    {playGameStarted? <Game players={players} peerId={peerId} thisUserProfile={profile} connections={connections}/>:<>
+    {playGameStarted? <Game players={players} peerId={peerId} thisUserProfile={profile}   connections={Object.values(connectionsRef.current)} 
+    />:<>
         <div className="form-box form-box__in-container transparent">
             <div className="lobby-grid">
                 <div className="lobby-box players-box">

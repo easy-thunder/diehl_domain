@@ -7,69 +7,19 @@ import { bearCards } from "./CardData/bearCards"
 import { hareCards } from "./CardData/hareCards"
 import { snareCards } from "./CardData/snareCards"
 import { DataConnection } from "peerjs"
-import { useState } from "react"
-import { CardType } from "@/components/BearsHaresAndSnares/UI/Game/SharedGameTypes/CardType"
+import { useState, useEffect, useMemo } from "react"
+import { PlayerFromLobby, PlayerInGame } from "./SharedGameTypes/playerTypes"
+import { addGameStatsToPlayer, getPlayerView, chooseDeck } from "./hooks/initializations"
+import { GameStateType } from "./SharedGameTypes/gameState"
+
 type GameProps ={
     connections: DataConnection[],
     peerId: string,
     thisUserProfile: any,
     players: PlayerFromLobby[]
 }
-type PlayerFromLobby = {
-    host: boolean;
-    id: string;
-    name: string;
-    peerId: string;
-    playing:boolean;
-    winPercent: number;
-}
-interface PlayerInGame extends PlayerFromLobby {
-    numberOfActions: number;
-    numberOfCardsInHand: number;
-    maxNumberOfCardsAllowedInHand: number;
-    cardsInHand: any[];
-    numberOfNegates: number;
-    maxNumberOfNegates: number;
-    numberOfCrittersInPlay: number;
-    maxNumberOfCrittersAllowedToPlay: number;
-    numberOfModsInPlay: number;
-    maxNumberOfModsAllowedToPlay: number;
-    canPlayBasicCards: boolean;
-    canPlayMods: boolean;
-    crittersInPlay: any[];
-    modsInPlay: any[];
-    canUseCritterCardEffect: boolean;
-    canUseModCardEffect: boolean;
-    canChooseSacrafice: boolean;
-    canChooseTarget: boolean;
-    canPlayNegate: boolean;
-    canBeNegated: boolean;
-    playerTotalScore:number
-    playerFieldScore:number;
-    playerRitualScore:number;
-    pointsToWin:number;
-    currentPlayerTurn: boolean;
-    drawsHowManyCards: number;
-    playerChosenDeck: "hasNotChosenDeck" | "bear" | "hare" | "snare";
-    playerIsReadyToPassCardsDuringDrawPhase: boolean;
 
-}
-interface GameState {
-    connections: DataConnection[];
-    gameDecks: {
-      firstDeck: CardType[];
-      secondDeck: CardType[];
-      thirdDeck: CardType[];
-    };
-    players: PlayerInGame[];              
-    thisPlayersPeerId: string;
-    thisPlayersProfile: any;        
-    currentPlayerTurn: Number;        
-    gamePhase:"initiate" | "starter card" | "draw" | "discard" | "play" | "handleEndOfGame" ; 
-    turnClock: number;
-    numberOfRoundsPerDrawPhase: number;
 
-  }
 // 1. Ensure all players are connectected. Get all the player info on the table. Deterimne first player. Shuffle decks. initiate Phase Phase never happens again
 // 2. All players choose a card from which deck they want to add to their hands. Once all players have chosen cards are drawn in player order. starter card phase phase never happens again
 // 3. Draw phase happens. Each player draws a number of cards equal to the number of players from the deck they chose originally. They choose a card and pass the rest to the left. This continues until all cards are gone. "draw phase"
@@ -81,45 +31,12 @@ interface GameState {
 // 5c. Player may sacrafice three creatures for a permanent point
 // Repeat steps 3 and 5 until one player has set number of points.
 export default function Game({connections, peerId, thisUserProfile,players}:GameProps){
-    console.log("connections passedIn",connections)
-    function addGameStatsToPlayer(player: PlayerFromLobby): PlayerInGame {
-        return {
-            ...player,
-            numberOfActions: 1,
-            numberOfCardsInHand:0,
-            maxNumberOfCardsAllowedInHand: 5,
-            cardsInHand:[],
-            numberOfNegates: 2,
-            maxNumberOfNegates: 3,
-            numberOfCrittersInPlay:0,
-            maxNumberOfCrittersAllowedToPlay: 100,
-            numberOfModsInPlay:0,
-            maxNumberOfModsAllowedToPlay: 5,
-            canPlayBasicCards: true,
-            canPlayMods: true,
-            crittersInPlay: [],
-            modsInPlay: [],
-            canUseCritterCardEffect: true,
-            canUseModCardEffect: true,
-            canChooseSacrafice: true,
-            canChooseTarget: true,
-            canPlayNegate: true,
-            canBeNegated: true,
-            playerTotalScore: 0,
-            playerFieldScore: 0,
-            playerRitualScore: 0,
-            pointsToWin: 10,
-            currentPlayerTurn: false,
-            drawsHowManyCards: initialPlayers.length,
-            playerChosenDeck: "hasNotChosenDeck",
-            playerIsReadyToPassCardsDuringDrawPhase: false,
-            
-        }
-    }
-    const initialPlayers: PlayerInGame[] = players.map(addGameStatsToPlayer);
-
-    const [gameState, setGameState] = useState<GameState>({
-        connections: connections,
+    useEffect(() => {
+  console.log("🎮 Game mounted. Connected to peers:", connections.map(c => c.peer));
+}, [connections]);
+    const initialPlayers: PlayerInGame[] = players.map(player=>addGameStatsToPlayer(player, players));
+    const [isRemoteUpdate, setIsRemoteUpdate] = useState(false);
+    const [gameState, setGameState] = useState<GameStateType>({
         gameDecks: {
             firstDeck: bearCards,
             secondDeck: hareCards,
@@ -129,28 +46,153 @@ export default function Game({connections, peerId, thisUserProfile,players}:Game
         thisPlayersPeerId: peerId,
         thisPlayersProfile: thisUserProfile,
         currentPlayerTurn: 0,
-        gamePhase: "draw",
-        turnClock:30000,//milliseconds
-        numberOfRoundsPerDrawPhase: initialPlayers.length,
-
-
-
+        gamePhase: "initiate",
+        turnClock:30000,//milliseconds before action is skipped
+        numberOfRoundsInDrawAndPlayPhase: initialPlayers.length,
     })
-    console.log("gameState jake",gameState.players)
+    
+
+    useEffect(() => {
+        const handlers: (() => void)[] = [];
+      
+        connections.forEach((conn) => {
+          const handleData = (data: any) => {
+            console.log("📥 Data received from", conn.peer, data);
+      
+            if (data.type === "gameStateUpdate") {
+              console.log("✅ Received game state update:", data.gameState);
+              setIsRemoteUpdate(true);
+              setGameState((prevState) => ({
+                ...prevState,
+                gameDecks: data.gameState.gameDecks,
+                players: data.gameState.players,
+                currentPlayerTurn: data.gameState.currentPlayerTurn,
+                gamePhase: data.gameState.gamePhase,
+                numberOfRoundsInDrawAndPlayPhase: data.gameState.numberOfRoundsInDrawAndPlayPhase,
+              }));
+            }
+          };
+      
+          conn.on("data", handleData);
+          handlers.push(() => conn.off?.("data", handleData));
+        });
+      
+        // ✅ this is the actual cleanup returned to React
+        return () => {
+          handlers.forEach((unsub) => unsub());
+        };
+      }, [connections]);
+
+    // We have handled players being able to connect. We have set up where gameState changes are sent to all players. We have handled local views of the game state. The decks are shuffled.
+    // Now we need to handle every player gettin the number of cards the need to draw. We need to handle every player drawing a card. We need to handle the initiate phase and the end of the initiate phase.
+    // 1. check if all players have chosen a deck.
+    // 2. once all players have chosen a deck give each player one card from their chosen deck.Change initiate phase to draw phase.
+
+  
+  
+  
+
+
+    useEffect(() => {
+        console.log("Game state updated:", gameState);
+        if (isRemoteUpdate) {
+          setIsRemoteUpdate(false);
+          return;
+        }
+        console.log("got past remot update check")
+
+      
+        // ✅ Use the connections prop, NOT gameState.connections
+        connections.forEach((conn) => {
+          if (conn.open) {
+            const serializableGameState = {
+                ...gameState,
+                // ⛔️ REMOVE unsafe fields before sending
+                thisPlayersProfile: undefined, // if it includes functions/refs
+              };
+              console.log("Sending game state to connection:", serializableGameState);
+              conn.send({
+                type: "gameStateUpdate",
+                gameState: serializableGameState,
+                playerId: gameState.thisPlayersPeerId,
+              });
+          }
+        });
+      
+        // ✅ Handle initiate phase
+        if (gameState.gamePhase !== "initiate") return;
+      
+        const allPlayersHaveChosenDeck = gameState.players.every(
+          (player) => player.playerHasSelectedDeckAtStartOfGame
+        );
+      
+        if (allPlayersHaveChosenDeck) {
+          const updatedDecks = { ...gameState.gameDecks };
+      
+          const updatedPlayers = gameState.players.map((player) => {
+            const chosenDeckName = player.playerChosenDeck as keyof typeof updatedDecks; // ✅ safer typing
+            const deck = updatedDecks[chosenDeckName];
+      
+            if (!deck || deck.length === 0) {
+              console.warn(`Deck ${chosenDeckName} is empty or invalid`);
+              return player;
+            }
+      
+            const drawnCard = deck[0];
+            updatedDecks[chosenDeckName] = deck.slice(1);
+      
+            return {
+              ...player,
+              cardsInHand: [...player.cardsInHand, drawnCard],
+            };
+          });
+      
+          const updatedGameState = {
+            ...gameState,
+            players: updatedPlayers,
+            gameDecks: updatedDecks,
+            gamePhase: "draw" as const,
+          };
+          console.log("ALL players have chosen decks. Updated game state:", updatedGameState);
+          setGameState(() => updatedGameState);
+        }
+      }, [gameState, connections]);
+      
+    // first time using useMemo. Basically I only want to run this function when the gameState or peerId changes.
+    const myView = useMemo(() => getPlayerView(gameState, peerId), [gameState.players, peerId]);
+    if (!myView) return <div>Error: player view not found</div>;
+
+
+
+
     return(
         <div className='invisible-game-grid'>
             <div className="zone deck-container">
-                <Deck deckCards={bearCards} cardClass="bear"/>
+                <Deck   deckCards={gameState.gameDecks.firstDeck} cardClass="bear" onClick={() => chooseDeck("firstDeck", gameState, setGameState)} />
                 <Midden cardClass="bear"/>
-                <Deck deckCards={hareCards} cardClass="hare"/>
+                <Deck deckCards={gameState.gameDecks.secondDeck} onClick={() => chooseDeck("secondDeck", gameState, setGameState)} cardClass="hare"/>
                 <Midden cardClass="hare"/>
-                <Deck deckCards={snareCards} cardClass="snare"/>
+                <Deck deckCards={gameState.gameDecks.thirdDeck} onClick={() => chooseDeck("thirdDeck", gameState, setGameState)} cardClass="snare"/>
                 <Midden cardClass="snare"/>
             </div>
-            <div className="zone left-hand">Left Hand</div>
-            <div className="zone right-hand">Right Hand</div>
-            <div className="zone top-hand">Top Hand</div>
-            <div className="zone player-hand">Player Hand</div>
+            {myView.top && (
+      <div className="zone top-hand">
+        {myView.top.name} – Cards: {myView.top.cardsInHand.length}
+      </div>
+    )}
+    {myView.left && (
+      <div className="zone left-hand">
+        {myView.left.name} – Cards: {myView.left.cardsInHand.length}
+      </div>
+    )}
+    {myView.right && (
+      <div className="zone right-hand">
+        {myView.right.name} – Cards: {myView.right.cardsInHand.length}
+      </div>
+    )}
+    <div className="zone player-hand">
+      {myView.player.name} – Your Cards: {myView.player.cardsInHand.length}
+    </div>
             <div className="zone top-field">Top Field</div>
             <div className="zone player-field">Player Field</div>
             <div className="zone left-field">Left Field</div>

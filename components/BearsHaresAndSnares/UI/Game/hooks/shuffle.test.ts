@@ -5,7 +5,6 @@ describe('shuffle', () => {
   it('returns a new array, with the same cards, in a (likely) different order', () => {
     const original = [...bearCards]            // copy so we don’t accidentally mutate the import
     const shuffled = shuffle(original)
-    console.log("original:",original,"shuffled",shuffled)
     // 1) returns a new array object
     expect(shuffled).not.toBe(original)
 

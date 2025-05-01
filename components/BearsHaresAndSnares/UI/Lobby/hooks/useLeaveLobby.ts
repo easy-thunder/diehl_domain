@@ -5,7 +5,6 @@ export function useLeaveLobby(){
 
 
     const leaveLobby= useCallback(async (lobbyId: string, peerId: string) => {
-        console.log(`${handShakeUrl}/lobby/${lobbyId}/leaveLobby`)
         try{
             const response = await fetch(`${handShakeUrl}/lobby/${lobbyId}/leaveLobby`, {
                 method: "PATCH",
