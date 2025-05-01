@@ -7,16 +7,18 @@ import { bearCards } from "./CardData/bearCards"
 import { hareCards } from "./CardData/hareCards"
 import { snareCards } from "./CardData/snareCards"
 import { DataConnection } from "peerjs"
-import { useState, useEffect, useMemo } from "react"
+import { useState, useEffect, useMemo, RefObject } from "react"
 import { PlayerFromLobby, PlayerInGame } from "./SharedGameTypes/playerTypes"
 import { addGameStatsToPlayer, getPlayerView, chooseDeck } from "./hooks/initializations"
 import { GameStateType } from "./SharedGameTypes/gameState"
+import Peer from "peerjs"
 
 type GameProps ={
     connections: DataConnection[],
     peerId: string,
     thisUserProfile: any,
-    players: PlayerFromLobby[]
+    players: PlayerFromLobby[],
+    peer: RefObject<Peer | null>; 
 }
 
 
@@ -30,10 +32,8 @@ type GameProps ={
 // 5B. Player may sacrafice two creatures to get a negate
 // 5c. Player may sacrafice three creatures for a permanent point
 // Repeat steps 3 and 5 until one player has set number of points.
-export default function Game({connections, peerId, thisUserProfile,players}:GameProps){
-    useEffect(() => {
-  console.log("🎮 Game mounted. Connected to peers:", connections.map(c => c.peer));
-}, [connections]);
+export default function Game({connections, peerId, thisUserProfile,players,peer}:GameProps){
+
     const initialPlayers: PlayerInGame[] = players.map(player=>addGameStatsToPlayer(player, players));
     const [isRemoteUpdate, setIsRemoteUpdate] = useState(false);
     const [gameState, setGameState] = useState<GameStateType>({
@@ -52,12 +52,13 @@ export default function Game({connections, peerId, thisUserProfile,players}:Game
     })
     
 
+
     useEffect(() => {
-        const handlers: (() => void)[] = [];
+        if (!peer?.current) return;
       
-        connections.forEach((conn) => {
-          const handleData = (data: any) => {
-            console.log("📥 Data received from", conn.peer, data);
+        const handleData = (conn: DataConnection) => {
+          const onData = (data: any) => {
+            console.log("📥 [Peer.on] Data received from", conn.peer, data);
       
             if (data.type === "gameStateUpdate") {
               console.log("✅ Received game state update:", data.gameState);
@@ -73,21 +74,30 @@ export default function Game({connections, peerId, thisUserProfile,players}:Game
             }
           };
       
-          conn.on("data", handleData);
-          handlers.push(() => conn.off?.("data", handleData));
+          conn.on("data", onData);
+          conn.on("close", () => console.log("❌ Connection closed:", conn.peer));
+        };
+      
+        // 🔁 Listen to future connections
+        peer.current.on("connection", handleData);
+      
+        // 🔁 Attach to already-open connections
+        Object.values(peer.current.connections).forEach((connArray) => {
+          connArray.forEach((conn:any) => {
+            handleData(conn); // ⬅️ this is key
+          });
         });
       
-        // ✅ this is the actual cleanup returned to React
         return () => {
-          handlers.forEach((unsub) => unsub());
+          peer.current?.off("connection", handleData);
         };
-      }, [connections]);
+      }, [peer]);
+      
 
     // We have handled players being able to connect. We have set up where gameState changes are sent to all players. We have handled local views of the game state. The decks are shuffled.
     // Now we need to handle every player gettin the number of cards the need to draw. We need to handle every player drawing a card. We need to handle the initiate phase and the end of the initiate phase.
     // 1. check if all players have chosen a deck.
     // 2. once all players have chosen a deck give each player one card from their chosen deck.Change initiate phase to draw phase.
-
   
   
   

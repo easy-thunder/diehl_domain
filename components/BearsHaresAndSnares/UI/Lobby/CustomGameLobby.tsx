@@ -428,6 +428,8 @@ export default function CustomGameLobby({lobbyId}:CustomGameLobbyProps) {
     return (
       <>
     {playGameStarted? <Game players={players} peerId={peerId} thisUserProfile={profile}   connections={Object.values(connectionsRef.current)} 
+    peer={peerRef}
+
     />:<>
         <div className="form-box form-box__in-container transparent">
             <div className="lobby-grid">
