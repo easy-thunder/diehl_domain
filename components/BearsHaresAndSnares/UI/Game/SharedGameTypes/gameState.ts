@@ -11,7 +11,7 @@ export interface GameStateType {
     thisPlayersPeerId: string;
     thisPlayersProfile: any;        
     currentPlayerTurn: Number;        
-    gamePhase:"initiate" | "draw" | "discard" | "play" | "handleEndOfGame" ; 
+    gamePhase:"initiate" | "draw" | "select and pass cards" | "discard" | "play" | "handleEndOfGame" ; 
     turnClock: number;
     numberOfRoundsInDrawAndPlayPhase: number;
 

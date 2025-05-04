@@ -8,6 +8,10 @@ export const bearCards = [
         effects: [],
         type: "bear",
         clan: "Bear Clan",
+        isBeingSelected: false,
+        owner:"",
+        faceUpForEveryone:false,
+        cardClass:"bear"
     },
     {
         id: "bear-2",
@@ -17,6 +21,10 @@ export const bearCards = [
         effects: [],
         type: "bear",
         clan: "Bear Clan",
+        isBeingSelected: false,
+        owner:"",
+        faceUpForEveryone:false,
+        cardClass:"bear"
     },
     {
         id: "bear-3",
@@ -26,6 +34,10 @@ export const bearCards = [
         effects: [],
         type: "bear",
         clan: "Bear Clan",
+        isBeingSelected: false,
+        owner:"",
+        faceUpForEveryone:false,
+        cardClass:"bear"
     },
     {
         id: "bear-4",
@@ -35,6 +47,10 @@ export const bearCards = [
         effects: [],
         type: "bear",
         clan: "Bear Clan",
+        isBeingSelected: false,
+        owner:"",
+        faceUpForEveryone:false,
+        cardClass:"bear"
     },
     {
         id: "bear-5",
@@ -44,6 +60,10 @@ export const bearCards = [
         effects: [],
         type: "bear",
         clan: "Bear Clan",
+        isBeingSelected: false,
+        owner:"",
+        faceUpForEveryone:false,
+        cardClass:"bear"
     },
     {
         id: "bear-6",
@@ -53,6 +73,10 @@ export const bearCards = [
         effects: [],
         type: "bear",
         clan: "Bear Clan",
+        isBeingSelected: false,
+        owner:"",
+        faceUpForEveryone:false,
+        cardClass:"bear"
     },
     {
         id: "bear-7",
@@ -62,6 +86,10 @@ export const bearCards = [
         effects: [],
         type: "bear",
         clan: "Bear Clan",
+        isBeingSelected: false,
+        owner:"",
+        faceUpForEveryone:false,
+        cardClass:"bear"
     },
     {
         id: "bear-8",
@@ -71,6 +99,10 @@ export const bearCards = [
         effects: [],
         type: "bear",
         clan: "Bear Clan",
+        isBeingSelected: false,
+        owner:"",
+        faceUpForEveryone:false,
+        cardClass:"bear"
     },
     {
         id: "bear-9",
@@ -80,6 +112,10 @@ export const bearCards = [
         effects: [],
         type: "bear",
         clan: "Bear Clan",
+        isBeingSelected: false,
+        owner:"",
+        faceUpForEveryone:false,
+        cardClass:"bear"
     },
     {
         id: "bear-10",
@@ -89,6 +125,10 @@ export const bearCards = [
         effects: [],
         type: "bear",
         clan: "Bear Clan",
+        isBeingSelected: false,
+        owner:"",
+        faceUpForEveryone:false,
+        cardClass:"bear"
     },
     {
         id: "bear-11",
@@ -98,6 +138,10 @@ export const bearCards = [
         effects: [],
         type: "bear",
         clan: "Bear Clan",
+        isBeingSelected: false,
+        owner:"",
+        faceUpForEveryone:false,
+        cardClass:"bear"
     },
     {
         id: "bear-12",
@@ -107,6 +151,10 @@ export const bearCards = [
         effects: [],
         type: "bear",
         clan: "Bear Clan",
+        isBeingSelected: false,
+        owner:"",
+        faceUpForEveryone:false,
+        cardClass:"bear"
     },
     {
         id: "bear-13",
@@ -116,6 +164,10 @@ export const bearCards = [
         effects: [],
         type: "bear",
         clan: "Bear Clan",
+        isBeingSelected: false,
+        owner:"",
+        faceUpForEveryone:false,
+        cardClass:"bear"
     },
     {
         id: "bear-14",
@@ -125,6 +177,10 @@ export const bearCards = [
         effects: [],
         type: "bear",
         clan: "Bear Clan",
+        isBeingSelected: false,
+        owner:"",
+        faceUpForEveryone:false,
+        cardClass:"bear"
     },
     {
         id: "bear-15",
@@ -134,6 +190,10 @@ export const bearCards = [
         effects: [],
         type: "bear",
         clan: "Bear Clan",
+        isBeingSelected: false,
+        owner:"",
+        faceUpForEveryone:false,
+        cardClass:"bear"
     },
     {
         id: "bear-16",
@@ -143,6 +203,10 @@ export const bearCards = [
         effects: [],
         type: "bear",
         clan: "Bear Clan",
+        isBeingSelected: false,
+        owner:"",
+        faceUpForEveryone:false,
+        cardClass:"bear"
     },
     {
         id: "bear-17",
@@ -152,6 +216,10 @@ export const bearCards = [
         effects: [],
         type: "bear",
         clan: "Bear Clan",
+        isBeingSelected: false,
+        owner:"",
+        faceUpForEveryone:false,
+        cardClass:"bear"
     },
     {
         id: "bear-18",
@@ -161,6 +229,10 @@ export const bearCards = [
         effects: [],
         type: "bear",
         clan: "Bear Clan",
+        isBeingSelected: false,
+        owner:"",
+        faceUpForEveryone:false,
+        cardClass:"bear"
     },
     {
         id: "bear-19",
@@ -170,6 +242,10 @@ export const bearCards = [
         effects: [],
         type: "bear",
         clan: "Bear Clan",
+        isBeingSelected: false,
+        owner:"",
+        faceUpForEveryone:false,
+        cardClass:"bear"
     },
     {
         id: "bear-20",
@@ -179,6 +255,10 @@ export const bearCards = [
         effects: [],
         type: "bear",
         clan: "Bear Clan",
+        isBeingSelected: false,
+        owner:"",
+        faceUpForEveryone:false,
+        cardClass:"bear"
     },
     {
         id: "bear-21",
@@ -188,6 +268,10 @@ export const bearCards = [
         effects: [],
         type: "bear",
         clan: "Bear Clan",
+        isBeingSelected: false,
+        owner:"",
+        faceUpForEveryone:false,
+        cardClass:"bear"
     },
     {
         id: "bear-22",
@@ -197,6 +281,10 @@ export const bearCards = [
         effects: [],
         type: "bear",
         clan: "Bear Clan",
+        isBeingSelected: false,
+        owner:"",
+        faceUpForEveryone:false,
+        cardClass:"bear"
     },
     {
         id: "bear-23",
@@ -206,6 +294,10 @@ export const bearCards = [
         effects: [],
         type: "bear",
         clan: "Bear Clan",
+        isBeingSelected: false,
+        owner:"",
+        faceUpForEveryone:false,
+        cardClass:"bear"
     },
     {
         id: "bear-24",
@@ -215,6 +307,10 @@ export const bearCards = [
         effects: [],
         type: "bear",
         clan: "Bear Clan",
+        isBeingSelected: false,
+        owner:"",
+        faceUpForEveryone:false,
+        cardClass:"bear"
     },
     {
         id: "bear-25",
@@ -224,6 +320,10 @@ export const bearCards = [
         effects: [],
         type: "bear",
         clan: "Bear Clan",
+        isBeingSelected: false,
+        owner:"",
+        faceUpForEveryone:false,
+        cardClass:"bear"
     },
     {
         id: "bear-26",
@@ -233,6 +333,10 @@ export const bearCards = [
         effects: [],
         type: "bear",
         clan: "Bear Clan",
+        isBeingSelected: false,
+        owner:"",
+        faceUpForEveryone:false,
+        cardClass:"bear"
     },
     {
         id: "bear-27",
@@ -242,6 +346,10 @@ export const bearCards = [
         effects: [],
         type: "bear",
         clan: "Bear Clan",
+        isBeingSelected: false,
+        owner:"",
+        faceUpForEveryone:false,
+        cardClass:"bear"
     },
     {
         id: "bear-28",
@@ -251,6 +359,10 @@ export const bearCards = [
         effects: [],
         type: "bear",
         clan: "Bear Clan",
+        isBeingSelected: false,
+        owner:"",
+        faceUpForEveryone:false,
+        cardClass:"bear"
     },
     {
         id: "bear-29",
@@ -260,6 +372,10 @@ export const bearCards = [
         effects: [],
         type: "bear",
         clan: "Bear Clan",
+        isBeingSelected: false,
+        owner:"",
+        faceUpForEveryone:false,
+        cardClass:"bear"
     },
     {
         id: "bear-30",
@@ -269,6 +385,10 @@ export const bearCards = [
         effects: [],
         type: "bear",
         clan: "Bear Clan",
+        isBeingSelected: false,
+        owner:"",
+        faceUpForEveryone:false,
+        cardClass:"bear"
     },
     {
         id: "bear-31",
@@ -278,6 +398,10 @@ export const bearCards = [
         effects: [],
         type: "bear",
         clan: "Bear Clan",
+        isBeingSelected: false,
+        owner:"",
+        faceUpForEveryone:false,
+        cardClass:"bear"
     },
     {
         id: "bear-32",
@@ -287,6 +411,10 @@ export const bearCards = [
         effects: [],
         type: "bear",
         clan: "Bear Clan",
+        isBeingSelected: false,
+        owner:"",
+        faceUpForEveryone:false,
+        cardClass:"bear"
     },
     {
         id: "bear-33",
@@ -296,6 +424,10 @@ export const bearCards = [
         effects: [],
         type: "bear",
         clan: "Bear Clan",
+        isBeingSelected: false,
+        owner:"",
+        faceUpForEveryone:false,
+        cardClass:"bear"
     },
     {
         id: "bear-34",
@@ -305,6 +437,10 @@ export const bearCards = [
         effects: [],
         type: "bear",
         clan: "Bear Clan",
+        isBeingSelected: false,
+        owner:"",
+        faceUpForEveryone:false,
+        cardClass:"bear"
     },
     {
         id: "bear-35",
@@ -314,6 +450,10 @@ export const bearCards = [
         effects: [],
         type: "bear",
         clan: "Bear Clan",
+        isBeingSelected: false,
+        owner:"",
+        faceUpForEveryone:false,
+        cardClass:"bear"
     },
     {
         id: "bear-36",
@@ -323,6 +463,10 @@ export const bearCards = [
         effects: [],
         type: "bear",
         clan: "Bear Clan",
+        isBeingSelected: false,
+        owner:"",
+        faceUpForEveryone:false,
+        cardClass:"bear"
     },
     {
         id: "bear-37",
@@ -332,6 +476,10 @@ export const bearCards = [
         effects: [],
         type: "bear",
         clan: "Bear Clan",
+        isBeingSelected: false,
+        owner:"",
+        faceUpForEveryone:false,
+        cardClass:"bear"
     },
     {
         id: "bear-38",
@@ -341,6 +489,10 @@ export const bearCards = [
         effects: [],
         type: "bear",
         clan: "Bear Clan",
+        isBeingSelected: false,
+        owner:"",
+        faceUpForEveryone:false,
+        cardClass:"bear"
     },
     {
         id: "bear-39",
@@ -350,6 +502,10 @@ export const bearCards = [
         effects: [],
         type: "bear",
         clan: "Bear Clan",
+        isBeingSelected: false,
+        owner:"",
+        faceUpForEveryone:false,
+        cardClass:"bear"
     },
     {
         id: "bear-40",
@@ -359,6 +515,10 @@ export const bearCards = [
         effects: [],
         type: "bear",
         clan: "Bear Clan",
+        isBeingSelected: false,
+        owner:"",
+        faceUpForEveryone:false,
+        cardClass:"bear"
     },
     {
         id: "bear-41",
@@ -368,6 +528,10 @@ export const bearCards = [
         effects: [],
         type: "bear",
         clan: "Bear Clan",
+        isBeingSelected: false,
+        owner:"",
+        faceUpForEveryone:false,
+        cardClass:"bear"
     },
     {
         id: "bear-42",
@@ -377,6 +541,10 @@ export const bearCards = [
         effects: [],
         type: "bear",
         clan: "Bear Clan",
+        isBeingSelected: false,
+        owner:"",
+        faceUpForEveryone:false,
+        cardClass:"bear"
     },
     {
         id: "bear-43",
@@ -386,6 +554,10 @@ export const bearCards = [
         effects: [],
         type: "bear",
         clan: "Bear Clan",
+        isBeingSelected: false,
+        owner:"",
+        faceUpForEveryone:false,
+        cardClass:"bear"
     },
     {
         id: "bear-44",
@@ -395,6 +567,10 @@ export const bearCards = [
         effects: [],
         type: "bear",
         clan: "Bear Clan",
+        isBeingSelected: false,
+        owner:"",
+        faceUpForEveryone:false,
+        cardClass:"bear"
     },
     {
         id: "bear-45",
@@ -404,6 +580,10 @@ export const bearCards = [
         effects: [],
         type: "bear",
         clan: "Bear Clan",
+        isBeingSelected: false,
+        owner:"",
+        faceUpForEveryone:false,
+        cardClass:"bear"
     },
     {
         id: "bear-46",
@@ -413,6 +593,10 @@ export const bearCards = [
         effects: [],
         type: "bear",
         clan: "Bear Clan",
+        isBeingSelected: false,
+        owner:"",
+        faceUpForEveryone:false,
+        cardClass:"bear"
     },
     {
         id: "bear-47",
@@ -422,6 +606,10 @@ export const bearCards = [
         effects: [],
         type: "bear",
         clan: "Bear Clan",
+        isBeingSelected: false,
+        owner:"",
+        faceUpForEveryone:false,
+        cardClass:"bear"
     },
     {
         id: "bear-48",
@@ -431,6 +619,10 @@ export const bearCards = [
         effects: [],
         type: "bear",
         clan: "Bear Clan",
+        isBeingSelected: false,
+        owner:"",
+        faceUpForEveryone:false,
+        cardClass:"bear"
     },
     {
         id: "bear-49",
@@ -440,6 +632,10 @@ export const bearCards = [
         effects: [],
         type: "bear",
         clan: "Bear Clan",
+        isBeingSelected: false,
+        owner:"",
+        faceUpForEveryone:false,
+        cardClass:"bear"
     },
     {
         id: "bear-50",
@@ -449,6 +645,10 @@ export const bearCards = [
         effects: [],
         type: "bear",
         clan: "Bear Clan",
+        isBeingSelected: false,
+        owner:"",
+        faceUpForEveryone:false,
+        cardClass:"bear"
     },
     {
         id: "bear-51",
@@ -458,6 +658,10 @@ export const bearCards = [
         effects: [],
         type: "bear",
         clan: "Bear Clan",
+        isBeingSelected: false,
+        owner:"",
+        faceUpForEveryone:false,
+        cardClass:"bear"
     },
     {
         id: "bear-52",
@@ -467,6 +671,10 @@ export const bearCards = [
         effects: [],
         type: "bear",
         clan: "Bear Clan",
+        isBeingSelected: false,
+        owner:"",
+        faceUpForEveryone:false,
+        cardClass:"bear"
     }
 ]
 

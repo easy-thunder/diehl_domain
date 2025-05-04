@@ -1,15 +1,15 @@
-import { drawACard } from "./drawACard";
+import { drawCards } from "./drawCards";
 import { bearCards } from "../CardData/bearCards";
 
-describe("drawACard", () => {
+describe("drawCards", () => {
     it("should return null if the deck is empty", () => {
-        const result = drawACard([]);
+        const result = drawCards([]);
         expect(result).toBeNull();
     });
 
     it("should return the first card and the new deck", () => {
         const deck = bearCards;
-        const result = drawACard(deck)
+        const result = drawCards(deck)
         if(!result){
             throw new Error("Expected result to be not null");
         }
@@ -21,11 +21,11 @@ describe("drawACard", () => {
 
     it("should return the correct card when called multiple times", () => {
         const deck = bearCards;
-        const result = drawACard(deck);
+        const result = drawCards(deck);
         if(!result){
             throw new Error("Expected result to be not null");
         }
-        const result2 = drawACard(result.newDeck);
+        const result2 = drawCards(result.newDeck);
         if(!result2){
             throw new Error("Expected result2 to be not null");
         }

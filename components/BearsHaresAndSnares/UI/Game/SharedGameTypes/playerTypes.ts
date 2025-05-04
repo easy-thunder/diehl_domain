@@ -38,5 +38,15 @@ export interface PlayerInGame extends PlayerFromLobby {
     playerChosenDeck: "hasNotChosenDeck" | "firstDeck" | "secondDeck" | "thirdDeck";
     playerIsReadyToPassCardsDuringDrawPhase: boolean;
     playerHasSelectedDeckAtStartOfGame: boolean;
+    cardsToSelectFrom: any[];
+    makesXnumberOfSelections: number;
+    makesXNumberOfSelectionsForFirstCard: number;
 
 }
+
+export type PlayerViewType = {
+    player: PlayerInGame; // your existing player type
+    top?: PlayerInGame;
+    left?: PlayerInGame;
+    right?: PlayerInGame;
+  };

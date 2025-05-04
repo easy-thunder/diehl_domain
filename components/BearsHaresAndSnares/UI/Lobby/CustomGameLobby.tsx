@@ -113,7 +113,7 @@ export default function CustomGameLobby({lobbyId}:CustomGameLobbyProps) {
                     {
                       id: newUser.peerId,
                       name: newUser.name,
-                      host: false,
+            host: false,
                       winPercent: newUser.winPercent,
                       playing: true,
                       peerId: newUser.peerId,
@@ -377,10 +377,10 @@ export default function CustomGameLobby({lobbyId}:CustomGameLobbyProps) {
     }
 
     function determinePlayer(number: number): JSX.Element | undefined {
-        const thisPlayer = players[number]
+    const thisPlayer = players[number]
         if (!thisPlayer) return <PlayerMissing />
-        return <PlayerLobbyCard name={thisPlayer.name} host={thisPlayer.host} winPercent={thisPlayer.winPercent} />
-    }
+    return <PlayerLobbyCard name={thisPlayer.name} host={thisPlayer.host} winPercent={thisPlayer.winPercent} />
+}
 
     useEffect(() => {
       const handleKeyDown = (e: KeyboardEvent) => {
@@ -431,24 +431,24 @@ export default function CustomGameLobby({lobbyId}:CustomGameLobbyProps) {
     peer={peerRef}
 
     />:<>
-        <div className="form-box form-box__in-container transparent">
-            <div className="lobby-grid">
-                <div className="lobby-box players-box">
-                    <div className="lobby-box__title">Players</div>
-                    <div className="lobby-box__content player-grid">
+<div className="form-box form-box__in-container transparent">
+  <div className="lobby-grid">
+    <div className="lobby-box players-box">
+        <div className="lobby-box__title">Players</div>
+            <div className="lobby-box__content player-grid">
                         <div className="player-slot">{determinePlayer(0)}</div>
-                        <div className="player-slot">{determinePlayer(1)}</div>
-                        <div className="player-slot">{determinePlayer(2)}</div>
-                        <div className="player-slot">{determinePlayer(3)}</div>
-                    </div>
-                </div>
-                <div className="lobby-box spectators-box">
-                    <div className="lobby-box__title">Spectators</div>
+                <div className="player-slot">{determinePlayer(1)}</div>
+                <div className="player-slot">{determinePlayer(2)}</div>
+                <div className="player-slot">{determinePlayer(3)}</div>
+            </div>
+        </div>
+    <div className="lobby-box spectators-box">
+        <div className="lobby-box__title">Spectators</div>
                     <div className="lobby-box__content player-rows">{spectators.map((spectator, index) => <PlayerLobbyCard key={`${spectator.name}-${index}`} name={spectator.name} host={spectator.host} winPercent={spectator.winPercent} />)}</div>
 
-                </div>
-                <div className="lobby-box chat-box">
-                    <div className="lobby-box__title">Chat</div>
+    </div>
+    <div className="lobby-box chat-box">
+        <div className="lobby-box__title">Chat</div>
                     <div className="lobby-box__content">
                         <div className="chat-messages">
                             {chatMessages.map((msg, i) => (
@@ -469,20 +469,21 @@ export default function CustomGameLobby({lobbyId}:CustomGameLobbyProps) {
                             <button className="chat-submit-button" onClick={handleChatSubmit}>Send</button>
                         </div>
                     </div>
-                </div>
-                <div className="lobby-box config-box">
-                    <div className="lobby-box__title">Game Settings</div>
+    </div>
+    <div className="lobby-box config-box">
+        <div className="lobby-box__title">Game Settings</div>
                     <div className="lobby-box__content">
                         <h2>Game id: {lobbyId}</h2>
                         <button onClick={()=>buildGame()} className="play-button">Play</button>
                     </div>
-                </div>
+    </div>
 
                 <button className="gap-button gap-button--left" onClick={()=>updatePlayerStatus(true)}>Play</button>
                 <button className="gap-button gap-button--right" onClick={()=>updatePlayerStatus(false)}>Spectate</button>
-            </div>
-        </div>
+  </div>
+</div>
       </>}
       </>
     );
-}
+  }
+  

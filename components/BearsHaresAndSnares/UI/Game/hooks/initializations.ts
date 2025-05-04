@@ -38,7 +38,11 @@ export     function addGameStatsToPlayer(player: PlayerFromLobby, initialPlayers
         drawsHowManyCards: initialPlayers.length,
         playerChosenDeck: "hasNotChosenDeck",
         playerIsReadyToPassCardsDuringDrawPhase: false,
-        playerHasSelectedDeckAtStartOfGame: false
+        playerHasSelectedDeckAtStartOfGame: false,
+        cardsToSelectFrom: [],
+        makesXnumberOfSelections: 1,
+        makesXNumberOfSelectionsForFirstCard: 1,
+
 
     }
 }

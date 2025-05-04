@@ -6,4 +6,12 @@ export type CardType = {
     effects: string[];
     type: string;
     clan:string;
+    owner?: string;
+    faceUpForEveryone?: boolean;
+    faceUpForSpecificePlayers?: string[];
+    isBeingSelected?:boolean ;
+    cardClass: string;
 };
+// selector?: string;
+
+

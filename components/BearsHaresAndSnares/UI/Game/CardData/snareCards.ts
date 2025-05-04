@@ -8,6 +8,10 @@ export const snareCards = [
         effects: [],
         type: "snare",
         clan: "snare Clan",
+        isBeingSelected: false,
+        owner:"",
+        faceUpForEveryone:false,
+        cardClass:"snare"
     },
     {
         id: "snare-2",
@@ -17,6 +21,10 @@ export const snareCards = [
         effects: [],
         type: "snare",
         clan: "snare Clan",
+        isBeingSelected: false,
+        owner:"",
+        faceUpForEveryone:false,
+        cardClass:"snare"
     },
     {
         id: "snare-3",
@@ -26,6 +34,10 @@ export const snareCards = [
         effects: [],
         type: "snare",
         clan: "snare Clan",
+        isBeingSelected: false,
+        owner:"",
+        faceUpForEveryone:false,
+        cardClass:"snare"
     },
     {
         id: "snare-4",
@@ -35,6 +47,10 @@ export const snareCards = [
         effects: [],
         type: "snare",
         clan: "snare Clan",
+        isBeingSelected: false,
+        owner:"",
+        faceUpForEveryone:false,
+        cardClass:"snare"
     },
     {
         id: "snare-5",
@@ -44,6 +60,10 @@ export const snareCards = [
         effects: [],
         type: "snare",
         clan: "snare Clan",
+        isBeingSelected: false,
+        owner:"",
+        faceUpForEveryone:false,
+        cardClass:"snare"
     },
     {
         id: "snare-6",
@@ -53,6 +73,10 @@ export const snareCards = [
         effects: [],
         type: "snare",
         clan: "snare Clan",
+        isBeingSelected: false,
+        owner:"",
+        faceUpForEveryone:false,
+        cardClass:"snare"
     },
     {
         id: "snare-7",
@@ -62,6 +86,10 @@ export const snareCards = [
         effects: [],
         type: "snare",
         clan: "snare Clan",
+        isBeingSelected: false,
+        owner:"",
+        faceUpForEveryone:false,
+        cardClass:"snare"
     },
     {
         id: "snare-8",
@@ -71,6 +99,10 @@ export const snareCards = [
         effects: [],
         type: "snare",
         clan: "snare Clan",
+        isBeingSelected: false,
+        owner:"",
+        faceUpForEveryone:false,
+        cardClass:"snare"
     },
     {
         id: "snare-9",
@@ -80,6 +112,10 @@ export const snareCards = [
         effects: [],
         type: "snare",
         clan: "snare Clan",
+        isBeingSelected: false,
+        owner:"",
+        faceUpForEveryone:false,
+        cardClass:"snare"
     },
     {
         id: "snare-10",
@@ -89,6 +125,10 @@ export const snareCards = [
         effects: [],
         type: "snare",
         clan: "snare Clan",
+        isBeingSelected: false,
+        owner:"",
+        faceUpForEveryone:false,
+        cardClass:"snare"
     },
     {
         id: "snare-11",
@@ -98,6 +138,10 @@ export const snareCards = [
         effects: [],
         type: "snare",
         clan: "snare Clan",
+        isBeingSelected: false,
+        owner:"",
+        faceUpForEveryone:false,
+        cardClass:"snare"
     },
     {
         id: "snare-12",
@@ -107,6 +151,10 @@ export const snareCards = [
         effects: [],
         type: "snare",
         clan: "snare Clan",
+        isBeingSelected: false,
+        owner:"",
+        faceUpForEveryone:false,
+        cardClass:"snare"
     },
     {
         id: "snare-13",
@@ -116,6 +164,10 @@ export const snareCards = [
         effects: [],
         type: "snare",
         clan: "snare Clan",
+        isBeingSelected: false,
+        owner:"",
+        faceUpForEveryone:false,
+        cardClass:"snare"
     },
     {
         id: "snare-14",
@@ -125,6 +177,10 @@ export const snareCards = [
         effects: [],
         type: "snare",
         clan: "snare Clan",
+        isBeingSelected: false,
+        owner:"",
+        faceUpForEveryone:false,
+        cardClass:"snare"
     },
     {
         id: "snare-15",
@@ -134,6 +190,10 @@ export const snareCards = [
         effects: [],
         type: "snare",
         clan: "snare Clan",
+        isBeingSelected: false,
+        owner:"",
+        faceUpForEveryone:false,
+        cardClass:"snare"
     },
     {
         id: "snare-16",
@@ -143,6 +203,10 @@ export const snareCards = [
         effects: [],
         type: "snare",
         clan: "snare Clan",
+        isBeingSelected: false,
+        owner:"",
+        faceUpForEveryone:false,
+        cardClass:"snare"
     },
     {
         id: "snare-17",
@@ -152,6 +216,10 @@ export const snareCards = [
         effects: [],
         type: "snare",
         clan: "snare Clan",
+        isBeingSelected: false,
+        owner:"",
+        faceUpForEveryone:false,
+        cardClass:"snare"
     },
     {
         id: "snare-18",
@@ -161,6 +229,10 @@ export const snareCards = [
         effects: [],
         type: "snare",
         clan: "snare Clan",
+        isBeingSelected: false,
+        owner:"",
+        faceUpForEveryone:false,
+        cardClass:"snare"
     },
     {
         id: "snare-19",
@@ -170,6 +242,10 @@ export const snareCards = [
         effects: [],
         type: "snare",
         clan: "snare Clan",
+        isBeingSelected: false,
+        owner:"",
+        faceUpForEveryone:false,
+        cardClass:"snare"
     },
     {
         id: "snare-20",
@@ -179,6 +255,10 @@ export const snareCards = [
         effects: [],
         type: "snare",
         clan: "snare Clan",
+        isBeingSelected: false,
+        owner:"",
+        faceUpForEveryone:false,
+        cardClass:"snare"
     },
     {
         id: "snare-21",
@@ -188,6 +268,10 @@ export const snareCards = [
         effects: [],
         type: "snare",
         clan: "snare Clan",
+        isBeingSelected: false,
+        owner:"",
+        faceUpForEveryone:false,
+        cardClass:"snare"
     },
     {
         id: "snare-22",
@@ -197,6 +281,10 @@ export const snareCards = [
         effects: [],
         type: "snare",
         clan: "snare Clan",
+        isBeingSelected: false,
+        owner:"",
+        faceUpForEveryone:false,
+        cardClass:"snare"
     },
     {
         id: "snare-23",
@@ -206,6 +294,10 @@ export const snareCards = [
         effects: [],
         type: "snare",
         clan: "snare Clan",
+        isBeingSelected: false,
+        owner:"",
+        faceUpForEveryone:false,
+        cardClass:"snare"
     },
     {
         id: "snare-24",
@@ -215,6 +307,10 @@ export const snareCards = [
         effects: [],
         type: "snare",
         clan: "snare Clan",
+        isBeingSelected: false,
+        owner:"",
+        faceUpForEveryone:false,
+        cardClass:"snare"
     },
     {
         id: "snare-25",
@@ -224,6 +320,10 @@ export const snareCards = [
         effects: [],
         type: "snare",
         clan: "snare Clan",
+        isBeingSelected: false,
+        owner:"",
+        faceUpForEveryone:false,
+        cardClass:"snare"
     },
     {
         id: "snare-26",
@@ -233,6 +333,10 @@ export const snareCards = [
         effects: [],
         type: "snare",
         clan: "snare Clan",
+        isBeingSelected: false,
+        owner:"",
+        faceUpForEveryone:false,
+        cardClass:"snare"
     },
     {
         id: "snare-27",
@@ -242,6 +346,10 @@ export const snareCards = [
         effects: [],
         type: "snare",
         clan: "snare Clan",
+        isBeingSelected: false,
+        owner:"",
+        faceUpForEveryone:false,
+        cardClass:"snare"
     },
     {
         id: "snare-28",
@@ -251,6 +359,10 @@ export const snareCards = [
         effects: [],
         type: "snare",
         clan: "snare Clan",
+        isBeingSelected: false,
+        owner:"",
+        faceUpForEveryone:false,
+        cardClass:"snare"
     },
     {
         id: "snare-29",
@@ -260,6 +372,10 @@ export const snareCards = [
         effects: [],
         type: "snare",
         clan: "snare Clan",
+        isBeingSelected: false,
+        owner:"",
+        faceUpForEveryone:false,
+        cardClass:"snare"
     },
     {
         id: "snare-30",
@@ -269,6 +385,10 @@ export const snareCards = [
         effects: [],
         type: "snare",
         clan: "snare Clan",
+        isBeingSelected: false,
+        owner:"",
+        faceUpForEveryone:false,
+        cardClass:"snare"
     },
     {
         id: "snare-31",
@@ -278,6 +398,10 @@ export const snareCards = [
         effects: [],
         type: "snare",
         clan: "snare Clan",
+        isBeingSelected: false,
+        owner:"",
+        faceUpForEveryone:false,
+        cardClass:"snare"
     },
     {
         id: "snare-32",
@@ -287,6 +411,10 @@ export const snareCards = [
         effects: [],
         type: "snare",
         clan: "snare Clan",
+        isBeingSelected: false,
+        owner:"",
+        faceUpForEveryone:false,
+        cardClass:"snare"
     },
     {
         id: "snare-33",
@@ -296,6 +424,10 @@ export const snareCards = [
         effects: [],
         type: "snare",
         clan: "snare Clan",
+        isBeingSelected: false,
+        owner:"",
+        faceUpForEveryone:false,
+        cardClass:"snare"
     },
     {
         id: "snare-34",
@@ -305,6 +437,10 @@ export const snareCards = [
         effects: [],
         type: "snare",
         clan: "snare Clan",
+        isBeingSelected: false,
+        owner:"",
+        faceUpForEveryone:false,
+        cardClass:"snare"
     },
     {
         id: "snare-35",
@@ -314,6 +450,10 @@ export const snareCards = [
         effects: [],
         type: "snare",
         clan: "snare Clan",
+        isBeingSelected: false,
+        owner:"",
+        faceUpForEveryone:false,
+        cardClass:"snare"
     },
     {
         id: "snare-36",
@@ -323,6 +463,10 @@ export const snareCards = [
         effects: [],
         type: "snare",
         clan: "snare Clan",
+        isBeingSelected: false,
+        owner:"",
+        faceUpForEveryone:false,
+        cardClass:"snare"
     },
     {
         id: "snare-37",
@@ -332,6 +476,10 @@ export const snareCards = [
         effects: [],
         type: "snare",
         clan: "snare Clan",
+        isBeingSelected: false,
+        owner:"",
+        faceUpForEveryone:false,
+        cardClass:"snare"
     },
     {
         id: "snare-38",
@@ -341,6 +489,10 @@ export const snareCards = [
         effects: [],
         type: "snare",
         clan: "snare Clan",
+        isBeingSelected: false,
+        owner:"",
+        faceUpForEveryone:false,
+        cardClass:"snare"
     },
     {
         id: "snare-39",
@@ -350,6 +502,10 @@ export const snareCards = [
         effects: [],
         type: "snare",
         clan: "snare Clan",
+        isBeingSelected: false,
+        owner:"",
+        faceUpForEveryone:false,
+        cardClass:"snare"
     },
     {
         id: "snare-40",
@@ -359,6 +515,10 @@ export const snareCards = [
         effects: [],
         type: "snare",
         clan: "snare Clan",
+        isBeingSelected: false,
+        owner:"",
+        faceUpForEveryone:false,
+        cardClass:"snare"
     },
     {
         id: "snare-41",
@@ -368,6 +528,10 @@ export const snareCards = [
         effects: [],
         type: "snare",
         clan: "snare Clan",
+        isBeingSelected: false,
+        owner:"",
+        faceUpForEveryone:false,
+        cardClass:"snare"
     },
     {
         id: "snare-42",
@@ -377,6 +541,10 @@ export const snareCards = [
         effects: [],
         type: "snare",
         clan: "snare Clan",
+        isBeingSelected: false,
+        owner:"",
+        faceUpForEveryone:false,
+        cardClass:"snare"
     },
     {
         id: "snare-43",
@@ -386,6 +554,10 @@ export const snareCards = [
         effects: [],
         type: "snare",
         clan: "snare Clan",
+        isBeingSelected: false,
+        owner:"",
+        faceUpForEveryone:false,
+        cardClass:"snare"
     },
     {
         id: "snare-44",
@@ -395,6 +567,10 @@ export const snareCards = [
         effects: [],
         type: "snare",
         clan: "snare Clan",
+        isBeingSelected: false,
+        owner:"",
+        faceUpForEveryone:false,
+        cardClass:"snare"
     },
     {
         id: "snare-45",
@@ -404,6 +580,10 @@ export const snareCards = [
         effects: [],
         type: "snare",
         clan: "snare Clan",
+        isBeingSelected: false,
+        owner:"",
+        faceUpForEveryone:false,
+        cardClass:"snare"
     },
     {
         id: "snare-46",
@@ -413,6 +593,10 @@ export const snareCards = [
         effects: [],
         type: "snare",
         clan: "snare Clan",
+        isBeingSelected: false,
+        owner:"",
+        faceUpForEveryone:false,
+        cardClass:"snare"
     },
     {
         id: "snare-47",
@@ -422,6 +606,10 @@ export const snareCards = [
         effects: [],
         type: "snare",
         clan: "snare Clan",
+        isBeingSelected: false,
+        owner:"",
+        faceUpForEveryone:false,
+        cardClass:"snare"
     },
     {
         id: "snare-48",
@@ -431,6 +619,10 @@ export const snareCards = [
         effects: [],
         type: "snare",
         clan: "snare Clan",
+        isBeingSelected: false,
+        owner:"",
+        faceUpForEveryone:false,
+        cardClass:"snare"
     },
     {
         id: "snare-49",
@@ -440,6 +632,10 @@ export const snareCards = [
         effects: [],
         type: "snare",
         clan: "snare Clan",
+        isBeingSelected: false,
+        owner:"",
+        faceUpForEveryone:false,
+        cardClass:"snare"
     },
     {
         id: "snare-50",
@@ -449,6 +645,10 @@ export const snareCards = [
         effects: [],
         type: "snare",
         clan: "snare Clan",
+        isBeingSelected: false,
+        owner:"",
+        faceUpForEveryone:false,
+        cardClass:"snare"
     },
     {
         id: "snare-51",
@@ -458,6 +658,10 @@ export const snareCards = [
         effects: [],
         type: "snare",
         clan: "snare Clan",
+        isBeingSelected: false,
+        owner:"",
+        faceUpForEveryone:false,
+        cardClass:"snare"
     },
     {
         id: "snare-52",
@@ -467,5 +671,9 @@ export const snareCards = [
         effects: [],
         type: "snare",
         clan: "snare Clan",
+        isBeingSelected: false,
+        owner:"",
+        faceUpForEveryone:false,
+        cardClass:"snare"
     }
 ]

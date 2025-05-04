@@ -12,6 +12,8 @@ import { PlayerFromLobby, PlayerInGame } from "./SharedGameTypes/playerTypes"
 import { addGameStatsToPlayer, getPlayerView, chooseDeck } from "./hooks/initializations"
 import { GameStateType } from "./SharedGameTypes/gameState"
 import Peer from "peerjs"
+import { drawCards } from "./hooks/drawCards"
+import CardSelectionModal from "../Game/GameModals/cardSelectionModal"
 
 type GameProps ={
     connections: DataConnection[],
@@ -52,7 +54,7 @@ export default function Game({connections, peerId, thisUserProfile,players,peer}
     })
     
 
-
+    // This effect sets up the PeerJS connection and listens for incoming gameState connections.
     useEffect(() => {
         if (!peer?.current) return;
       
@@ -102,7 +104,7 @@ export default function Game({connections, peerId, thisUserProfile,players,peer}
   
   
 
-
+      // This effect initiates the game and broadcasts any game state changes to all connections.
     useEffect(() => {
         console.log("Game state updated:", gameState);
         if (isRemoteUpdate) {
@@ -148,7 +150,7 @@ export default function Game({connections, peerId, thisUserProfile,players,peer}
               return player;
             }
       
-            const drawnCard = deck[0];
+            const drawnCard = { ...deck[0], owner: player.peerId };
             updatedDecks[chosenDeckName] = deck.slice(1);
       
             return {
@@ -163,10 +165,28 @@ export default function Game({connections, peerId, thisUserProfile,players,peer}
             gameDecks: updatedDecks,
             gamePhase: "draw" as const,
           };
-          console.log("ALL players have chosen decks. Updated game state:", updatedGameState);
           setGameState(() => updatedGameState);
         }
       }, [gameState, connections]);
+
+    // This effect handles the game phase changes and player turns.
+    useEffect(() => {
+        if (gameState.gamePhase === "draw") {
+            drawCards(gameState, setGameState);
+        }
+        if( gameState.gamePhase === "select and pass cards") {
+            // This is where we need to handle the player selecting a card and passing the rest to the left.
+
+        }
+            
+        if (gameState.gamePhase === "discard") {
+        }
+        if (gameState.gamePhase === "play") {
+        }
+        if (gameState.gamePhase === "handleEndOfGame") {
+        }
+
+    }, [gameState]);
       
     // first time using useMemo. Basically I only want to run this function when the gameState or peerId changes.
     const myView = useMemo(() => getPlayerView(gameState, peerId), [gameState.players, peerId]);
@@ -177,6 +197,9 @@ export default function Game({connections, peerId, thisUserProfile,players,peer}
 
     return(
         <div className='invisible-game-grid'>
+            {gameState.gamePhase === "select and pass cards" && (
+                <CardSelectionModal myView={myView} cards={myView.player.cardsToSelectFrom} setGameState={setGameState} gameState={gameState}/>
+            )}
             <div className="zone deck-container">
                 <Deck   deckCards={gameState.gameDecks.firstDeck} cardClass="bear" onClick={() => chooseDeck("firstDeck", gameState, setGameState)} />
                 <Midden cardClass="bear"/>

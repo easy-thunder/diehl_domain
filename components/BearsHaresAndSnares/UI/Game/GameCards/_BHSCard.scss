@@ -68,3 +68,28 @@
     padding: 0.2rem 0.5rem;
     border-radius: 0.5rem;
   }
+  .card-face-front {
+    background-color: #fff; /* or a card-front image if desired */
+    color: #000;
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+  }
+  
+  .card-face-front .card-name {
+    font-weight: bold;
+    font-size: 1rem;
+  }
+  
+  .card-face-front .card-type,
+  .card-face-front .card-description {
+    font-size: 0.75rem;
+  }
+  
+  .card-face-front .card-effects {
+    font-size: 0.65rem;
+    list-style-type: disc;
+    padding-left: 1rem;
+  }
