@@ -14,6 +14,8 @@ import { GameStateType } from "./SharedGameTypes/gameState"
 import Peer from "peerjs"
 import { drawCards } from "./hooks/drawCards"
 import CardSelectionModal from "../Game/GameModals/cardSelectionModal"
+import { shuffle } from "./hooks/shuffle"
+import { handleDeckSelectionPhase } from "./hooks/handleDeckSelectionPhase"
 
 type GameProps ={
     connections: DataConnection[],
@@ -52,6 +54,7 @@ export default function Game({connections, peerId, thisUserProfile,players,peer}
         turnClock:30000,//milliseconds before action is skipped
         numberOfRoundsInDrawAndPlayPhase: initialPlayers.length,
     })
+    const [instruction, setInstruction]= useState("Choose a deck to draw from.") 
     
 
     // This effect sets up the PeerJS connection and listens for incoming gameState connections.
@@ -86,7 +89,7 @@ export default function Game({connections, peerId, thisUserProfile,players,peer}
         // 🔁 Attach to already-open connections
         Object.values(peer.current.connections).forEach((connArray) => {
           connArray.forEach((conn:any) => {
-            handleData(conn); // ⬅️ this is key
+            handleData(conn); 
           });
         });
       
@@ -133,40 +136,23 @@ export default function Game({connections, peerId, thisUserProfile,players,peer}
       
         // ✅ Handle initiate phase
         if (gameState.gamePhase !== "initiate") return;
-      
-        const allPlayersHaveChosenDeck = gameState.players.every(
-          (player) => player.playerHasSelectedDeckAtStartOfGame
-        );
-      
-        if (allPlayersHaveChosenDeck) {
-          const updatedDecks = { ...gameState.gameDecks };
-      
-          const updatedPlayers = gameState.players.map((player) => {
-            const chosenDeckName = player.playerChosenDeck as keyof typeof updatedDecks; // ✅ safer typing
-            const deck = updatedDecks[chosenDeckName];
-      
-            if (!deck || deck.length === 0) {
-              console.warn(`Deck ${chosenDeckName} is empty or invalid`);
-              return player;
+
+        const shuffledDecks = Object.fromEntries(
+            Object.entries(gameState.gameDecks).map(([deckName, deckCards]) => {
+              return [deckName, shuffle(deckCards)];
+            })
+          ) 
+
+          setGameState(prevState => ({
+            ...prevState,
+            gameDecks: {
+              firstDeck: shuffledDecks.firstDeck || [],
+              secondDeck: shuffledDecks.secondDeck || [],
+              thirdDeck: shuffledDecks.thirdDeck || []
             }
-      
-            const drawnCard = { ...deck[0], owner: player.peerId };
-            updatedDecks[chosenDeckName] = deck.slice(1);
-      
-            return {
-              ...player,
-              cardsInHand: [...player.cardsInHand, drawnCard],
-            };
-          });
-      
-          const updatedGameState = {
-            ...gameState,
-            players: updatedPlayers,
-            gameDecks: updatedDecks,
-            gamePhase: "draw" as const,
-          };
-          setGameState(() => updatedGameState);
-        }
+          }));
+          handleDeckSelectionPhase(gameState, setGameState, setInstruction);
+
       }, [gameState, connections]);
 
     // This effect handles the game phase changes and player turns.
@@ -188,19 +174,23 @@ export default function Game({connections, peerId, thisUserProfile,players,peer}
 
     }, [gameState]);
       
-    // first time using useMemo. Basically I only want to run this function when the gameState or peerId changes.
     const myView = useMemo(() => getPlayerView(gameState, peerId), [gameState.players, peerId]);
     if (!myView) return <div>Error: player view not found</div>;
 
 
 
+    
 
     return(
         <div className='invisible-game-grid'>
             {gameState.gamePhase === "select and pass cards" && (
-                <CardSelectionModal myView={myView} cards={myView.player.cardsToSelectFrom} setGameState={setGameState} gameState={gameState}/>
+                <CardSelectionModal myView={myView} setGameState={setGameState} gameState={gameState}/>
             )}
+
             <div className="zone deck-container">
+            <div className="zone instruction-bar">
+                <p>{instruction}</p>
+            </div>
                 <Deck   deckCards={gameState.gameDecks.firstDeck} cardClass="bear" onClick={() => chooseDeck("firstDeck", gameState, setGameState)} />
                 <Midden cardClass="bear"/>
                 <Deck deckCards={gameState.gameDecks.secondDeck} onClick={() => chooseDeck("secondDeck", gameState, setGameState)} cardClass="hare"/>

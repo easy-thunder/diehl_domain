@@ -16,3 +16,5 @@ export interface GameStateType {
     numberOfRoundsInDrawAndPlayPhase: number;
 
   }
+
+  

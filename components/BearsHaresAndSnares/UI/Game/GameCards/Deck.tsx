@@ -11,7 +11,6 @@ type DeckProps={
 }
 export default function Deck({cardClass, deckCards, onClick}:DeckProps){
     const countOfCards = deckCards?.length || 0
-    const [shuffledDeck,setShuffledDeck] = useState<CardType[]>(shuffle(deckCards || []))
 
 
     return(

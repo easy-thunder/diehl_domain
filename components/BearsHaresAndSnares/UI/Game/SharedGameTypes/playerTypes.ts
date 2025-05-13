@@ -39,8 +39,10 @@ export interface PlayerInGame extends PlayerFromLobby {
     playerIsReadyToPassCardsDuringDrawPhase: boolean;
     playerHasSelectedDeckAtStartOfGame: boolean;
     cardsToSelectFrom: any[];
+    cardsPassedFromAnotherPlayer: any[];
     makesXnumberOfSelections: number;
     makesXNumberOfSelectionsForFirstCard: number;
+
 
 }
 

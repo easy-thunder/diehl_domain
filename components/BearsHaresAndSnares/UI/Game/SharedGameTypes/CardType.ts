@@ -11,6 +11,7 @@ export type CardType = {
     faceUpForSpecificePlayers?: string[];
     isBeingSelected?:boolean ;
     cardClass: string;
+    
 };
 // selector?: string;
 

@@ -1,64 +1,94 @@
-import { CardType } from "../SharedGameTypes/CardType";
-import Card from "../GameCards/Card";
-import { GameStateType } from "../SharedGameTypes/gameState";
-import { PlayerViewType } from "../SharedGameTypes/playerTypes";
+import { useEffect }         from "react";
+import { CardType }          from "../SharedGameTypes/CardType";
+import Card                  from "../GameCards/Card";
+import { GameStateType }     from "../SharedGameTypes/gameState";
+import { PlayerViewType }    from "../SharedGameTypes/playerTypes";
 
-type CardSelectionModalProps = {
-  cards: CardType[];
-  gameState: GameStateType;
-  setGameState: (gameState:GameStateType)=>void;
-  myView: PlayerViewType;
+type Props = {
+  gameState:    GameStateType;
+  setGameState: (g: GameStateType) => void;
+  myView:       PlayerViewType;
 };
 
-export default function CardSelectionModal({ myView,gameState, cards, setGameState }: CardSelectionModalProps) {
-    // update the selector and isBeingSelected
-    function handleCardSelection(card: CardType) {
-        // 1. Update the selected card's owner and isBeingSelected
-        const updatedCard = { ...card, owner: gameState.thisPlayersPeerId, isBeingSelected: true };
-      
-        // 2. Remove it from cardsToSelectFrom
-        const updatedPlayers = gameState.players.map((p) => {
-          if (p.peerId === gameState.thisPlayersPeerId) {
-            return {
-              ...p,
-              cardsToSelectFrom: p.cardsToSelectFrom.filter(c => c.id !== card.id),
-              cardsInHand: [...p.cardsInHand, updatedCard],
-            };
+export default function CardSelectionModal({ gameState, setGameState, myView }: Props) {
+  const me = gameState.players.find(p => p.peerId === gameState.thisPlayersPeerId);
+  if (!me) return null;                     
+  
+  useEffect(() => {
+    const allReady = gameState.players.every(p => p.playerIsReadyToPassCardsDuringDrawPhase);
+    if (!allReady) return;
+
+    
+    const passedOnce = gameState.players.map((p, idx, arr) => {
+      const nextIdx = (idx + 1) % arr.length;
+      return {
+        ...arr[nextIdx],
+        cardsToSelectFrom: [
+          ...arr[nextIdx].cardsToSelectFrom,
+          ...p.cardsPassedFromAnotherPlayer,
+        ],
+      };
+    });
+
+    
+    const cleanPlayers = passedOnce.map(p => ({
+      ...p,
+      cardsPassedFromAnotherPlayer: [],
+      playerIsReadyToPassCardsDuringDrawPhase: false,
+    }));
+
+    
+    const roundDone = cleanPlayers.every(p => p.cardsToSelectFrom.length === 0);
+
+    setGameState({
+      ...gameState,
+      players: cleanPlayers,
+      gamePhase: roundDone ? "discard" : gameState.gamePhase,
+    });
+  }, [gameState.players]);                
+
+  
+  function handlePick(card: CardType) {
+    if(!me){return}
+    const chosen    = { ...card, owner: me.peerId, isBeingSelected: true };
+    const leftovers = me.cardsToSelectFrom.filter(c => c.id !== card.id);
+
+    
+    const updatedPlayers = gameState.players.map(p =>
+      p.peerId === me.peerId
+        ? {
+            ...p,
+            cardsToSelectFrom: [],
+            cardsInHand: [...p.cardsInHand, chosen],
+            playerIsReadyToPassCardsDuringDrawPhase: true,
+            cardsPassedFromAnotherPlayer: leftovers,
           }
-          return p;
-        });
-      
-        // 3. Pass remaining cards to left player
-        const leftPeerId = myView.left?.peerId;
-        const leftPlayerIndex = gameState.players.findIndex(p => p.peerId === leftPeerId);
-        const thisPlayer = gameState.players.find(p => p.peerId === gameState.thisPlayersPeerId);
-        const cardsToPass = thisPlayer?.cardsToSelectFrom.filter(c => c.id !== card.id) || [];
-      
-        if (leftPlayerIndex !== -1) {
-          updatedPlayers[leftPlayerIndex] = {
-            ...gameState.players[leftPlayerIndex],
-            cardsToSelectFrom: [
-              ...(gameState.players[leftPlayerIndex].cardsToSelectFrom || []),
-              ...cardsToPass,
-            ],
-          };
-        }
-      
-        setGameState({
-          ...gameState,
-          players: updatedPlayers,
-        });
-      }
-      
-  return (
+        : p
+    );
+
+    setGameState({ ...gameState, players: updatedPlayers });
+  }
+
+  
+  const showModal = me.cardsToSelectFrom.length > 0;
+
+  return showModal ? (
     <div className="modal-overlay">
       <div className="modal">
-        <h2>Choose cards</h2>
+        <h2>Choose a card and pass the rest</h2>
+
         <div className="card-list">
-          {cards.map((card) => <Card gameState={gameState} card={card} onClick={() => handleCardSelection(card)}
-          />)}
+          {me.cardsToSelectFrom.map(c => (
+            <Card
+              key={c.id}
+              card={c}
+              gameState={gameState}
+              size="large"
+              onClick={() => handlePick(c)}
+            />
+          ))}
         </div>
       </div>
     </div>
-  );
+  ) : null;
 }
