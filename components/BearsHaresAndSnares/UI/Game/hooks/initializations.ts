@@ -40,6 +40,7 @@ export     function addGameStatsToPlayer(player: PlayerFromLobby, initialPlayers
         playerIsReadyToPassCardsDuringDrawPhase: false,
         playerHasSelectedDeckAtStartOfGame: false,
         cardsToSelectFrom: [],
+        cardsPassedFromAnotherPlayer:[],
         makesXnumberOfSelections: 1,
         makesXNumberOfSelectionsForFirstCard: 1,
 

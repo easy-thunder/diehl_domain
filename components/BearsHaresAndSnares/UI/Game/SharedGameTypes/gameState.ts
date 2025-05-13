@@ -13,8 +13,9 @@ export interface GameStateType {
     currentPlayerTurn: Number;        
     gamePhase:"initiate" | "draw" | "select and pass cards" | "discard" | "play" | "handleEndOfGame" ; 
     turnClock: number;
-    numberOfRoundsInDrawAndPlayPhase: number;
-
+    numberOfRoundsInDrawAndPlayPhase: number;//actually handled this differently for drawPhase
+    roundNumber: number
+    playerTurn: 0|1|2|3
   }
 
   

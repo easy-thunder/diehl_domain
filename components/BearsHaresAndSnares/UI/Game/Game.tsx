@@ -16,6 +16,7 @@ import { drawCards } from "./hooks/drawCards"
 import CardSelectionModal from "../Game/GameModals/cardSelectionModal"
 import { shuffle } from "./hooks/shuffle"
 import { handleDeckSelectionPhase } from "./hooks/handleDeckSelectionPhase"
+import DiscardModal from "./GameModals/DiscardModal"
 
 type GameProps ={
     connections: DataConnection[],
@@ -51,8 +52,10 @@ export default function Game({connections, peerId, thisUserProfile,players,peer}
         thisPlayersProfile: thisUserProfile,
         currentPlayerTurn: 0,
         gamePhase: "initiate",
-        turnClock:30000,//milliseconds before action is skipped
+        turnClock:30000,//milliseconds before action is skipped need to make option for gameSetup
         numberOfRoundsInDrawAndPlayPhase: initialPlayers.length,
+        roundNumber:0,
+        playerTurn:0,
     })
     const [instruction, setInstruction]= useState("Choose a deck to draw from.") 
     
@@ -166,8 +169,40 @@ export default function Game({connections, peerId, thisUserProfile,players,peer}
         }
             
         if (gameState.gamePhase === "discard") {
+            setInstruction(()=>"Players with over their card hand limit need to discard")
+            const allPlayersWithinLimit = gameState.players.every(
+              player => player.cardsInHand.length <= player.maxNumberOfCardsAllowedInHand
+            );
+          
+            if (allPlayersWithinLimit) {
+              setGameState(prev => ({ ...prev, gamePhase: "play" }));
+            }
         }
         if (gameState.gamePhase === "play") {
+            // preAction:
+            // Activate inPlayCardEffectOptions
+            //actions:
+            // 1. play a card
+            // 2. choose new deck and draw
+            // 3. Check if can sacrafice 2, sacrafice 2 creatures to regenerate a negate
+            // 4. Check if can sacrafice3, sacrafice 3 creatures to regnerate a negate and gain one permanent point
+            setInstruction(()=>`We are now in a play phase. The number of rouds is ${gameState.numberOfRoundsInDrawAndPlayPhase} we are in round ${gameState.roundNumber}`)
+            if(gameState.numberOfRoundsInDrawAndPlayPhase===gameState.roundNumber){
+                console.log('here we need to re-select a deck then go to draw phase or we could simplify and just draw from that deck and leave cards in to change which deck you draw from or make it an action that can be taken.')
+                return 
+            }
+            // figure out who is first. The first player in the array is first. but not necesarily
+            // figure out how to display who's turn it is
+            // figure out how to resolve card effects
+            // figure out how to update the state of the field and update the players points
+            // figure out how to pass to the next turn
+            // figure out how to check if player has reached score that wins
+            // figure out how to loop back through once all players have gone
+            const playerThatIsPlaying = gameState.players[gameState.currentPlayerTurn as number]
+
+
+            
+            
         }
         if (gameState.gamePhase === "handleEndOfGame") {
         }
@@ -175,6 +210,7 @@ export default function Game({connections, peerId, thisUserProfile,players,peer}
     }, [gameState]);
       
     const myView = useMemo(() => getPlayerView(gameState, peerId), [gameState.players, peerId]);
+    console.log(myView?.player.cardsInHand)
     if (!myView) return <div>Error: player view not found</div>;
 
 
@@ -186,7 +222,10 @@ export default function Game({connections, peerId, thisUserProfile,players,peer}
             {gameState.gamePhase === "select and pass cards" && (
                 <CardSelectionModal myView={myView} setGameState={setGameState} gameState={gameState}/>
             )}
-
+            {gameState.gamePhase==='discard' && myView.player.cardsInHand.length > myView.player.maxNumberOfCardsAllowedInHand && (
+                <DiscardModal myView={myView} setGameState={setGameState} gameState={gameState}/>
+            )}
+t
             <div className="zone deck-container">
             <div className="zone instruction-bar">
                 <p>{instruction}</p>
