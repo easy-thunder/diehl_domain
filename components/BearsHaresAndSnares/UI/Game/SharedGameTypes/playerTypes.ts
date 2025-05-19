@@ -42,7 +42,7 @@ export interface PlayerInGame extends PlayerFromLobby {
     cardsPassedFromAnotherPlayer: any[];
     makesXnumberOfSelections: number;
     makesXNumberOfSelectionsForFirstCard: number;
-
+    playPhase: "none" | "pre-action" | "action"
 
 }
 

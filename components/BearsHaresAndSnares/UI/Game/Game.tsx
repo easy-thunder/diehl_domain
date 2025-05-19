@@ -17,6 +17,7 @@ import CardSelectionModal from "../Game/GameModals/cardSelectionModal"
 import { shuffle } from "./hooks/shuffle"
 import { handleDeckSelectionPhase } from "./hooks/handleDeckSelectionPhase"
 import DiscardModal from "./GameModals/DiscardModal"
+import PlayModal from "./GameModals/PlayModal"
 
 type GameProps ={
     connections: DataConnection[],
@@ -186,6 +187,8 @@ export default function Game({connections, peerId, thisUserProfile,players,peer}
             // 2. choose new deck and draw
             // 3. Check if can sacrafice 2, sacrafice 2 creatures to regenerate a negate
             // 4. Check if can sacrafice3, sacrafice 3 creatures to regnerate a negate and gain one permanent point
+
+            //Note some cards effects need to be removed when the card is removed from play.
             setInstruction(()=>`We are now in a play phase. The number of rouds is ${gameState.numberOfRoundsInDrawAndPlayPhase} we are in round ${gameState.roundNumber}`)
             if(gameState.numberOfRoundsInDrawAndPlayPhase===gameState.roundNumber){
                 console.log('here we need to re-select a deck then go to draw phase or we could simplify and just draw from that deck and leave cards in to change which deck you draw from or make it an action that can be taken.')
@@ -205,6 +208,7 @@ export default function Game({connections, peerId, thisUserProfile,players,peer}
             
         }
         if (gameState.gamePhase === "handleEndOfGame") {
+
         }
 
     }, [gameState]);
@@ -225,7 +229,13 @@ export default function Game({connections, peerId, thisUserProfile,players,peer}
             {gameState.gamePhase==='discard' && myView.player.cardsInHand.length > myView.player.maxNumberOfCardsAllowedInHand && (
                 <DiscardModal myView={myView} setGameState={setGameState} gameState={gameState}/>
             )}
-t
+
+            {gameState.gamePhase==="play" && gameState.thisPlayersPeerId=== gameState.players[gameState.playerTurn].peerId &&(
+                <PlayModal myView={myView} gameState={gameState} setGameState={setGameState} />
+            )}
+
+
+
             <div className="zone deck-container">
             <div className="zone instruction-bar">
                 <p>{instruction}</p>

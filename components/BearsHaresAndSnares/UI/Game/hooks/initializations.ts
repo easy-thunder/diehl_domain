@@ -43,6 +43,7 @@ export     function addGameStatsToPlayer(player: PlayerFromLobby, initialPlayers
         cardsPassedFromAnotherPlayer:[],
         makesXnumberOfSelections: 1,
         makesXNumberOfSelectionsForFirstCard: 1,
+        playPhase: "none"
 
 
     }
